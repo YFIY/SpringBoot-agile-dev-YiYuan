@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * @Description 学生信息实体类
- * @Author Sans
+ * @Author MoLi
  * @CreateTime 2019/5/26 21:41
  */
 @Data

@@ -8,12 +8,11 @@ import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
 
 /**
  * @Description UserInfoController
- * @Author Sans
+ * @Author MoLi
  * @CreateTime 2019/6/8 16:27
  */
 @RestController
@@ -24,7 +23,7 @@ public class UserInfoController {
 
     /**
      * 根据ID获取用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:34
      * @Param  userId  用户ID
      * @Return UserInfoEntity 用户实体
@@ -37,7 +36,7 @@ public class UserInfoController {
     }
     /**
      * 查询全部信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:35
      * @Param  userId  用户ID
      * @Return List<UserInfoEntity> 用户实体集合
@@ -49,7 +48,7 @@ public class UserInfoController {
     }
     /**
      * 分页查询全部数据
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:37
      * @Return IPage<UserInfoEntity> 分页数据
      */
@@ -64,7 +63,7 @@ public class UserInfoController {
     }
     /**
      * 根据指定字段查询用户信息集合
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:39
      * @Return Collection<UserInfoEntity> 用户实体集合
      */
@@ -78,7 +77,7 @@ public class UserInfoController {
     }
     /**
      * 新增用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:40
      */
     @RequestMapping("/saveInfo")
@@ -94,18 +93,18 @@ public class UserInfoController {
     }
     /**
      * 批量新增用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:42
      */
     @RequestMapping("/saveInfoList")
     public Result saveInfoList(){
         //创建对象
-        UserInfoEntity sans = new UserInfoEntity();
-        sans.setName("Sans");
-        sans.setSkill("睡觉");
-        sans.setAge(18);
-        sans.setFraction(60L);
-        sans.setEvaluate("Sans是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子");
+        UserInfoEntity MoLi = new UserInfoEntity();
+        MoLi.setName("MoLi");
+        MoLi.setSkill("睡觉");
+        MoLi.setAge(18);
+        MoLi.setFraction(60L);
+        MoLi.setEvaluate("MoLi是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子");
         UserInfoEntity papyrus = new UserInfoEntity();
         papyrus.setName("papyrus");
         papyrus.setSkill("JAVA");
@@ -114,14 +113,14 @@ public class UserInfoController {
         papyrus.setEvaluate("Papyrus是一个讲话大声、个性张扬的骷髅，给人自信、有魅力的骷髅小瘦子");
         //批量保存
         List<UserInfoEntity> list =new ArrayList<>();
-        list.add(sans);
+        list.add(MoLi);
         list.add(papyrus);
         userInfoService.saveBatch(list);
         return ResultGenerator.genSuccessResult();
     }
     /**
      * 更新用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:47
      */
     @RequestMapping("/updateInfo")
@@ -135,7 +134,7 @@ public class UserInfoController {
     }
     /**
      * 新增或者更新用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:50
      */
     @RequestMapping("/saveOrUpdateInfo")
@@ -150,7 +149,7 @@ public class UserInfoController {
     }
     /**
      * 根据ID删除用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:52
      */
     @RequestMapping("/deleteInfo")
@@ -160,7 +159,7 @@ public class UserInfoController {
     }
     /**
      * 根据ID批量删除用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:55
      */
     @RequestMapping("/deleteInfoList")
@@ -173,7 +172,7 @@ public class UserInfoController {
     }
     /**
      * 根据指定字段删除用户信息
-     * @Author Sans
+     * @Author MoLi
      * @CreateTime 2019/6/8 16:57
      */
     @RequestMapping("/deleteInfoMap")

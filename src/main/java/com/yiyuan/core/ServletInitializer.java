@@ -4,6 +4,10 @@ import com.yiyuan.Application;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
+/**
+ * 项目打war包时所需要的类
+ * @Author MoLi
+ */
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override

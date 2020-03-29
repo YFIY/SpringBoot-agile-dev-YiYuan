@@ -4,11 +4,12 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * 统一API响应结果封装
+ * @Author MoLi
  */
 public class Result<T> {
-    private int code;
-    private String message;
-    private T data;
+    private int code;//状态码
+    private String message;//提示
+    private T data;//数据本体
 
     public Result setCode(ResultCode resultCode) {
         this.code = resultCode.code();

@@ -35,6 +35,7 @@ import java.util.List;
 
 /**
  * Spring MVC 配置
+ * @Author MoLi
  */
 @Configuration
 public class WebMvcConfigurer extends WebMvcConfigurationSupport {
