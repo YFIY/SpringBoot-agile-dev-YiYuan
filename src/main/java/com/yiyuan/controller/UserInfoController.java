@@ -6,9 +6,11 @@ import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultGenerator;
 import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.service.UserInfoService;
+import com.yiyuan.util.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import com.alibaba.fastjson.JSON;
 
 /**
  * @Description UserInfoController
@@ -16,7 +18,7 @@ import java.util.*;
  * @CreateTime 2019/6/8 16:27
  */
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping("/UserInfo")
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
@@ -25,20 +27,25 @@ public class UserInfoController {
      * 根据ID获取用户信息
      * @Author MoLi
      * @CreateTime 2019/6/8 16:34
-     * @Param  userId  用户ID
+     * @Param  id  用户ID
      * @Return UserInfoEntity 用户实体
      */
-    @ResponseBody
     @RequestMapping(value = "/getInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result getInfo(@RequestBody String userId){
-        UserInfoEntity userInfoEntity = userInfoService.getById(userId);
+    public Result getInfo(@RequestBody String jsonStr){
+        UserInfoEntity model = JSON.parseObject(jsonStr, UserInfoEntity.class);
+        UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
+
+        //TODO 雪花算法ID生成测试
+        SnowflakeIdWorker snowflakeIdWorker = SnowflakeIdWorker.getSnowflakeIdWorker();
+        System.out.println("===============================");
+        System.out.println(snowflakeIdWorker.nextId());
+
         return ResultGenerator.genSuccessResult(userInfoEntity);
     }
     /**
      * 查询全部信息
      * @Author MoLi
      * @CreateTime 2019/6/8 16:35
-     * @Param  userId  用户ID
      * @Return List<UserInfoEntity> 用户实体集合
      */
     @RequestMapping(value = "/getList",method = RequestMethod.GET)
@@ -50,14 +57,17 @@ public class UserInfoController {
      * 分页查询全部数据
      * @Author MoLi
      * @CreateTime 2019/6/8 16:37
+     * @Param  current  当前页
+     * @Param  size  每页条数
      * @Return IPage<UserInfoEntity> 分页数据
      */
-    @RequestMapping("/getInfoListPage")
-    public Result getInfoListPage(){
+    @RequestMapping(value = "/getInfoListPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result getInfoListPage(@RequestBody String jsonStr){
         //需要在Config配置类中配置分页插件
+        Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
         IPage<UserInfoEntity> page = new Page<>();
-        page.setCurrent(5); //当前页
-        page.setSize(1);    //每页条数
+        page.setCurrent(Long.parseLong(jsonMap.get("current").toString())); //当前页
+        page.setSize(Long.parseLong(jsonMap.get("size").toString()));    //每页条数
         page = userInfoService.page(page);
         return ResultGenerator.genSuccessResult(page);
     }
@@ -65,14 +75,13 @@ public class UserInfoController {
      * 根据指定字段查询用户信息集合
      * @Author MoLi
      * @CreateTime 2019/6/8 16:39
+     * @Param  任意字段都可当做条件传入  kay是字段名 value是字段值  例如{"id":"123","password":"123"}
      * @Return Collection<UserInfoEntity> 用户实体集合
      */
-    @RequestMapping("/getListMap")
-    public Result getListMap(){
-        Map<String,Object> map = new HashMap<>();
-        //kay是字段名 value是字段值
-        map.put("age",20);
-        Collection<UserInfoEntity> userInfoEntityList = userInfoService.listByMap(map);
+    @RequestMapping(value = "/getListMap", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result getListMap(@RequestBody String jsonStr){
+        Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
+        Collection<UserInfoEntity> userInfoEntityList = userInfoService.listByMap(jsonMap);
         return ResultGenerator.genSuccessResult(userInfoEntityList);
     }
     /**
