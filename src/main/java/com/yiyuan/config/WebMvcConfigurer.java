@@ -71,7 +71,7 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
                 SerializerFeature.WriteNullListAsEmpty,     // 将Collection类型字段的字段空值输出为[]
                 SerializerFeature.WriteNullStringAsEmpty,   // 将字符串类型字段的空值输出为空字符串
                 SerializerFeature.WriteNullNumberAsZero,    // 将数值类型字段的空值输出为0
-                SerializerFeature.WriteDateUseDateFormat,
+                SerializerFeature.WriteDateUseDateFormat,   //全局修改日期格式
                 SerializerFeature.DisableCircularReferenceDetect    // 禁用循环引用
         );
         fastJsonHttpMessageConverter.setFastJsonConfig(config);
