@@ -22,6 +22,9 @@ import com.alibaba.fastjson.JSON;
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
+    //雪花ID生成
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     /**
      * 根据ID获取用户信息
@@ -36,7 +39,6 @@ public class UserInfoController {
         UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
 
         //TODO 雪花算法ID生成测试
-        SnowflakeIdWorker snowflakeIdWorker = SnowflakeIdWorker.getSnowflakeIdWorker();
         System.out.println("===============================");
         System.out.println(snowflakeIdWorker.nextId());
 

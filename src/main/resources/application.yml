@@ -1,3 +1,11 @@
+#自定义分布式配置信息，目前用于生成ID，如果新增服务器或数据中心，请修改此处配置
+distributed-yy:
+  #服务器编号(1-31)
+  machine-code: 1
+  #数据中心编号(1-31)
+  idc-code: 1
+
+
 spring:
   #不同环境配置文件设置
   profiles:

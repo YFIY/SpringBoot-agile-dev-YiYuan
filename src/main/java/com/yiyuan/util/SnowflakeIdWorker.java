@@ -1,6 +1,8 @@
 package com.yiyuan.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * Snowflake算法是带有时间戳的全局唯一ID生成算法。它有一套固定的ID格式，如下：
@@ -10,12 +12,10 @@ import lombok.extern.slf4j.Slf4j;
  *
  * <p>结构如下(每部分用-分开):<br>
  * 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000 <br>
- * 优点是：整体上按照时间自增排序，且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分) Author:frankwoo(吴峻申) <br>
- * Date:2017/8/29 <br>
- * Time:下午6:32 <br>
- * Mail:frank_wjs@hotmail.com <br>
+ * 优点是：整体上按照时间自增排序，且整个分布式系统内不会产生ID碰撞(由数据中心ID和机器ID作区分) <br>
  */
 @Slf4j
+@Component
 public class SnowflakeIdWorker {
     // 开始时间截 (从2015-01-01起)
     private static final long START_TIME = 1420041600000L;
@@ -43,47 +43,25 @@ public class SnowflakeIdWorker {
     // 毫秒内Sequence(0~4095)
     private static long sequence = 0L;
 
-    // =============↓换机器或数据库时请更新参数↓=============
+    // =============↓新增机器或数据中心时请到application.yml更新参数↓=============
     // 机器ID(0-31)
-    private final long workerId = 1;
+    private static long workerId;
     // 数据中心ID(0-31)
-    private final long dataCenterId = 1;
-    // =============↑换机器或数据库时请更新参数↑=============
-
-    //单例模式  使用此类时通过【getSnowflakeIdWorker】方法获取
-    private SnowflakeIdWorker(){ }
-    private static class SingletonInstance {
-        private static final SnowflakeIdWorker SNOWFLAKE_ID_WORKER = new SnowflakeIdWorker();
+    private static long dataCenterId;
+    //从application.yml获取配置信息
+    @Value("${distributed-yy.machine-code}")
+    private void setWorkerId(long workerId) {
+        SnowflakeIdWorker.workerId = workerId;
     }
-    public static SnowflakeIdWorker getSnowflakeIdWorker(){ return SingletonInstance.SNOWFLAKE_ID_WORKER; }
-
-    /**
-     * 构造
-     * 【此构造方法弃用】
-     * @param workerId 机器ID(0-31)
-     * @param dataCenterId 数据中心ID(0-31)
-     */
-    /*public SnowflakeIdWorker(long workerId, long dataCenterId) {
-        if (workerId > MAX_ID || workerId < 0) {
-            throw new IllegalArgumentException(
-                    String.format("worker Id can't be greater than %d or less than 0", MAX_ID));
-        }
-        if (dataCenterId > MAX_DATA_CENTER_ID || dataCenterId < 0) {
-            throw new IllegalArgumentException(
-                    String.format(
-                            "datacenter Id can't be greater than %d or less than 0", MAX_DATA_CENTER_ID));
-        }
-        this.workerId = workerId;
-        this.dataCenterId = dataCenterId;
-        log.info(
-                String.format(
-                        "worker starting. timestamp left shift %d, datacenter id bits %d, worker id bits %d, sequence bits %d, workerid %d",
-                        TIMESTAMP_LEFT_SHIFT_BITS, DATA_CENTER_ID_BITS, ID_BITS, SEQUENCE_BITS, workerId));
-    }*/
+    @Value("${distributed-yy.idc-code}")
+    private void setDataCenterId(long dataCenterId) {
+        SnowflakeIdWorker.dataCenterId = dataCenterId;
+    }
+    // =============↑新增机器或数据中心时请到application.yml更新参数↑=============
 
     /**
      * 生成ID（线程安全）
-     *
+     * 需要ID时调用此方法
      * @return id
      */
     public synchronized long nextId() {
@@ -92,10 +70,10 @@ public class SnowflakeIdWorker {
         // 如果当前时间小于上一次ID生成的时间戳，说明系统时钟被修改过，回退在上一次ID生成时间之前应当抛出异常！！！
         if (timestamp < lastTimestamp) {
             log.error(
-                    String.format("时间在倒退.  拒绝请求，直到 %d.", lastTimestamp));
+                    String.format("时间倒退了. 拒绝生成ID . 上一次ID生成的时间戳为：%d ", lastTimestamp));
             throw new IllegalStateException(
                     String.format(
-                            "时间倒退了，拒绝生成ID %d 毫秒",
+                            "时间倒退了，拒绝生成ID ,相差 %d 毫秒",
                             lastTimestamp - timestamp));
         }
 
