@@ -1,4 +1,6 @@
 #生产环境的配置文件
+server:
+  port: 8888   # web应用服务端口
 
 spring:
   # 配置数据源
@@ -8,6 +10,55 @@ spring:
     username: root
     password: root
     type: com.alibaba.druid.pool.DruidDataSource
+    #连接池配置
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      #连接等待超时时间
+      max-wait: 30000
+      #配置检测可以关闭的空闲连接间隔时间
+      time-between-eviction-runs-millis: 60000
+      #配置连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      #用来检测连接是否有效的sql，要求是一个查询语句，常用select 'x'。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会起作用。
+      validation-query: select '1' from dual
+      #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-while-idle: true
+      #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+      test-on-borrow: false
+      #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+      test-on-return: false
+      #是否缓存preparedStatement，也就是PSCache。PSCache对支持游标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。
+      pool-prepared-statements: false
+      max-open-prepared-statements: 20
+      #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-pool-prepared-statement-per-connection-size: 20
+      #Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      aop-patterns: com.yiyuan.service.impl.*
+      #合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      #配置监控统计拦截的filters
+      filter:
+        #监控统计用的filter:stat
+        stat:
+          enabled: true
+          merge-sql: true
+          log-slow-sql: true
+          #配置SQL慢的标准，执行时间超过slowSqlMillis的就是慢
+          slow-sql-millis: 5000
+        #防御sql注入的filter:wall
+        wall:
+          enabled: true
+          config:
+            #是否允许执行DELETE语句
+            delete-allow: true
+            #是否允许修改表
+            drop-table-allow: true
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
+          #所有Statement相关的日志
+          statement-log-enabled: false
 
-server:
-  port: 8888   # web应用服务端口
+
