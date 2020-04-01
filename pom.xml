@@ -10,12 +10,13 @@
 	<name>SpringBoot-agile-dev-YiYuan</name>
 	<description>SpringBoot-agile-dev-YiYuan</description>
 
-	<!--JDK版本-->
+	<!--变量统一管理-->
 	<properties>
+		<!--JDK版本-->
 		<java.version>1.8</java.version>
 	</properties>
 
-	<!--SpringBoot-->
+	<!--SpringBoot 提供常用jar包版本-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -25,16 +26,17 @@
 
 	<!--依赖-->
 	<dependencies>
-		<!--Web开发-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+		<!--外置Tomcat-->
 		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>-->
+		<!--Web开发-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!--引入lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -112,6 +114,21 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.11</version>
+		</dependency>
+		<!-- cache 本地缓存 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>3.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
 		</dependency>
 
 
