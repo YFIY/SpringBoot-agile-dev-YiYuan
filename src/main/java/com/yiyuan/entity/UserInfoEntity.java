@@ -23,7 +23,7 @@ public class UserInfoEntity {
      * UUID: 全局唯一ID，UUID类型的主键
      * NONE: 该类型为未设置主键类型
      */
-    @TableId(type = IdType.INPUT)
+    @TableId(type = IdType.AUTO)
     private Long id;
     /**
      * 姓名

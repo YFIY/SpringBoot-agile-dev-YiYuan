@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.alibaba.fastjson.JSON;
 
+import static sun.security.krb5.Confounder.longValue;
+
 /**
- * @Description UserInfoController
+ * @Description 演示类UserInfoController
  * @Author MoLi
  * @CreateTime 2019/6/8 16:27
  */
@@ -39,6 +41,7 @@ public class UserInfoController {
      */
     @RequestMapping(value = "/getInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result getInfo(@RequestBody String jsonStr){
+        //json字符串解析放入模型
         UserInfoEntity model = JSON.parseObject(jsonStr, UserInfoEntity.class);
         UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
 
@@ -100,14 +103,13 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:40
      */
-    @RequestMapping("/saveInfo")
-    public Result saveInfo(){
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        userInfoEntity.setName("小龙");
-        userInfoEntity.setSkill("JAVA");
-        userInfoEntity.setAge(18);
-        userInfoEntity.setFraction(59L);
-        userInfoEntity.setEvaluate("该学生是一个在改BUG的码农");
+    @RequestMapping(value = "/saveInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result saveInfo(@RequestBody String jsonStr){
+        //json字符串解析放入模型
+        UserInfoEntity userInfoEntity = JSON.parseObject(jsonStr, UserInfoEntity.class);
+        //雪花ID注入
+        userInfoEntity.setId(snowflakeIdWorker.nextId());
+        //执行保存
         userInfoService.save(userInfoEntity);
         return ResultGenerator.genSuccessResult();
     }
