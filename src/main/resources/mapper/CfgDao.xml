@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--系统参数表(t_sys_cfg)的Mapper-->
+<mapper namespace="com.yiyuan.dao.CfgDao">
+    <select id="findByCfgName" resultType="com.yiyuan.entity.CfgEntity">
+		SELECT * FROM t_sys_cfg WHERE cfg_name = #{cfgName}
+	</select>
+</mapper>

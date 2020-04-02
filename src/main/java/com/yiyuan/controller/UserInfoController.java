@@ -2,11 +2,12 @@ package com.yiyuan.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yiyuan.cache.ConfigCache;
 import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultGenerator;
 import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.service.UserInfoService;
-import com.yiyuan.util.SnowflakeIdWorker;
+import com.yiyuan.utils.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -25,6 +26,9 @@ public class UserInfoController {
     //雪花ID生成
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
+    //缓存service
+    @Autowired
+    private ConfigCache configCache;
 
     /**
      * 根据ID获取用户信息
@@ -39,8 +43,13 @@ public class UserInfoController {
         UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
 
         //TODO 雪花算法ID生成测试
-        System.out.println("===============================");
+        System.out.println("==============雪花算法ID生成测试=================");
         System.out.println(snowflakeIdWorker.nextId());
+
+        //TODO 缓存测试
+        System.out.println("==============缓存测试=================");
+        String huancun = configCache.get("api.tencent.sms.appid",false);
+        System.out.println(huancun);
 
         return ResultGenerator.genSuccessResult(userInfoEntity);
     }
@@ -110,12 +119,12 @@ public class UserInfoController {
     @RequestMapping("/saveInfoList")
     public Result saveInfoList(){
         //创建对象
-        UserInfoEntity MoLi = new UserInfoEntity();
-        MoLi.setName("MoLi");
-        MoLi.setSkill("睡觉");
-        MoLi.setAge(18);
-        MoLi.setFraction(60L);
-        MoLi.setEvaluate("MoLi是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子");
+        UserInfoEntity userInfoEntity = new UserInfoEntity();
+        userInfoEntity.setName("MoLi");
+        userInfoEntity.setSkill("睡觉");
+        userInfoEntity.setAge(18);
+        userInfoEntity.setFraction(60L);
+        userInfoEntity.setEvaluate("MoLi是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子");
         UserInfoEntity papyrus = new UserInfoEntity();
         papyrus.setName("papyrus");
         papyrus.setSkill("JAVA");
@@ -124,7 +133,7 @@ public class UserInfoController {
         papyrus.setEvaluate("Papyrus是一个讲话大声、个性张扬的骷髅，给人自信、有魅力的骷髅小瘦子");
         //批量保存
         List<UserInfoEntity> list =new ArrayList<>();
-        list.add(MoLi);
+        list.add(userInfoEntity);
         list.add(papyrus);
         userInfoService.saveBatch(list);
         return ResultGenerator.genSuccessResult();

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true" >
+
+    <!--
+        diskStore:为缓存路径，ehcache分为内存和磁盘 2级，此属性定义磁盘的缓存位置
+        user.home - 用户主目录
+        user.dir - 用户当前工作目录
+        java.io.tmpdir - 默认临时文件路径
+    -->
+    <diskStore path="java.io.tmpdir/ehcache"/>
+
+
+    <!--
+        name:缓存名称。
+        maxElementsInMemory:缓存最大数目
+        maxElementsOnDisk：硬盘最大缓存个数。
+        eternal:对象是否永久有效，一但设置了，timeout将不起作用。
+        overflowToDisk:是否保存到磁盘，当系统宕机时
+        timeToIdleSeconds:设置对象在失效前的允许闲置时间（单位：秒）。仅当eternal=false对象不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。
+        timeToLiveSeconds:设置对象在失效前允许存活时间（单位：秒）。最大时间介于创建时间和失效时间之间。仅当eternal=false对象不是永久有效时使用，默认是0.，也就是对象存活时间无穷大。
+        diskPersistent：是否缓存虚拟机重启期数据 Whether the disk store persists between restarts of the Virtual Machine. The default value is false.
+        diskSpoolBufferSizeMB：这个参数设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区。
+        diskExpiryThreadIntervalSeconds：磁盘失效线程运行时间间隔，默认是120秒。
+        memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。
+        clearOnFlush：内存数量最大时是否清除。
+        memoryStoreEvictionPolicy:可选策略有：LRU（最近最少使用，默认策略）、FIFO（先进先出）、LFU（最少访问次数）。
+            FIFO，first in first out，这个是大家最熟的，先进先出。
+            LFU， Less Frequently Used，就是上面例子中使用的策略，直白一点就是讲一直以来最少被使用的。如上面所讲，缓存的元素有一个hit属性，hit值最小的将会被清出缓存。
+            LRU，Least Recently Used，最近最少使用的，缓存的元素有一个时间戳，当缓存容量满了，而又需要腾出地方来缓存新的元素的时候，那么现有缓存元素中时间戳离当前时间最远的元素将被清出缓存。
+    -->
+    <defaultCache
+            maxElementsInMemory="50000"
+            eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="true"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+    />
+
+    <!-- 全局变量：永不过期-->
+    <cache name="CONSTANT"
+    	   maxElementsInMemory="50000"
+           eternal="true"
+    	   clearOnFlush="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+    <!--SESSION缓存-->
+    <cache name="SESSION"
+           maxElementsInMemory="50000"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           eternal="true"
+           clearOnFlush="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+
+    <!--app数据缓存-->
+    <cache name="APPLICATION"
+           maxElementsInMemory="50000"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           eternal="true"
+           clearOnFlush="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="1024"
+           maxElementsOnDisk="100000"
+           diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+
+</ehcache>
+
+    <!--
+	    maxElementsInMemory="10000" 	//Cache中最多允许保存的数据对象的数量
+		external="false" 				//缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期
+		timeToLiveSeconds="3600"  		//缓存的存活时间，从开始创建的时间算起
+		timeToIdleSeconds="3600"  		//多长时间不访问该缓存，那么ehcache 就会清除该缓存
+
+		这两个参数很容易误解，看文档根本没用，我仔细分析了ehcache的代码。结论如下：
+		1、timeToLiveSeconds的定义是：以创建时间为基准开始计算的超时时长；
+		2、timeToIdleSeconds的定义是：在创建时间和最近访问时间中取出离现在最近的时间作为基准计算的超时时长；
+		3、如果仅设置了timeToLiveSeconds，则该对象的超时时间=创建时间+timeToLiveSeconds，假设为A；
+		4、如果没设置timeToLiveSeconds，则该对象的超时时间=min(创建时间，最近访问时间)+timeToIdleSeconds，假设为B；
+		5、如果两者都设置了，则取出A、B最少的值，即min(A,B)，表示只要有一个超时成立即算超时。
+
+		overflowToDisk="true"    		//内存不足时，是否启用磁盘缓存
+		diskSpoolBufferSizeMB	//设置DiskStore（磁盘缓存）的缓存区大小。默认是30MB。每个Cache都应该有自己的一个缓冲区
+		maxElementsOnDisk		//硬盘最大缓存个数
+		diskPersistent			//是否缓存虚拟机重启期数据The default value is false
+		diskExpiryThreadIntervalSeconds	//磁盘失效线程运行时间间隔，默认是120秒。
+		memoryStoreEvictionPolicy="LRU" //当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略去清理内存。默认策略是LRU（最近最少使用）。你可以设置为FIFO（先进先出）或是LFU（较少使用）。
+        clearOnFlush	//内存数量最大时是否清除
+        maxEntriesLocalHeap="0"  //堆内存中最大缓存对象数,0没有限制
+        maxEntriesLocalDisk="1000" //硬盘最大缓存个数。
+    -->
