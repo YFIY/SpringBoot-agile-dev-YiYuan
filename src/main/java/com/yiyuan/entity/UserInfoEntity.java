@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * @Description 学生信息实体类
+ * @Description 演示类 学生信息实体类
  * @Author MoLi
  * @CreateTime 2019/5/26 21:41
  */
@@ -23,7 +23,7 @@ public class UserInfoEntity {
      * UUID: 全局唯一ID，UUID类型的主键
      * NONE: 该类型为未设置主键类型
      */
-    @TableId(type = IdType.AUTO)
+    @TableId(type = IdType.INPUT)
     private Long id;
     /**
      * 姓名

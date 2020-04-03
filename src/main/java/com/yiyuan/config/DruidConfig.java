@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description Druid配置类
+ * @Description Druid连接池配置类
  * @Author MoLi
  */
 @Configuration
@@ -22,7 +22,7 @@ public class DruidConfig {
 
     @Bean
     public ServletRegistrationBean<StatViewServlet> druidServlet() {
-        logger.info("--------------初始化 Druid 服务--------------");
+        logger.info("--------------初始化 Druid 连接池 服务--------------");
         ServletRegistrationBean<StatViewServlet> srBean = new ServletRegistrationBean<>();
         srBean.setServlet(new StatViewServlet());
         srBean.addUrlMappings("/druid/*");

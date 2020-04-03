@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.alibaba.fastjson.JSON;
 
-import static sun.security.krb5.Confounder.longValue;
-
 /**
- * @Description 演示类UserInfoController
+ * @Description 演示类 UserInfoController
  * @Author MoLi
  * @CreateTime 2019/6/8 16:27
  */
@@ -105,7 +103,7 @@ public class UserInfoController {
      */
     @RequestMapping(value = "/saveInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result saveInfo(@RequestBody String jsonStr){
-        //json字符串解析放入模型
+        //json字符串解析数据放入模型
         UserInfoEntity userInfoEntity = JSON.parseObject(jsonStr, UserInfoEntity.class);
         //雪花ID注入
         userInfoEntity.setId(snowflakeIdWorker.nextId());
@@ -118,26 +116,20 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:42
      */
-    @RequestMapping("/saveInfoList")
-    public Result saveInfoList(){
-        //创建对象
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        userInfoEntity.setName("MoLi");
-        userInfoEntity.setSkill("睡觉");
-        userInfoEntity.setAge(18);
-        userInfoEntity.setFraction(60L);
-        userInfoEntity.setEvaluate("MoLi是一个爱睡觉,并且身材较矮骨骼巨大的骷髅小胖子");
-        UserInfoEntity papyrus = new UserInfoEntity();
-        papyrus.setName("papyrus");
-        papyrus.setSkill("JAVA");
-        papyrus.setAge(18);
-        papyrus.setFraction(58L);
-        papyrus.setEvaluate("Papyrus是一个讲话大声、个性张扬的骷髅，给人自信、有魅力的骷髅小瘦子");
+    @RequestMapping(value = "/saveInfoList", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result saveInfoList(@RequestBody String jsonStr){
+
+        //从json字符串中获取多个模型数据注入list
+        List<UserInfoEntity> userInfoEntityList=new ArrayList(JSON.parseArray(jsonStr,UserInfoEntity.class));
+
+        //遍历集合
+        for (int i = 0; i < userInfoEntityList.size(); i++) {
+            //雪花ID注入
+            userInfoEntityList.get(i).setId(snowflakeIdWorker.nextId());
+        }
+
         //批量保存
-        List<UserInfoEntity> list =new ArrayList<>();
-        list.add(userInfoEntity);
-        list.add(papyrus);
-        userInfoService.saveBatch(list);
+        userInfoService.saveBatch(userInfoEntityList);
         return ResultGenerator.genSuccessResult();
     }
     /**
@@ -145,12 +137,13 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:47
      */
-    @RequestMapping("/updateInfo")
-    public Result updateInfo(){
+    @RequestMapping(value = "/updateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result updateInfo(@RequestBody String jsonStr){
+
+        //json字符串解析数据放入模型
+        UserInfoEntity userInfoEntity = JSON.parseObject(jsonStr, UserInfoEntity.class);
+
         //根据实体中的ID去更新,其他字段如果值为null则不会更新该字段,参考yml配置文件
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        userInfoEntity.setId(1L);
-        userInfoEntity.setAge(19);
         userInfoService.updateById(userInfoEntity);
         return ResultGenerator.genSuccessResult();
     }
@@ -159,13 +152,14 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:50
      */
-    @RequestMapping("/saveOrUpdateInfo")
-    public Result saveOrUpdate(){
+    @RequestMapping(value = "/saveOrUpdateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result saveOrUpdate(@RequestBody String jsonStr){
+
+        //json字符串解析数据放入模型
+        UserInfoEntity userInfoEntity = JSON.parseObject(jsonStr, UserInfoEntity.class);
+
         //传入的实体类userInfoEntity中ID为null就会新增(ID自增)
         //实体类ID值存在,如果数据库存在ID就会更新,如果不存在就会新增
-        UserInfoEntity userInfoEntity = new UserInfoEntity();
-        userInfoEntity.setId(1L);
-        userInfoEntity.setAge(20);
         userInfoService.saveOrUpdate(userInfoEntity);
         return ResultGenerator.genSuccessResult();
     }
@@ -175,8 +169,8 @@ public class UserInfoController {
      * @CreateTime 2019/6/8 16:52
      */
     @RequestMapping("/deleteInfo")
-    public Result deleteInfo(String userId){
-        userInfoService.removeById(userId);
+    public Result deleteInfo(String id){
+        userInfoService.removeById(id);
         return ResultGenerator.genSuccessResult();
     }
     /**
@@ -184,11 +178,15 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:55
      */
-    @RequestMapping("/deleteInfoList")
-    public Result deleteInfoList(){
-        List<String> userIdlist = new ArrayList<>();
-        userIdlist.add("12");
-        userIdlist.add("13");
+    @RequestMapping(value = "/deleteInfoList", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result deleteInfoList(@RequestBody String jsonStr){
+
+        //从json字符串中获取数据注入Map
+        Map<String,List> mapType = JSON.parseObject(jsonStr,Map.class);
+
+        //将Map中的数组注入List
+        List<String> userIdlist = mapType.get("list");
+
         userInfoService.removeByIds(userIdlist);
         return ResultGenerator.genSuccessResult();
     }
@@ -197,13 +195,14 @@ public class UserInfoController {
      * @Author MoLi
      * @CreateTime 2019/6/8 16:57
      */
-    @RequestMapping("/deleteInfoMap")
-    public Result deleteInfoMap(){
+    @RequestMapping(value = "/deleteInfoMap", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result deleteInfoMap(@RequestBody String jsonStr){
+
+        //从json字符串中获取数据注入Map
+        Map<String,Object> mapType = JSON.parseObject(jsonStr,Map.class);
+
         //kay是字段名 value是字段值
-        Map<String,Object> map = new HashMap<>();
-        map.put("skill","删除");
-        map.put("fraction",10L);
-        userInfoService.removeByMap(map);
+        userInfoService.removeByMap(mapType);
         return ResultGenerator.genSuccessResult();
     }
 }
