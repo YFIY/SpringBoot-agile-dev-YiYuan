@@ -43,10 +43,6 @@ public class UserInfoController {
         UserInfoEntity model = JSON.parseObject(jsonStr, UserInfoEntity.class);
         UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
 
-        //TODO 雪花算法ID生成测试
-        System.out.println("==============雪花算法ID生成测试=================");
-        System.out.println(snowflakeIdWorker.nextId());
-
         //TODO 缓存测试
         System.out.println("==============缓存测试=================");
         String huancun = configCache.get("api.tencent.sms.appid",false);
