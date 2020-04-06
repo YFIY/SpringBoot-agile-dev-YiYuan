@@ -13,8 +13,8 @@ public interface Cache {
 	/**
 	 * 获取缓存数据
 	 *
-	 * @param key
-	 * @return
+	 * @param key key
+	 * @return value
 	 */
 	String get(String key);
 

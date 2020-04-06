@@ -29,7 +29,7 @@ public class UserInfoPlusController {
      * MP扩展演示
      * @author MoLi
      * @CreateTime 2019/6/8 16:37
-     * @Return Map<String,Object> 返回数据
+     * @return Map<String,Object> 返回数据
      */
     @RequestMapping("/getInfoListPlus")
     public Map<String,Object> getInfoListPage(){
@@ -77,7 +77,7 @@ public class UserInfoPlusController {
      * MP自定义SQL
      * @author MoLi
      * @CreateTime 2019/6/9 14:37
-     * @Return IPage<UserInfoEntity> 分页数据
+     * @return IPage<UserInfoEntity> 分页数据
      */
     @RequestMapping("/getInfoListSql")
     public IPage<UserInfoEntity> getInfoListSql(){

@@ -15,9 +15,9 @@ public interface UserInfoService extends IService<UserInfoEntity> {
      * 查询大于该分数的学生
      * @author MoLi
      * @CreateTime 2019/6/9 14:27
-     * @Param  page  分页参数
-     * @Param  fraction  分数
-     * @Return IPage<UserInfoEntity> 分页数据
+     * @param  page  分页参数
+     * @param  fraction  分数
+     * @return IPage<UserInfoEntity> 分页数据
      */
     IPage<UserInfoEntity> selectUserInfoByGtFraction(IPage<UserInfoEntity> page, Long fraction);
 

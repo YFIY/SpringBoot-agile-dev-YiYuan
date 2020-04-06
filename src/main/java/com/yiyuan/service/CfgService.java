@@ -12,7 +12,12 @@ import com.yiyuan.entity.UserInfoEntity;
  */
 public interface CfgService extends IService<CfgEntity> {
 
-    //根据参数名查一条数据
+    /**
+     * 根据参数名查一条参数值
+     *
+     * @param cfgName 参数名
+     * @return 参数值
+     */
     CfgEntity findByCfgName(String cfgName);
 
 }

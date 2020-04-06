@@ -19,70 +19,79 @@ public interface CacheDao {
     String SESSION = "SESSION";
 
     /**
+     * 将数据放入缓存
      * 设置hash key值
      *
-     * @param key
-     * @param k
-     * @param val
+     * @param key 缓存类型
+     * @param k 缓存名
+     * @param val 缓存值
      */
     void hset(Serializable key, Serializable k, Object val);
 
     /**
+     * 将数据放入缓存(默认为指定类型的缓存)
+     * 设置hash key值
+     *
+     * @param key 缓存名
+     * @param val 缓存值
+     */
+    void set(Serializable key, Object val);
+
+    /**
+     * 从缓存中取指定名字的String类型数据
      * 获取hash key值
      *
-     * @param key
-     * @param k
-     * @return
+     * @param key 缓存类型
+     * @param k 缓存名
+     * @return 缓存值(String类型)
      */
     Serializable hget(Serializable key, Serializable k);
 
     /**
+     * 从缓存中取指定名字的指定类型数据
      * 获取hash key值
      *
-     * @param key
-     * @param k
-     * @param klass
-     * @param <T>
-     * @return
+     * @param key 缓存类型
+     * @param k 缓存名
+     * @param klass 缓存值的类型
+     * @return 缓存值(klass指定类型)
      */
     <T> T hget(Serializable key, Serializable k, Class<T> klass);
 
-    /**
-     * 设置key值，超时失效
-     *
-     * @param key
-     * @param val
-     */
-    void set(Serializable key, Object val);
-
 
     /**
-     * 获取key值
+     * 从缓存中取指定名字的指定类型数据(带默认缓存类型)
+     * 获取hash key值
      *
-     * @param key
-     * @param klass
-     * @return
+     * @param key 缓存名
+     * @param klass 缓存值的类型
+     * @return 缓存值(klass指定类型)
      */
     <T> T get(Serializable key, Class<T> klass);
 
 
     /**
-     * 获取指定名字的全局配置
-     * @param key
-     * @return 配置内容(value)
+     * 从缓存中取指定名字的String类型的数据(带默认缓存类型)
+     * 获取hash key值
+     *
+     * @param key 缓存名
+     * @return 缓存值(String类型)
      */
     String get(Serializable key);
 
     /**
-     * 删除指定名字的全局配置
-     * @param key
+     * 删除指定缓存名的缓存数据(带默认缓存类型)
+     * 获取hash key值
+     *
+     * @param key 缓存名
      */
     void del(Serializable key);
 
     /**
-     * 删除指定类型标识以及指定名字的缓存
-     * @param key
-     * @param k
+     * 删除指定缓存类型以及指定名字的缓存
+     *
+     * @param key 类型标识
+     * @param k 缓存名
      */
     void hdel(Serializable key, Serializable k);
 }

@@ -38,8 +38,8 @@ public class UserInfoController {
      * 根据ID获取用户信息
      * @author MoLi
      * @CreateTime 2019/6/8 16:34
-     * @Param  id  用户ID
-     * @Return UserInfoEntity 用户实体
+     * @param  jsonStr [id 用户ID]
+     * @return UserInfoEntity 用户实体
      */
     @RequestMapping(value = "/getInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result getInfo(@RequestBody String jsonStr){
@@ -49,7 +49,7 @@ public class UserInfoController {
 
         //TODO 缓存测试
         System.out.println("==============缓存测试=================");
-        String huancun = configCache.get("api.tencent.sms.appid",false);
+        String huancun = configCache.get("api.tencent.sms.appid");
         System.out.println(huancun);
 
         return ResultGenerator.genSuccessResult(userInfoEntity);
@@ -57,8 +57,7 @@ public class UserInfoController {
     /**
      * 查询全部信息
      * @author MoLi
-     * @CreateTime 2019/6/8 16:35
-     * @Return List<UserInfoEntity> 用户实体集合
+     * @return List<UserInfoEntity> 用户实体集合
      */
     @RequestMapping(value = "/getList",method = RequestMethod.GET)
     public Result getList(){
@@ -68,29 +67,32 @@ public class UserInfoController {
     /**
      * 分页查询全部数据
      * @author MoLi
-     * @CreateTime 2019/6/8 16:37
-     * @Param  current  当前页
-     * @Param  size  每页条数
-     * @Return IPage<UserInfoEntity> 分页数据
+     * @param  jsonStr [current 当前页][size 每页条数]
+     * @return IPage<UserInfoEntity> 分页数据
      */
     @RequestMapping(value = "/getInfoListPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result getInfoListPage(@RequestBody String jsonStr){
         //需要在Config配置类中配置分页插件
         Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
-        IPage<UserInfoEntity> page = new Page<>();
+        IPage<UserInfoEntity> pageData = new Page<>();
+
+        //参数校验
+        if( null == jsonMap.get("current") || null == jsonMap.get("size") ){
+            return ResultGenerator.genFailResult("当前页|每页条数,不允许为空");
+        }
+
         //当前页
-        page.setCurrent(Long.parseLong(jsonMap.get("current").toString()));
+        pageData.setCurrent(Long.parseLong(jsonMap.get("current").toString()));
         //每页条数
-        page.setSize(Long.parseLong(jsonMap.get("size").toString()));
-        page = userInfoService.page(page);
-        return ResultGenerator.genSuccessResult(page);
+        pageData.setSize(Long.parseLong(jsonMap.get("size").toString()));
+        pageData = userInfoService.page(pageData);
+        return ResultGenerator.genSuccessResult(pageData);
     }
     /**
      * 根据指定字段查询用户信息集合
      * @author MoLi
-     * @CreateTime 2019/6/8 16:39
-     * @Param  任意字段都可当做条件传入  kay是字段名 value是字段值  例如{"id":"123","password":"123"}
-     * @Return Collection<UserInfoEntity> 用户实体集合
+     * @param  jsonStr  kay是字段名 value是字段值  例如{"id":"123","password":"123"}
+     * @return Collection<UserInfoEntity> 用户实体集合
      */
     @RequestMapping(value = "/getListMap", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result getListMap(@RequestBody String jsonStr){
