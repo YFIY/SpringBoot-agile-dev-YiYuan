@@ -9,8 +9,13 @@ import java.io.Serializable;
  */
 public interface CacheDao {
 
-    //全局配置
+    /**
+     * 全局配置标识
+     */
     String CONSTANT = "CONSTANT";
+    /**
+     * Session标识
+     */
     String SESSION = "SESSION";
 
     /**
@@ -33,13 +38,14 @@ public interface CacheDao {
 
     /**
      * 获取hash key值
+     *
      * @param key
      * @param k
      * @param klass
      * @param <T>
      * @return
      */
-    <T>T hget(Serializable key, Serializable k, Class<T> klass);
+    <T> T hget(Serializable key, Serializable k, Class<T> klass);
 
     /**
      * 设置key值，超时失效
@@ -50,7 +56,6 @@ public interface CacheDao {
     void set(Serializable key, Object val);
 
 
-
     /**
      * 获取key值
      *
@@ -58,10 +63,26 @@ public interface CacheDao {
      * @param klass
      * @return
      */
-      <T>T get(Serializable key, Class<T> klass);
-      String get(Serializable key);
+    <T> T get(Serializable key, Class<T> klass);
 
 
-      void del(Serializable key);
-      void hdel(Serializable key, Serializable k);
+    /**
+     * 获取指定名字的全局配置
+     * @param key
+     * @return 配置内容(value)
+     */
+    String get(Serializable key);
+
+    /**
+     * 删除指定名字的全局配置
+     * @param key
+     */
+    void del(Serializable key);
+
+    /**
+     * 删除指定类型标识以及指定名字的缓存
+     * @param key
+     * @param k
+     */
+    void hdel(Serializable key, Serializable k);
 }

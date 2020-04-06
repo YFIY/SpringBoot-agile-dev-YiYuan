@@ -5,6 +5,7 @@ import com.yiyuan.utils.StringUtil;
 
 /**
  * 工具类初始化异常
+ * @author MoLi
  */
 public class ToolBoxException extends RuntimeException {
 	private static final long serialVersionUID = 8247610319171014183L;

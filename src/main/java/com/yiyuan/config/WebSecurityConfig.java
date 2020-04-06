@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 /**
  * Security 权限框架配置类
- * @Author MoLi
+ * @author MoLi
  */
 @Configuration
 @EnableWebSecurity

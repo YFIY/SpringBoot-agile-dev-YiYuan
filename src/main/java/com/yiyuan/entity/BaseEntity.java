@@ -11,15 +11,25 @@ import java.util.Date;
 @Data
 public abstract class BaseEntity {
 
-    //ID
+    /**
+     * ID
+     */
     private Long id;
-    //创建时间/注册时间
+    /**
+     * 创建时间/注册时间
+     */
     private Date createTime;
-    //创建人
+    /**
+     * 创建人
+     */
     private Long createBy;
-    //最后更新时间
+    /**
+     * 最后更新时间
+     */
     private Date modifyTime;
-    //最后更新人
+    /**
+     * 最后更新人
+     */
     private Long modifyBy;
 
 }

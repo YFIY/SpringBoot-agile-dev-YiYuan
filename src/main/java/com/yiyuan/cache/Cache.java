@@ -22,8 +22,8 @@ public interface Cache {
 	/**
 	 * 设置缓存数据
 	 *
-	 * @param key
-	 * @param val
+	 * @param key 缓存的名字(key)
+	 * @param val 缓存的内容(value)
 	 */
 	void set(String key, Object val);
 

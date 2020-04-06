@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * @Description Druid连接池配置类
- * @Author MoLi
+ * @author MoLi
  */
 @Configuration
 public class DruidConfig {
@@ -30,6 +30,7 @@ public class DruidConfig {
         srBean.addInitParameter("allow", "127.0.0.1");
         // IP黑名单(共同存在时，deny优先于allow)
         //srBean.addInitParameter("deny", "192.168.1.100");
+
         //控制台管理用户
         srBean.addInitParameter("loginUsername", "admin");
         srBean.addInitParameter("loginPassword", "123456");

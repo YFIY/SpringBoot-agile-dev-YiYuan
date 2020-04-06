@@ -319,8 +319,10 @@ public class StringUtil {
             return new String[] { str };
         }
 
-        int dellen = delimiter.length(); // del length
-        int maxparts = (str.length() / dellen) + 2; // one more for the last
+        // del length
+        int dellen = delimiter.length();
+        // one more for the last
+        int maxparts = (str.length() / dellen) + 2;
         int[] positions = new int[maxparts];
 
         int i, j = 0;

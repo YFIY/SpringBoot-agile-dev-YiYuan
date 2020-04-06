@@ -81,7 +81,8 @@ public class SnowflakeIdWorker {
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & SEQUENCE_MASK;
             // 溢出处理
-            if (sequence == 0) { // 阻塞到下一毫秒,获得新时间戳
+            if (sequence == 0) {
+                // 阻塞到下一毫秒,获得新时间戳
                 timestamp = tilNextMillis(lastTimestamp);
             }
         } else { // 时间戳改变，毫秒内sequence重置

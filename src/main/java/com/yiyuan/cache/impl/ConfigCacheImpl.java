@@ -30,7 +30,7 @@ public class ConfigCacheImpl implements ConfigCache {
     /**
      * 通过参数名获取参数值
      * 注意:使用此方法只会从本地缓存中取,如果缓存中没有则返回NULL
-     * @Author MoLi
+     * @author MoLi
      * @Param  key 参数名
      * @Return 参数值
      */
@@ -41,7 +41,7 @@ public class ConfigCacheImpl implements ConfigCache {
 
     /**
      * 自定义数据源,通过参数名获取参数值
-     * @Author MoLi
+     * @author MoLi
      * @Param  key 参数名
      * @Param  local 布尔含义:[true]从本地缓存中获取 [false]从数据库中获取
      * @Return 参数值

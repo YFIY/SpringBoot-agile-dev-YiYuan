@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * @Description 演示类 UserInfoController
- * @Author MoLi
+ * @author MoLi
  * @CreateTime 2019/6/8 16:27
  */
 @RestController
@@ -23,16 +23,20 @@ import com.alibaba.fastjson.JSON;
 public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
-    //雪花ID生成
+    /**
+     * 雪花ID生成
+     */
     @Autowired
     private SnowflakeIdWorker snowflakeIdWorker;
-    //缓存service
+    /**
+     * 缓存service
+     */
     @Autowired
     private ConfigCache configCache;
 
     /**
      * 根据ID获取用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:34
      * @Param  id  用户ID
      * @Return UserInfoEntity 用户实体
@@ -52,7 +56,7 @@ public class UserInfoController {
     }
     /**
      * 查询全部信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:35
      * @Return List<UserInfoEntity> 用户实体集合
      */
@@ -63,7 +67,7 @@ public class UserInfoController {
     }
     /**
      * 分页查询全部数据
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:37
      * @Param  current  当前页
      * @Param  size  每页条数
@@ -74,14 +78,16 @@ public class UserInfoController {
         //需要在Config配置类中配置分页插件
         Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
         IPage<UserInfoEntity> page = new Page<>();
-        page.setCurrent(Long.parseLong(jsonMap.get("current").toString())); //当前页
-        page.setSize(Long.parseLong(jsonMap.get("size").toString()));    //每页条数
+        //当前页
+        page.setCurrent(Long.parseLong(jsonMap.get("current").toString()));
+        //每页条数
+        page.setSize(Long.parseLong(jsonMap.get("size").toString()));
         page = userInfoService.page(page);
         return ResultGenerator.genSuccessResult(page);
     }
     /**
      * 根据指定字段查询用户信息集合
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:39
      * @Param  任意字段都可当做条件传入  kay是字段名 value是字段值  例如{"id":"123","password":"123"}
      * @Return Collection<UserInfoEntity> 用户实体集合
@@ -94,7 +100,7 @@ public class UserInfoController {
     }
     /**
      * 新增用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:40
      */
     @RequestMapping(value = "/saveInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -109,7 +115,7 @@ public class UserInfoController {
     }
     /**
      * 批量新增用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:42
      */
     @RequestMapping(value = "/saveInfoList", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -130,7 +136,7 @@ public class UserInfoController {
     }
     /**
      * 更新用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:47
      */
     @RequestMapping(value = "/updateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -145,7 +151,7 @@ public class UserInfoController {
     }
     /**
      * 新增或者更新用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:50
      */
     @RequestMapping(value = "/saveOrUpdateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -161,7 +167,7 @@ public class UserInfoController {
     }
     /**
      * 根据ID删除用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:52
      */
     @RequestMapping("/deleteInfo")
@@ -171,7 +177,7 @@ public class UserInfoController {
     }
     /**
      * 根据ID批量删除用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:55
      */
     @RequestMapping(value = "/deleteInfoList", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -188,7 +194,7 @@ public class UserInfoController {
     }
     /**
      * 根据指定字段删除用户信息
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:57
      */
     @RequestMapping(value = "/deleteInfoMap", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

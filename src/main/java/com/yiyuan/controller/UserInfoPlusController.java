@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @Description 演示类UserInfoPlusController
- * @Author MoLi
+ * @author MoLi
  * @CreateTime 2019/6/9 14:52
  */
 @RestController
@@ -27,7 +27,7 @@ public class UserInfoPlusController {
 
     /**
      * MP扩展演示
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/8 16:37
      * @Return Map<String,Object> 返回数据
      */
@@ -75,12 +75,12 @@ public class UserInfoPlusController {
     }
     /**
      * MP自定义SQL
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/9 14:37
      * @Return IPage<UserInfoEntity> 分页数据
      */
-    @RequestMapping("/getInfoListSQL")
-    public IPage<UserInfoEntity> getInfoListSQL(){
+    @RequestMapping("/getInfoListSql")
+    public IPage<UserInfoEntity> getInfoListSql(){
         //查询大于60分以上的学生,并且分页
         IPage<UserInfoEntity> page = new Page<>();
         page.setCurrent(1);

@@ -2,7 +2,7 @@ package com.yiyuan.core;
 
 /**
  * 响应结果生成工具
- * @Author MoLi
+ * @author MoLi
  */
 public class ResultGenerator {
     private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";

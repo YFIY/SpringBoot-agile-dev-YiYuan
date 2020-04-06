@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Description 用户业务实现
- * @Author MoLi
+ * @author MoLi
  * @CreateTime 2019/6/8 16:26
  */
 @Service
@@ -20,7 +20,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoDao, UserInfoEntity
 
     /**
      * 查询大于该分数的学生
-     * @Author MoLi
+     * @author MoLi
      * @CreateTime 2019/6/9 14:27
      * @Param  page  分页参数
      * @Param  fraction  分数
