@@ -27,7 +27,7 @@ public class DruidConfig {
         srBean.setServlet(new StatViewServlet());
         srBean.addUrlMappings("/druid/*");
         // IP白名单
-        srBean.addInitParameter("allow", "127.0.0.1");
+        //srBean.addInitParameter("allow", "127.0.0.1");
         // IP黑名单(共同存在时，deny优先于allow)
         //srBean.addInitParameter("deny", "192.168.1.100");
 

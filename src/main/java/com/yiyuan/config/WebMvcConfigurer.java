@@ -132,7 +132,11 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     //解决跨域问题
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        //registry.addMapping("/**");
+        registry.addMapping("/**")
+                .allowCredentials(true)
+                .allowedHeaders("*")
+                .allowedOrigins("*")
+                .allowedMethods("GET","POST","PUT","DELETE");
     }
 
     //添加拦截器

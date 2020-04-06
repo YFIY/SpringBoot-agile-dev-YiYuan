@@ -34,6 +34,18 @@ public class UserInfoController {
     @Autowired
     private ConfigCache configCache;
 
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello jwt !";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "hello admin !";
+    }
+
+
     /**
      * 根据ID获取用户信息
      * @author MoLi

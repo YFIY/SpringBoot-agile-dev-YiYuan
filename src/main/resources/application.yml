@@ -10,15 +10,10 @@ spring:
   #不同环境配置文件设置
   profiles:
     active: dev
-  #security默认账户设置
-  security:
-    user:
-      name: root
-      password: 123456
   cache:
     ehcache:
       #指定ehcache本地缓存的配置文件路径
-      config: classpath:ehcache.xml
+      config: classpath:config/ehcache.xml
 
 
 # mybatis-plus相关配置
