@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * @Description 演示类 学生信息实体类
+ * 演示类 学生信息实体类
  * @author MoLi
  * @CreateTime 2019/5/26 21:41
  */

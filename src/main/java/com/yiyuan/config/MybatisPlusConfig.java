@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Description MybatisPlus配置类
+ * MybatisPlus配置类
  * @author MoLi
  * @CreateTime 2019/5/26 17:20
  */

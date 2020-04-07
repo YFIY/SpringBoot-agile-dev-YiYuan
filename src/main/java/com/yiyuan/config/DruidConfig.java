@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @Description Druid连接池配置类
+ * Druid连接池配置类
  * @author MoLi
  */
 @Configuration

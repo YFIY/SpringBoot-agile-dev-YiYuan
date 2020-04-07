@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * @Description 用户业务实现
+ * 用户业务实现
  * @author MoLi
  * @CreateTime 2019/6/8 16:26
  */

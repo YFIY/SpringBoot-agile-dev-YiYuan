@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description 演示类UserInfoPlusController
+ * 演示类UserInfoPlusController
  * @author MoLi
  * @CreateTime 2019/6/9 14:52
  */

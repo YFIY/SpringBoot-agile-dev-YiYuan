@@ -6,7 +6,7 @@ import com.yiyuan.entity.CfgEntity;
 import com.yiyuan.entity.UserInfoEntity;
 
 /**
- * @Description 系统参数业务接口
+ * 系统参数业务接口
  *              注意:不要直接调用该类获取配置参数,请注入[ConfigCache]接口使用
  * @author MoLi
  */

@@ -17,7 +17,7 @@ import java.util.*;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @Description 演示类 UserInfoController
+ * 演示类 UserInfoController
  * @author MoLi
  * @CreateTime 2019/6/8 16:27
  */
