@@ -1,7 +1,14 @@
 #开发环境的配置文件
 server:
   port: 8888   # web应用服务端口
-
+  tomcat:
+    max-swallow-size: -1
+  servlet:
+    context-path: /yiyuan
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
 
 spring:
   # 配置数据源

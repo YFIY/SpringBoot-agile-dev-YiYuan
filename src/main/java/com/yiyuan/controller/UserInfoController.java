@@ -8,6 +8,9 @@ import com.yiyuan.core.ResultGenerator;
 import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.service.UserInfoService;
 import com.yiyuan.utils.SnowflakeIdWorker;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -20,7 +23,12 @@ import com.alibaba.fastjson.JSON;
  */
 @RestController
 @RequestMapping("/UserInfo")
+@Api(tags = "演示接口-学生用户")
 public class UserInfoController {
+
+    /**
+     * 用户业务接口
+     */
     @Autowired
     private UserInfoService userInfoService;
     /**
@@ -50,14 +58,14 @@ public class UserInfoController {
      * 根据ID获取用户信息
      * @author MoLi
      * @CreateTime 2019/6/8 16:34
-     * @param  jsonStr [id 用户ID]
+     * @param  id [id 用户ID]
      * @return UserInfoEntity 用户实体
      */
-    @RequestMapping(value = "/getInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result getInfo(@RequestBody String jsonStr){
-        //json字符串解析放入模型
-        UserInfoEntity model = JSON.parseObject(jsonStr, UserInfoEntity.class);
-        UserInfoEntity userInfoEntity = userInfoService.getById(model.getId());
+    @ApiOperation(value = "根据ID获取用户信息", notes = "根据ID获取用户信息")
+    @GetMapping(value = "/getInfo")
+    public Result getInfo(@ApiParam(name = "id", value = "用户ID", required = true) @RequestParam(name = "id", required = true) String id){
+
+        UserInfoEntity userInfoEntity = userInfoService.getById(id);
 
         //TODO 缓存测试
         System.out.println("==============缓存测试=================");

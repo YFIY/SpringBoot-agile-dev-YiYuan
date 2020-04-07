@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        /*http.authorizeRequests()
                 .antMatchers("/hello").hasRole("user")
                 .antMatchers("/admin").hasRole("admin")
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
@@ -50,6 +50,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilterBefore(new JwtLoginFilter("/login",authenticationManager()),UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtFilter(),UsernamePasswordAuthenticationFilter.class)
+                .csrf().disable();*/
+
+        http
+                // 关闭csrf保护功能（跨域访问）
                 .csrf().disable();
     }
 
