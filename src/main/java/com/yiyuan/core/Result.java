@@ -9,13 +9,20 @@ import com.alibaba.fastjson.JSON;
 public class Result<T> {
     //状态码
     private int code;
-    //提示
+    //处理消息
     private String message;
     //数据本体
     private T data;
+    //成功标识
+    private Boolean success;
+    //时间戳
+    private long timestamp;
+
+
 
     public Result setCode(ResultCode resultCode) {
         this.code = resultCode.code();
+        this.timestamp = System.currentTimeMillis();
         return this;
     }
 
@@ -34,6 +41,23 @@ public class Result<T> {
 
     public T getData() {
         return data;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public Result setSuccess(Boolean success) {
+        this.success = success;
+        return this;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public Result setData(T data) {

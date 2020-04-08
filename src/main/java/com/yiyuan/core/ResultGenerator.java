@@ -14,7 +14,8 @@ public class ResultGenerator {
     public static Result genSuccessResult() {
         return new Result()
                 .setCode(ResultCode.SUCCESS)
-                .setMessage(DEFAULT_SUCCESS_MESSAGE);
+                .setMessage(DEFAULT_SUCCESS_MESSAGE)
+                .setSuccess(true);
     }
 
     /**
@@ -27,7 +28,8 @@ public class ResultGenerator {
         return new Result()
                 .setCode(ResultCode.SUCCESS)
                 .setMessage(DEFAULT_SUCCESS_MESSAGE)
-                .setData(data);
+                .setData(data)
+                .setSuccess(true);
     }
 
     /**
@@ -39,6 +41,7 @@ public class ResultGenerator {
     public static Result genFailResult(String message) {
         return new Result()
                 .setCode(ResultCode.FAIL)
-                .setMessage(message);
+                .setMessage(message)
+                .setSuccess(false);
     }
 }

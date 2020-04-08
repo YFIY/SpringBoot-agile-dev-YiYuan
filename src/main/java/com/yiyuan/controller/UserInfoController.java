@@ -63,7 +63,7 @@ public class UserInfoController {
      */
     @ApiOperation(value = "根据ID获取用户信息", notes = "根据ID获取用户信息")
     @GetMapping(value = "/getInfo")
-    public Result getInfo(@ApiParam(name = "id", value = "用户ID", required = true) @RequestParam(name = "id", required = true) String id){
+    public UserInfoEntity getInfo(@ApiParam(name = "id", value = "用户ID", required = true) @RequestParam(name = "id", required = true) String id){
 
         UserInfoEntity userInfoEntity = userInfoService.getById(id);
 
@@ -72,7 +72,7 @@ public class UserInfoController {
         String huancun = configCache.get("api.tencent.sms.appid");
         System.out.println(huancun);
 
-        return ResultGenerator.genSuccessResult(userInfoEntity);
+        return userInfoEntity;
     }
     /**
      * 查询全部信息
