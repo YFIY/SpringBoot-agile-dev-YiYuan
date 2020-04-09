@@ -10,7 +10,7 @@ import lombok.Data;
  * @author MoLi
  */
 @Data
-@TableName("t_sys_cfg")//@TableName中的值对应着表名
+@TableName("t_sys_cfg")//表名
 public class CfgEntity extends BaseEntity {
 
     /**

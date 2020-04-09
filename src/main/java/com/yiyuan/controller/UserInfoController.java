@@ -2,6 +2,7 @@ package com.yiyuan.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.cache.ConfigCache;
 import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultGenerator;
@@ -43,17 +44,6 @@ public class UserInfoController {
     private ConfigCache configCache;
 
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello jwt !";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "hello admin !";
-    }
-
-
     /**
      * 根据ID获取用户信息
      * @author MoLi
@@ -61,6 +51,7 @@ public class UserInfoController {
      * @param  id [id 用户ID]
      * @return UserInfoEntity 用户实体
      */
+    @AnonymousAccess
     @ApiOperation(value = "根据ID获取用户信息", notes = "根据ID获取用户信息")
     @GetMapping(value = "/getInfo")
     public UserInfoEntity getInfo(@ApiParam(name = "id", value = "用户ID", required = true) @RequestParam(name = "id", required = true) String id){

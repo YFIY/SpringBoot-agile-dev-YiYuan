@@ -1,14 +1,14 @@
 package com.yiyuan;
 
+import com.yiyuan.utils.SpringContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -21,9 +21,14 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @MapperScan(basePackages = {"com.yiyuan.dao"})//配置需要扫描的Dao包
 @EnableCaching//启用缓存
-@EnableSwagger2//启用文档
 @Slf4j//日志
 public class Application {
+
+
+	@Bean
+	public SpringContextHolder springContextHolder() {
+		return new SpringContextHolder();
+	}
 
 	public static void main(String[] args) throws UnknownHostException {
 		//SpringApplication.run(Application.class, args);
