@@ -1,21 +1,41 @@
 package com.yiyuan.core;
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 统一API响应结果封装
  * @author MoLi
  */
+@ApiModel(value="接口返回对象", description="接口返回对象")
 public class Result<T> {
-    //状态码
+
+    /**
+     * 返回状态码
+     */
+    @ApiModelProperty(value = "返回状态码")
     private int code;
-    //处理消息
+    /**
+     * 返回处理消息
+     */
+    @ApiModelProperty(value = "返回处理消息")
     private String message;
-    //数据本体
+    /**
+     * 返回数据对象 data
+     */
+    @ApiModelProperty(value = "返回数据对象")
     private T data;
-    //成功标识
+    /**
+     * 成功标志
+     */
+    @ApiModelProperty(value = "成功标志")
     private Boolean success;
-    //时间戳
+
+    /**
+     * 时间戳
+     */
+    @ApiModelProperty(value = "时间戳")
     private long timestamp;
 
 

@@ -3,6 +3,8 @@ package com.yiyuan.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,6 +14,7 @@ import lombok.Data;
  */
 @Data
 @TableName("user_info")//@TableName中的值对应着表名
+@ApiModel(value="学生信息实体类", description="演示类")
 public class UserInfoEntity {
     /**
      * 主键
@@ -28,6 +31,7 @@ public class UserInfoEntity {
     /**
      * 姓名
      */
+    @ApiModelProperty(value = "姓名")
     private String name;
     /**
      * 年龄

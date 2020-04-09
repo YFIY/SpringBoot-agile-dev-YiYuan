@@ -25,6 +25,10 @@ public class UserDto implements Serializable {
 
     private String sex;
 
+    //头像表的ID
+    private Long avatarId;
+
+    //头像图片路径
     private String avatar;
 
     private String email;
@@ -38,12 +42,14 @@ public class UserDto implements Serializable {
 
     private Date lastPasswordResetTime;
 
-    @ApiModelProperty(hidden = true)
     private Set<RoleSmallDto> roles;
 
-    @ApiModelProperty(hidden = true)
+    //job表的ID
+    private Long jobId;
+
     private JobSmallDto job;
 
+    //TODO 此数据还未注入
     private DeptSmallDto dept;
 
     private Long deptId;

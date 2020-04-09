@@ -11,6 +11,7 @@ import com.yiyuan.entity.dto.UserDto;
 public interface UserService extends IService<UserDto> {
 
 
+    //获取用户数据,多表查询
     UserDto findByName(String username);
 
 
