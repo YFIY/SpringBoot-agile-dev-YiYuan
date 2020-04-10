@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * 角色
  */
-@TableName("role")//@TableName中的值对应着表名
+@TableName("role")//表名
 @Getter
 @Setter
 public class Role implements Serializable {

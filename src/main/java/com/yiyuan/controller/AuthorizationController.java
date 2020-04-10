@@ -96,6 +96,7 @@ public class AuthorizationController {
         String code = (String) redisUtils.get(authUserDto.getUuid());
         // 清除验证码
         redisUtils.del(authUserDto.getUuid());
+        //TODO 为方便测试,暂先注销验证码校验
         /*if (StringUtils.isBlank(code)) {
             throw new BadRequestException("验证码不存在或已过期");
         }

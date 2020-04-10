@@ -9,6 +9,8 @@ import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.service.RoleRepository;
 import com.yiyuan.service.RoleService;
 import com.yiyuan.utils.StringUtils;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -31,14 +33,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleDtoDao, RoleDto> implements
 
     @Override
     public List<GrantedAuthority> mapToGrantedAuthorities(UserDto user) {
+        //获取该用户的角色数据
         Set<Role> roles = roleRepository.findByUsers_Id(user.getId());
+        //取出角色标识
         Set<String> permissions = roles.stream().filter(role -> StringUtils.isNotBlank(role.getPermission())).map(Role::getPermission).collect(Collectors.toSet());
+        //取出具体所拥有的权限
         permissions.addAll(
                 roles.stream().flatMap(role -> role.getMenus().stream())
                         .filter(menu -> StringUtils.isNotBlank(menu.getPermission()))
                         .map(Menu::getPermission).collect(Collectors.toSet())
         );
-        return permissions.stream().map(SimpleGrantedAuthority::new)
+
+        //将所有的权限封装成security权限类型
+        List<GrantedAuthority> grantedAuthorityList = permissions.stream().map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+
+        return grantedAuthorityList;
     }
 }

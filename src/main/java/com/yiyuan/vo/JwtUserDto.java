@@ -18,6 +18,9 @@ public class JwtUserDto implements UserDetails {
     private UserDto user;
 
 
+    /**
+     * 权限列表
+     */
     @JsonIgnore
     private List<GrantedAuthority> authorities;
 

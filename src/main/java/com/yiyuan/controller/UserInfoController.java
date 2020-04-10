@@ -13,6 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import com.alibaba.fastjson.JSON;
@@ -51,7 +52,7 @@ public class UserInfoController {
      * @param  id [id 用户ID]
      * @return UserInfoEntity 用户实体
      */
-    @AnonymousAccess
+    @AnonymousAccess//免登访问
     @ApiOperation(value = "根据ID获取用户信息", notes = "根据ID获取用户信息")
     @GetMapping(value = "/getInfo")
     public UserInfoEntity getInfo(@ApiParam(name = "id", value = "用户ID", required = true) @RequestParam(name = "id", required = true) String id){
@@ -70,6 +71,7 @@ public class UserInfoController {
      * @author MoLi
      * @return List<UserInfoEntity> 用户实体集合
      */
+    @PreAuthorize("@dokit.check('database:list')")//权限配置
     @RequestMapping(value = "/getList",method = RequestMethod.GET)
     public Result getList(){
         List<UserInfoEntity> userInfoEntityList = userInfoService.list();

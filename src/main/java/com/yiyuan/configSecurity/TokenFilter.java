@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * @author perye
- * @email peryedev@gmail.com
- * @date 2019/12/13
+ * Token过滤器
+ * [说明]如果有请求携带了Token,则对其进行校验,Token合法则让Security授权
+ * @author MoLi
  */
 @Slf4j
 public class TokenFilter extends GenericFilterBean {
@@ -57,7 +57,6 @@ public class TokenFilter extends GenericFilterBean {
                 log.debug("找不到有效的JWT令牌, uri: {}", requestRri);
             }
         }
-
 
 
         filterChain.doFilter(servletRequest, servletResponse);
