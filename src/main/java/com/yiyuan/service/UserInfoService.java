@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yiyuan.entity.UserInfoEntity;
 
 /**
- * 用户业务接口
+ * 演示类 学生用户业务接口
  * @author MoLi
  */
 public interface UserInfoService extends IService<UserInfoEntity> {

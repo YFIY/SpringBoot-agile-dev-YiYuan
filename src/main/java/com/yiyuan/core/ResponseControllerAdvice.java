@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * 响应数据全局处理类
  * [说明]用于使Controller响应的数据自动包装
+ * @author MoLi
  */
 @RestControllerAdvice(basePackages = {"com.yiyuan.controller"})//需要扫描的包
 public class ResponseControllerAdvice implements ResponseBodyAdvice<Object> {

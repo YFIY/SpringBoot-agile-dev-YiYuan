@@ -21,7 +21,6 @@ import com.alibaba.fastjson.JSON;
 /**
  * 演示类 UserInfoController
  * @author MoLi
- * @CreateTime 2019/6/8 16:27
  */
 @RestController
 @RequestMapping("/UserInfo")
@@ -61,8 +60,8 @@ public class UserInfoController {
 
         //TODO 缓存测试
         System.out.println("==============缓存测试=================");
-        String huancun = configCache.get("api.tencent.sms.appid");
-        System.out.println(huancun);
+        String cache = configCache.get("api.tencent.sms.appid");
+        System.out.println(cache);
 
         return userInfoEntity;
     }

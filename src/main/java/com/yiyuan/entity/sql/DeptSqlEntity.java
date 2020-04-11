@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-//表模型
+//部门表模型
 @Data
 @TableName("dept")//表名
 public class DeptSqlEntity {

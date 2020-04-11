@@ -16,7 +16,6 @@ import java.util.Map;
 /**
  * 演示类UserInfoPlusController
  * @author MoLi
- * @CreateTime 2019/6/9 14:52
  */
 @RestController
 @RequestMapping("/userInfoPlus")
@@ -28,7 +27,6 @@ public class UserInfoPlusController {
     /**
      * MP扩展演示
      * @author MoLi
-     * @CreateTime 2019/6/8 16:37
      * @return Map<String,Object> 返回数据
      */
     @RequestMapping("/getInfoListPlus")

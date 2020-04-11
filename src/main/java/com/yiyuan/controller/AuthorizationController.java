@@ -36,7 +36,8 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 授权、根据token获取用户详细信息
+ * 系统授权接口[登录.退出.验证码等]
+ * @author MoLi
  */
 @Slf4j
 @RestController

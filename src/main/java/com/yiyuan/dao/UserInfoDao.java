@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yiyuan.entity.UserInfoEntity;
 
 /**
- * 用户信息DAO
+ * 演示类 学生用户信息DAO
  * @author MoLi
  */
 public interface UserInfoDao extends BaseMapper<UserInfoEntity> {
