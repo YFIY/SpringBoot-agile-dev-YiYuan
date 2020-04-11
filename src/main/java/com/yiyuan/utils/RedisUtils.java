@@ -11,9 +11,8 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author perye
- * @email peryedev@gmail.com
- * @date 2019/12/13
+ * Redis工具类
+ * @author MoLi
  */
 @Component
 @SuppressWarnings({"unchecked","all"})

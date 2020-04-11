@@ -57,17 +57,29 @@ public class AuthorizationController {
      * 验证码业务
      */
     private final CaptchaService captchaService;
-
+    /**
+     * Jwt参数配置类
+     */
     private final SecurityProperties properties;
-
+    /**
+     * Redis工具类
+     */
     private final RedisUtils redisUtils;
-
+    /**
+     * Security登录身份认证
+     */
     private final UserDetailsService userDetailsService;
-
+    /**
+     * 在线用户业务类
+     */
     private final OnlineUserService onlineUserService;
-
+    /**
+     * Token服务类
+     */
     private final TokenProvider tokenProvider;
-
+    /**
+     * 认证管理器构建器
+     */
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     public AuthorizationController(SecurityProperties properties, RedisUtils redisUtils, UserDetailsService userDetailsService, OnlineUserService onlineUserService, TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, CaptchaService captchaService) {
@@ -92,10 +104,11 @@ public class AuthorizationController {
         // 密码解密
         RSA rsa = new RSA(privateKey, null);
         String password = new String(rsa.decrypt(authUserDto.getPassword(), KeyType.PrivateKey));
-        // 查询验证码
+        // 查询缓存中的验证码
         String code = (String) redisUtils.get(authUserDto.getUuid());
-        // 清除验证码
+        // 清除缓存中的验证码
         redisUtils.del(authUserDto.getUuid());
+
         //TODO 为方便测试,暂先注销验证码校验
         /*if (StringUtils.isBlank(code)) {
             throw new BadRequestException("验证码不存在或已过期");
@@ -103,18 +116,22 @@ public class AuthorizationController {
         if (StringUtils.isBlank(authUserDto.getCode()) || !authUserDto.getCode().equalsIgnoreCase(code)) {
             throw new BadRequestException("验证码错误");
         }*/
+
+        // 封装用户名密码
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(authUserDto.getUsername(), password);
-
+        //认证
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        //认证成功,返回的Authentication对象赋予给当前的SecurityContext
         SecurityContextHolder.getContext().setAuthentication(authentication);
         // 生成令牌
         String token = tokenProvider.createToken(authentication);
+        //用户信息封装
         final JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
-
-        // 保存在线信息
+        // 保存在线信息到缓存中
         onlineUserService.save(jwtUserDto, token, request);
 
+        //如果开启了踢出功能
         if(singleLogin){
             //踢掉之前已经登录的token
             onlineUserService.checkLoginOnUser(authUserDto.getUsername(),token);

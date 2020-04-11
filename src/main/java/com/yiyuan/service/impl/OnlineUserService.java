@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * 在线用户业务类
+ * @author MoLi
+ */
 @Service
 @Slf4j
 @SuppressWarnings({"unchecked","all"})//抑制警告
@@ -160,7 +164,7 @@ public class OnlineUserService {
 
 
     /**
-     * 查询用户
+     * 根据key查询Redis中的单个用户信息
      * @param key
      * @return
      */

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+/**
+ * Spring上下文操作类
+ */
 @Slf4j
 public class SpringContextHolder implements ApplicationContextAware, DisposableBean {
 
