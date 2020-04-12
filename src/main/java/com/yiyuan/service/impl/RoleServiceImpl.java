@@ -1,10 +1,12 @@
 package com.yiyuan.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yiyuan.dao.RoleDao;
 import com.yiyuan.dao.RoleDtoDao;
 import com.yiyuan.entity.Menu;
 import com.yiyuan.entity.Role;
 import com.yiyuan.entity.dto.RoleDto;
+import com.yiyuan.entity.dto.RoleSmallDto;
 import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.service.RoleRepository;
 import com.yiyuan.service.RoleService;
@@ -17,18 +19,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class RoleServiceImpl extends ServiceImpl<RoleDtoDao, RoleDto> implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleDao roleDao;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository,RoleDao roleDao) {
         this.roleRepository = roleRepository;
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -49,5 +52,15 @@ public class RoleServiceImpl extends ServiceImpl<RoleDtoDao, RoleDto> implements
                 .collect(Collectors.toList());
 
         return grantedAuthorityList;
+    }
+
+    @Override
+    public List<RoleSmallDto> findByUsersId(Long id) {
+        //根据用户ID查询该用户所有的角色
+        Set<RoleSmallDto> roleList = roleDao.findRoleList(id);
+        //set转list
+        List<RoleSmallDto> result = new ArrayList<>(roleList);
+
+        return result;
     }
 }

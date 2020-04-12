@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author MoLi
  */
 @Service
-@Transactional
+@Transactional//事务
 public class CfgServiceImpl extends ServiceImpl<CfgDao, CfgEntity> implements CfgService {
 
     //根据参数名查一条数据
