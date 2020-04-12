@@ -117,6 +117,8 @@ public class CargoBillController {
         cargoBillSqlEntity.setId(snowflakeIdWorker.nextId());
         //创建时间注入
         cargoBillSqlEntity.setCreationTime(new Date());
+        //TODO 暂时先固定用户ID
+        cargoBillSqlEntity.setUserId(8068996691l);
         //执行保存
         cargoBillService.save(cargoBillSqlEntity);
         return ResultGenerator.genSuccessResult();
