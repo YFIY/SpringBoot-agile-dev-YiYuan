@@ -634,34 +634,18 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                           <td>&nbsp;&nbsp;&nbsp;&nbsp;济源</td>
-                                            <td>郑州</td>
-                                            <td>玄武岩</td>
-                                            <td>2-3</td>
-                                            <td>吨</td>
-                                            <td>20</td>
-                                            <td>2.5</td>
-                                            <td>60</td>
-                                            <td>2008/11/28</td>
-                                            <td>￥：6800</td>
-                                            <td>
-                                                <button type="button" class="btn btn-info waves-effect waves-light"> <i class="mdi mdi-border-color "></i> <span>修改</span> </button>
-                                                &nbsp; &nbsp; &nbsp; &nbsp;
-                                                <button type="button" class="btn btn-info waves-effect waves-light"> <i class=" mdi mdi-delete"></i> <span>删除</span> </button>
-                                                </td>
-                                        </tr>
+
                                         <tr v-for="item in cargobillList"  v-cloak>
                                            <td>&nbsp;&nbsp;&nbsp;&nbsp;{{item.departureLocation}}</td>
                                             <td>{{item.arrivedLocation}}</td>
                                             <td>{{item.goodsName}}</td>
                                             <td>{{item.goodsSpecification}}</td>
-                                            <td>{{item.goodsUnit}}</td>
+                                            <td>{{state_transform_FF(item.goodsUnit)}}</td>
                                             <td>{{item.goodsUnitPrice}}</td>
                                             <td>{{item.goodsNumber}}</td>
                                             <td>{{item.goodsFreight}}</td>
                                             <td>{{item.creationTime}}</td>
-                                            <td>￥：6800</td>
+                                            <td>￥：{{(item.goodsUnitPrice+item.goodsFreight)*item.goodsNumber}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info waves-effect waves-light"> <i class="mdi mdi-border-color "></i> <span>修改</span> </button>
                                                 &nbsp; &nbsp; &nbsp; &nbsp;
@@ -696,35 +680,20 @@
         </div>
         <!-- END wrapper -->
 
-        <!-- Vendor js -->
-        <script src="/yiyuan/static/assets/js/vendor.min.js"></script>
 
-        <!-- datatable js -->
-        <script src="/yiyuan/static/assets/libs/datatables/jquery.dataTables.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/dataTables.responsive.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
 
-        <script src="/yiyuan/static/assets/libs/datatables/dataTables.buttons.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/buttons.html5.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/buttons.flash.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/buttons.print.min.js"></script>
 
-        <script src="/yiyuan/static/assets/libs/datatables/dataTables.keyTable.min.js"></script>
-        <script src="/yiyuan/static/assets/libs/datatables/dataTables.select.min.js"></script>
 
-        <!-- Datatables init -->
-        <script src="/yiyuan/static/assets/js/pages/datatables.init.js"></script>
 
-        <!-- App js -->
-        <script src="/yiyuan/static/assets/js/app.min.js"></script>
         <!--VUE JS-->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script src="/yiyuan/static/assets/js/vue.js"></script>
         <!--Axios-->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="/yiyuan/static/assets/js/axios.min.js"></script>
         <!--QS-->
-        <script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>
+        <!--<script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>-->
+
+
+
         <script>
 
             //初始化VUE实例
@@ -758,7 +727,7 @@
                     },
                     //状态数字转汉字
                     state_transform_FF(state){
-                        if(goodsUnit=="01"){
+                        if(state=="01"){
                             return "吨";
                         }
                         return "数据异常";
@@ -767,9 +736,10 @@
             });
             //============ ajax接口调用方法区 ====================
             //===== 页面加载后执行 start=====
-            $(function() {
+            app.ajax_querySHTperfromance_FF();
+            /*$(function() {
                 app.ajax_querySHTperfromance_FF();
-            });
+            });*/
             //===== 页面加载后执行 end=====
 
             //获取一周前和一周后时间的方法
@@ -818,6 +788,32 @@
                 return theRequest;
             }
         </script>
+
+
+        <!-- Vendor js -->
+        <script src="/yiyuan/static/assets/js/vendor.min.js"></script>
+
+
+        <!-- datatable js -->
+        <script src="/yiyuan/static/assets/libs/datatables/jquery.dataTables.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/dataTables.responsive.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+
+        <script src="/yiyuan/static/assets/libs/datatables/dataTables.buttons.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/buttons.html5.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/buttons.flash.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/buttons.print.min.js"></script>
+
+        <script src="/yiyuan/static/assets/libs/datatables/dataTables.keyTable.min.js"></script>
+        <script src="/yiyuan/static/assets/libs/datatables/dataTables.select.min.js"></script>
+
+        <!-- Datatables init -->
+        <script src="/yiyuan/static/assets/js/pages/datatables.init.js"></script>
+
+        <!-- App js -->
+        <script src="/yiyuan/static/assets/js/app.min.js"></script>
 
         
     </body>
