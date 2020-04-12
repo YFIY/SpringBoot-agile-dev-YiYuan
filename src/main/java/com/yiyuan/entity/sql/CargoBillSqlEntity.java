@@ -43,6 +43,10 @@ public class CargoBillSqlEntity {
      */
     private Long goodsNumber;
     /**
+     * 货物单位
+     */
+    private Long goodsUnit;
+    /**
      * 货物单价
      */
     private BigDecimal goodsUnitPrice;
@@ -54,5 +58,9 @@ public class CargoBillSqlEntity {
      * 创建时间
      */
     private Date creationTime;
+    /**
+     * 运单备注
+     */
+    private String goodsRemarks;
 
 }
