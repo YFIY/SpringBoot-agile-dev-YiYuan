@@ -5,7 +5,7 @@ package com.yiyuan.core;
  * @author MoLi
  */
 public class ResultGenerator {
-    private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";
+    private static final String DEFAULT_SUCCESS_MESSAGE = "成功";
 
     /**
      * 不带数据的成功返回

@@ -2,6 +2,7 @@ package com.yiyuan.service.impl;
 
 import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.exception.BadRequestException;
+import com.yiyuan.exception.ServiceException;
 import com.yiyuan.service.RoleService;
 import com.yiyuan.service.UserService;
 import com.yiyuan.vo.JwtUserDto;
@@ -36,10 +37,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //通过登录名从数据源获取用户是否存在
         UserDto user = userService.findByName(username);
         if (user == null) {
-            throw new BadRequestException("账号不存在");
+            throw new ServiceException("账号不存在");
         } else {
             if (!user.getEnabled()) {
-                throw new BadRequestException("账号未激活");
+                throw new ServiceException("账号未激活");
             }
 
             //获取该用户拥有的权限
