@@ -122,6 +122,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/webSocket/**"
                 ).permitAll()
 
+                //页面资源
+                .antMatchers("/static").permitAll()
+
                 // swagger
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/swagger-resources/**").permitAll()
