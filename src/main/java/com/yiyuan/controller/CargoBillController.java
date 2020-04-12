@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +115,8 @@ public class CargoBillController {
         CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
         //雪花ID注入
         cargoBillSqlEntity.setId(snowflakeIdWorker.nextId());
+        //创建时间注入
+        cargoBillSqlEntity.setCreationTime(new Date());
         //执行保存
         cargoBillService.save(cargoBillSqlEntity);
         return ResultGenerator.genSuccessResult();

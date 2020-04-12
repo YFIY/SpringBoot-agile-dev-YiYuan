@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
         <title>Dashoon - Responsive Bootstrap 4 Admin Dashboard</title>
@@ -606,37 +606,37 @@
                                 <div class="card-box">
 
         
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" id="basic-form">
 
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">名称</label>
                                             <div class="col-sm-10">
-                                                <input type="text" id="form_goods_name" name="form_name" class="form-control" placeholder="货物名称">
+                                                <input type="text" id="form_goods_name" name="goods_name" class="form-control" placeholder="货物名称">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">出发地</label>
                                             <div class="col-sm-10">
-                                                <input type="text" id="form_departure_location" name="form_name" class="form-control" placeholder="出发地">
+                                                <input type="text" id="form_departure_location" name="departure_location" class="form-control" placeholder="出发地">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">到达地</label>
                                             <div class="col-sm-10">
-                                                <input type="text" id="form_arrived_location" name="form_name" class="form-control" placeholder="到达地">
+                                                <input type="text" id="form_arrived_location" name="arrived_location" class="form-control" placeholder="到达地">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">规格</label>
                                             <div class="col-sm-10">
-                                                <input type="text" id="form_goods_specification" name="form_name" class="form-control" placeholder="货物规格">
+                                                <input type="text" id="form_goods_specification" name="goods_specification" class="form-control" placeholder="货物规格">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">单位</label>
                                             <div class="col-sm-10">
-                                                <select class="form-control" id="form_goods_unit">
-                                                    <option>吨</option>
+                                                <select class="form-control" name="goods_unit" id="form_goods_unit">
+                                                    <option value ="1">吨</option>
 
                                                 </select>
                                             </div>
@@ -644,32 +644,32 @@
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">数量</label>
                                             <div class="col-sm-10">
-                                                <input type="number" id="form_goods_number" name="form_name" class="form-control" placeholder="0">
+                                                <input type="number" id="form_goods_number" name="goods_number" class="form-control" placeholder="0">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">单价</label>
                                             <div class="col-sm-10">
-                                                <input type="number" id="form_goods_unit_price" name="form_name" class="form-control" placeholder="0">
+                                                <input type="number" id="form_goods_unit_price" name="goods_unit_price" class="form-control" placeholder="0">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">运费</label>
                                             <div class="col-sm-10">
-                                                <input type="number" id="form_goods_freight" name="form_name" class="form-control" placeholder="0">
+                                                <input type="number" id="form_goods_freight" name="goods_freight" class="form-control" placeholder="0">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-textarea">备注</label>
                                             <div class="col-sm-10">
-                                                <textarea class="form-control" id="example-textarea" rows="5"></textarea>
+                                                <textarea class="form-control" name="goods_remarks" id="example-textarea" rows="5"></textarea>
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary">提交</button>
 
                                     </form>
+                                    <button class="btn btn-primary" v-on:click="ajax_insertCargoBill_FF">提交</button>
         
                                 </div> <!-- end card-box -->
                             </div><!-- end col -->
@@ -735,58 +735,32 @@
                     performDateList: []
                 },
                 methods:{
-                    //查询业绩并渲染
-                    ajax_querySHTperfromance_FF(){
-                        console.log("执行货运单查询接口")
-                        axios.post('/yiyuan/CargoBill/getInfoListPage',
-                            { //表单提交
-                                "current":1,
-                                "size":"2"
-                            }
-                        ).then(function (response) {
-                            //请求成功响应结果response
-                            console.log("↓货运单查询接口返回结果↓");
-                            console.log(response);
-                            console.log(response.data);
-                            app.performDateList = response.data;
-                        }).catch(function (error) {
-                            //请求异常响应结果
-                            console.log(error);
-                        });
-                    },
                     //新增货运单
                     ajax_insertCargoBill_FF(){
-                        console.log("执行货运单查询接口")
-                        axios.post('/yiyuan/CargoBill/getInfoListPage',
-                            { //表单提交
-                                "current":1,
-                                "size":"2"
-                            }
+                        console.log("执行货运单新增接口");
+
+                        //调用方法获取form中用户填的数据
+                        const date = app.form_query_FF();
+
+                        axios.post('/yiyuan/CargoBill/saveInfo',
+                            date
                         ).then(function (response) {
                             //请求成功响应结果response
-                            console.log("↓货运单查询接口返回结果↓");
+                            console.log("↓货运单新增接口返回结果↓");
                             console.log(response);
                             console.log(response.data);
                             app.performDateList = response.data;
+
+                            if(response.data.success === true){
+                                alert("新增成功");
+                                //重定向到列表页
+                                window.location.replace("/yiyuan/CargoBillPage/list.html");
+                            }
+
                         }).catch(function (error) {
                             //请求异常响应结果
                             console.log(error);
                         });
-                    },
-                    //状态数字转汉字
-                    state_transform_FF(state){
-                        if(state=="01"){
-                            return "未确认";
-                        }else if(state=="02"){
-                            return "未通过";
-                        }else if(state=="03"){
-                            return "已通过";
-                        }else if(state=="04"){
-                            return "已完成 ";
-                        }else if(state=="05"){
-                            return "已审核";
-                        }
-                        return "数据异常";
                     },
                     //表单数据获取
                     form_query_FF(){
@@ -817,7 +791,7 @@
 
             //===== 页面加载后执行 start=====
             $(function() {
-                app.ajax_querySHTperfromance_FF();
+                //app.ajax_querySHTperfromance_FF();
             });
             //===== 页面加载后执行 end=====
 
