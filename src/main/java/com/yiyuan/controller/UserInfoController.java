@@ -115,7 +115,6 @@ public class UserInfoController {
     /**
      * 新增用户信息
      * @author MoLi
-     * @CreateTime 2019/6/8 16:40
      */
     @RequestMapping(value = "/saveInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result saveInfo(@RequestBody String jsonStr){

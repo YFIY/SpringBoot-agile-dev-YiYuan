@@ -265,7 +265,10 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     //排除不需要拦截的页面
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+
+        //将所有/static/** 访问都映射到classpath:/static/ 目录下
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        //将所有/** 访问都映射到classpath:/static/ 目录下
         registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
