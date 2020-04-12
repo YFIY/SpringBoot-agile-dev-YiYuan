@@ -123,7 +123,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
 
                 //页面资源
-                .antMatchers("/static").permitAll()
+                .antMatchers("/static/**").permitAll()
 
                 // swagger
                 .antMatchers("/swagger-ui.html").permitAll()
