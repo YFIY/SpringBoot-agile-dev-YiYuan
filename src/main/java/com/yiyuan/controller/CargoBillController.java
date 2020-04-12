@@ -124,6 +124,7 @@ public class CargoBillController {
      * @author MoLi
      * @CreateTime 2019/6/8 16:47
      */
+    @AnonymousAccess//免登访问
     @RequestMapping(value = "/updateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result updateInfo(@RequestBody String jsonStr){
 

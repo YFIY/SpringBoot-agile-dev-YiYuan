@@ -134,7 +134,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 文件
                 .antMatchers("/avatar/**").permitAll()
                 .antMatchers("/file/**").permitAll()
-                // druid
+
+                // druid连接池
                 .antMatchers("/druid/**").permitAll()
 
 
