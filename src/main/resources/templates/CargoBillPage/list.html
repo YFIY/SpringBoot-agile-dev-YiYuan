@@ -2,7 +2,7 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="utf-8" />
-        <title>Dashoon - Responsive Bootstrap 4 Admin Dashboard</title>
+        <title>货运单列表页</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -254,7 +254,7 @@
 
                 <ul class="list-unstyled menu-left mb-0">
                     <li class="float-left">
-                        <a href="index.html" class="logo">
+                        <a href="list.html" class="logo">
                             <span class="logo-lg">
                                 <img src="/yiyuan/static/assets/images/logo.png" alt="" height="25">
                             </span>
@@ -614,7 +614,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-                                    <button type="button" v-on: click="" class="btn btn-info waves-effect waves-light"> <i class=" mdi mdi-gamepad-round "></i> <span>新增</span> </button>
+                                    <button type="button" v-on:click="tiaozhan_FF" class="btn btn-info waves-effect waves-light"> <i class=" mdi mdi-gamepad-round "></i> <span>新增</span> </button>
 
                                     <p class="sub-header"></p>
                                     <table id="selection-datatable" class="table table-bordered dt-responsive nowrap">
@@ -732,6 +732,10 @@
                         }
                         return "数据异常";
                     },
+                    //跳转到新增页方法
+                    tiaozhan_FF(){
+                        window.location.replace("/yiyuan/CargoBillPage/form.html")
+                    }
                 }
             });
             //============ ajax接口调用方法区 ====================
