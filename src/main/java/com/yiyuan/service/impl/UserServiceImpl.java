@@ -9,14 +9,18 @@ import com.yiyuan.entity.dto.DeptSmallDto;
 import com.yiyuan.entity.dto.JobSmallDto;
 import com.yiyuan.entity.dto.RoleSmallDto;
 import com.yiyuan.entity.dto.UserDto;
+import com.yiyuan.entity.sql.UserSqlEntity;
 import com.yiyuan.service.UserService;
+import com.yiyuan.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Iterator;
-import java.util.Set;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 用户业务
@@ -24,7 +28,7 @@ import java.util.Set;
  */
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Exception.class)
-public class UserServiceImpl extends ServiceImpl<UserDao, UserDto> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserDao, UserSqlEntity> implements UserService {
 
     @Autowired
     UserDao userDao;
@@ -90,6 +94,27 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserDto> implements Us
 
 
         return userSet;
+    }
+
+    @Override
+    public void download(List<UserDto> queryAll, HttpServletResponse response) throws IOException {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (UserDto userDTO : queryAll) {
+            List<String> roles = userDTO.getRoles().stream().map(RoleSmallDto::getName).collect(Collectors.toList());
+            Map<String,Object> map = new LinkedHashMap<>();
+            map.put("用户名", userDTO.getUsername());
+            map.put("头像", userDTO.getAvatar());
+            map.put("邮箱", userDTO.getEmail());
+            map.put("状态", userDTO.getEnabled() ? "启用" : "禁用");
+            map.put("手机号码", userDTO.getPhone());
+            map.put("角色", roles);
+            map.put("部门", userDTO.getDept().getName());
+            map.put("岗位", userDTO.getJob().getName());
+            map.put("最后修改密码的时间", userDTO.getLastPasswordResetTime());
+            map.put("创建日期", userDTO.getCreateTime());
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
 

@@ -3,10 +3,11 @@ package com.yiyuan.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yiyuan.entity.User;
 import com.yiyuan.entity.dto.UserDto;
+import com.yiyuan.entity.sql.UserSqlEntity;
 
 import java.util.Set;
 
-public interface UserDao extends BaseMapper<UserDto> {
+public interface UserDao extends BaseMapper<UserSqlEntity> {
 
     /**
      * 根据用户名字获取该用户信息

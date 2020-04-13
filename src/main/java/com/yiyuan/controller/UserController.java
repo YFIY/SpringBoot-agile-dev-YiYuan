@@ -2,9 +2,13 @@ package com.yiyuan.controller;
 
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import com.alibaba.fastjson.JSON;
+import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.config.DataScope;
 import com.yiyuan.entity.User;
+import com.yiyuan.entity.VerificationCode;
 import com.yiyuan.entity.dto.RoleSmallDto;
+import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.exception.BadRequestException;
 import com.yiyuan.service.DeptService;
 import com.yiyuan.service.RoleService;
@@ -25,12 +29,9 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Api(tags = "系统：用户管理")
@@ -63,16 +64,10 @@ public class UserController {
     }
 
 
-    /*@ApiOperation("导出用户数据")
-    @GetMapping(value = "/download")
-    @PreAuthorize("@dokit.check('user:list')")
-    public void download(HttpServletResponse response, UserQueryCriteria criteria) throws IOException {
-        userService.download(userService.queryAll(criteria), response);
-    }
-
-    @ApiOperation("查询用户")
+    /*@ApiOperation("查询用户")
     @GetMapping
-    @PreAuthorize("@dokit.check('user:list')")
+    @AnonymousAccess//免登访问
+    //@PreAuthorize("@dokit.check('user:list')")
     public ResponseEntity<Object> getUsers(UserQueryCriteria criteria, Pageable pageable) {
         Set<Long> deptSet = new HashSet<>();
         Set<Long> result = new HashSet<>();
@@ -106,9 +101,9 @@ public class UserController {
             criteria.setDeptIds(result);
             return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
         }
-    }
+    }*/
 
-    @ApiOperation("新增用户")
+    /*@ApiOperation("新增用户")
     @PostMapping
     @PreAuthorize("@dokit.check('user:add')")
     public ResponseEntity<Object> create(@Validated @RequestBody User resources) {
@@ -193,11 +188,8 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    *//**
-     * 如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
-     *
-     * @param resources /
-     *//*
+
+    //如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
     private void checkLevel(User resources) {
         Integer currentLevel =  Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDto::getLevel).collect(Collectors.toList()));
         Integer optLevel = roleService.findByRoles(resources.getRoles());
