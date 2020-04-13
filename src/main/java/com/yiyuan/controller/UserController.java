@@ -10,6 +10,7 @@ import com.yiyuan.entity.VerificationCode;
 import com.yiyuan.entity.dto.RoleSmallDto;
 import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.exception.BadRequestException;
+import com.yiyuan.query.UserQueryCriteria;
 import com.yiyuan.service.DeptService;
 import com.yiyuan.service.RoleService;
 import com.yiyuan.service.UserService;
@@ -64,7 +65,7 @@ public class UserController {
     }
 
 
-    /*@ApiOperation("查询用户")
+    @ApiOperation("查询用户")
     @GetMapping
     @AnonymousAccess//免登访问
     //@PreAuthorize("@dokit.check('user:list')")
@@ -101,7 +102,7 @@ public class UserController {
             criteria.setDeptIds(result);
             return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
         }
-    }*/
+    }
 
     /*@ApiOperation("新增用户")
     @PostMapping
