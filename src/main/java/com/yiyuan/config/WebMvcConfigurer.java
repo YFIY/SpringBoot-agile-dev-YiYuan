@@ -265,7 +265,9 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
         //将所有/static/** 访问都映射到classpath:/static/ 目录下
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/")
+         .setCachePeriod(31556926);//开启静态资源缓存并设置缓存的时间（秒）
+
         //将所有/** 访问都映射到classpath:/static/ 目录下
         registry.addResourceHandler("/**").addResourceLocations("classpath:/templates/");
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");

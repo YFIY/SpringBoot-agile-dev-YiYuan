@@ -12,10 +12,12 @@
 
 	<!--变量统一管理-->
 	<properties>
+		<!-- Log libs -->
+		<slf4j.version>1.7.21</slf4j.version>
+		<logback.version>1.1.7</logback.version>
 		<!--JDK版本-->
 		<java.version>1.8</java.version>
 		<!--JWT-->
-
 		<jjwt.version>0.10.6</jjwt.version>
 		<!--spring2.0集成redis所需common-pool2-->
 		<commons-pool2.version>2.5.0</commons-pool2.version>
@@ -139,7 +141,7 @@
 			<version>${commons-pool2.version}</version>
 		</dependency>
 		<!--日志-->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.5</version>
@@ -149,12 +151,12 @@
 			<artifactId>logback-core</artifactId>
 			<version>1.0.11</version>
 		</dependency>
-		<!--<dependency>
+		&lt;!&ndash;<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.0.11</version>
 			<scope>test</scope>
-		</dependency>-->
+		</dependency>&ndash;&gt;
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -166,7 +168,7 @@
 				</exclusion>
 			</exclusions>
 			<scope>provided</scope>
-		</dependency>
+		</dependency>-->
 		<!-- cache 本地缓存 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
