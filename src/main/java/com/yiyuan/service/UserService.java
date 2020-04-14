@@ -26,11 +26,6 @@ public interface UserService extends IService<UserSqlEntity> {
     UserDto findByName(String username);
 
     /**
-     * 根据用户名获取DTO用户数据,多表查询 优化版
-     */
-    UserDto findByName2(String username);
-
-    /**
      * 根据角色ID获取角色下的所有用户,多表查询
      */
     Set<User> findRoleIdByUser(Long roleId);

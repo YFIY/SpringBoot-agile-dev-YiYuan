@@ -78,14 +78,6 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserSqlEntity> impleme
     }
 
     @Override
-    public UserDto findByName2(String username) {
-
-        UserDto userDto = userDao.findByName2(username);
-
-        return null;
-    }
-
-    @Override
     public Set<User> findRoleIdByUser(Long roleId) {
 
         //获取该角色ID下的所有用户

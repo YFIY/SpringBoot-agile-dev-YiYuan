@@ -10,16 +10,4 @@
 		SELECT u.* FROM `user` u,users_roles ur WHERE u.id=ur.user_id AND ur.role_id = #{roleId}
 	</select>
 
-
-    <select id="findByName2" resultType="com.yiyuan.entity.dto.UserDto" parameterType="java.lang.String">
-		SELECT
-			u.*,
-			ua.real_name
-		FROM
-			`user` AS u
-		LEFT JOIN user_avatar AS ua ON u.avatar_id = ua.id
-		WHERE
-			u.username = #{username}
-	</select>
-
 </mapper>
