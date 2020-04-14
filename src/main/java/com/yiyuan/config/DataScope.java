@@ -35,16 +35,19 @@ public class DataScope {
 
     public Set<Long> getDeptIds() {
 
+        //获取当前用户的信息
         UserDto user = userService.findByName(SecurityUtils.getCurrentUsername());
 
         // 用于存储部门id的集合
         Set<Long> deptIds = new HashSet<>();
 
-        // 查询用户角色
+        // 查询用户的角色数据
         List<RoleSmallDto> roleSet = roleService.findByUsersId(user.getId());
 
+        // 遍历角色数据
         for (RoleSmallDto role : roleSet) {
 
+            //如果权限类型为：全部，则直接放行
             if (scopeType[0].equals(role.getDataScope())) {
                 return new HashSet<>() ;
             }
@@ -73,7 +76,9 @@ public class DataScope {
         return deptIds;
     }
 
-
+    /**
+     * 根据部门集合递归获取部门以及下级部门的ID
+     */
     public List<Long> getDeptChildren(List<Dept> deptList) {
         List<Long> list = new ArrayList<>();
         deptList.forEach(dept -> {

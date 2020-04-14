@@ -1,5 +1,6 @@
 package com.yiyuan.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yiyuan.dao.*;
 import com.yiyuan.entity.Role;
@@ -98,8 +99,13 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserSqlEntity> impleme
     }
 
     @Override
-    public Object queryAll(UserQueryCriteria criteria, Pageable pageable) {
-        return null;
+    public IPage<UserDto> queryAll(IPage<UserDto> page,UserQueryCriteria criteria) {
+
+        //动态条件获取用户数据
+        IPage<UserDto> objectIPage = userDao.queryAll(page,criteria);
+
+
+        return objectIPage;
     }
 
 

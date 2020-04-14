@@ -3,13 +3,19 @@ package com.yiyuan.controller;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.config.DataScope;
+import com.yiyuan.dao.UserDao;
+import com.yiyuan.entity.Dept;
 import com.yiyuan.entity.User;
+import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.entity.VerificationCode;
 import com.yiyuan.entity.dto.RoleSmallDto;
 import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.exception.BadRequestException;
+import com.yiyuan.exception.ServiceException;
 import com.yiyuan.query.UserQueryCriteria;
 import com.yiyuan.service.DeptService;
 import com.yiyuan.service.RoleService;
@@ -68,41 +74,64 @@ public class UserController {
     @ApiOperation("查询用户")
     @GetMapping(value = "/getUsers")
     @PreAuthorize("@dokit.check('user:list')")
-    public ResponseEntity<Object> getUsers(UserQueryCriteria criteria) {
+    public IPage<UserDto> getUsers(UserQueryCriteria criteria,Long current,Long size) {
 
-        Set<Long> deptSet = new HashSet<>();
-        Set<Long> result = new HashSet<>();
-
-        if (!ObjectUtils.isEmpty(criteria.getDeptId())) {
-            deptSet.add(criteria.getDeptId());
-            deptSet.addAll(dataScope.getDeptChildren(deptService.findByPid(criteria.getDeptId())));
+        //参数校验
+        if( null == current || null == size ){
+            throw new ServiceException("当前页current|每页条数size,不允许为空");
         }
 
-        // 数据权限
-        Set<Long> deptIds = dataScope.getDeptIds();
+        //期望查询部门集合
+        Set<Long> deptSet = new HashSet<>();
+        //确切查询部门集合
+        Set<Long> result = new HashSet<>();
 
+        //创建分页模型
+        IPage<UserDto> page = new Page<>();
+        //从接口参数中获取当前页数据和每页条数数据
+        page.setCurrent(current);
+        page.setSize(size);
+
+        //如果条件对象中的部门ID不为空
+        if (!ObjectUtils.isEmpty(criteria.getDeptId())) {
+            //将此部门ID注入部门集合
+            deptSet.add(criteria.getDeptId());
+            //获取此部门下的所有部门数据
+            List<Dept> deptList = deptService.findByPid(criteria.getDeptId());
+            //递归获取此部门下所有部门的ID
+            List<Long> deptChildren = dataScope.getDeptChildren(deptList);
+            //将ID放入期望查询部门集合
+            deptSet.addAll(deptChildren);
+        }
+        //获取此用户允许查询的部门ID
+        Set<Long> deptIds = dataScope.getDeptIds();
         // 查询条件不为空并且数据权限不为空则取交集
         if (!CollectionUtils.isEmpty(deptIds) && !CollectionUtils.isEmpty(deptSet)) {
-
             // 取交集
             result.addAll(deptSet);
             result.retainAll(deptIds);
-
-            // 若无交集，则代表无数据权限
+            //部门ID放入条件对象
             criteria.setDeptIds(result);
+            // 若无交集，则代表无数据权限
             if (result.size() == 0) {
-                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
+                //返回空数据对象
+                return page;
             } else {
-                //return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
-                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
+                //获取用户集合数据
+                page = userService.queryAll(page,criteria);
+                return page;
             }
             // 否则取并集
         } else {
+            //【期望查询部门集合】数据放入【确切查询部门集合】
             result.addAll(deptSet);
+            //【用户允许查询的部门集合】数据放入【确切查询部门集合】
             result.addAll(deptIds);
+            //部门ID放入条件对象
             criteria.setDeptIds(result);
-            //return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
-            return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
+            //获取用户集合数据
+            page = userService.queryAll(page,criteria);
+            return page;
         }
     }
 

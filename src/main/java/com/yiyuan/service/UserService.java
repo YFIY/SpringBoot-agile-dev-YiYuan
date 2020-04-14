@@ -1,7 +1,10 @@
 package com.yiyuan.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yiyuan.dao.UserDao;
 import com.yiyuan.entity.User;
+import com.yiyuan.entity.UserInfoEntity;
 import com.yiyuan.entity.dto.UserDto;
 import com.yiyuan.entity.sql.UserSqlEntity;
 import com.yiyuan.query.UserQueryCriteria;
@@ -34,5 +37,5 @@ public interface UserService extends IService<UserSqlEntity> {
     /**
      * 动态条件分页获取符合条件的用户数据集合
      */
-    Object queryAll(UserQueryCriteria criteria, Pageable pageable);
+    IPage<UserDto> queryAll(IPage<UserDto> page,UserQueryCriteria criteria);
 }

@@ -1,9 +1,11 @@
 package com.yiyuan.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yiyuan.entity.Dept;
 import com.yiyuan.entity.dto.DeptSmallDto;
 import com.yiyuan.entity.sql.DeptSqlEntity;
+import com.yiyuan.query.UserQueryCriteria;
 
 import java.util.List;
 import java.util.Set;
@@ -27,4 +29,5 @@ public interface DeptDao extends BaseMapper<DeptSqlEntity> {
      * 根据上级部门ID获取部门数据
      */
     List<Dept> findByPid(Long deptId);
+
 }

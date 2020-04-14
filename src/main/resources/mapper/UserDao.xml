@@ -10,4 +10,22 @@
 		SELECT u.* FROM `user` u,users_roles ur WHERE u.id=ur.user_id AND ur.role_id = #{roleId}
 	</select>
 
+	<select id="queryAll" resultType="com.yiyuan.entity.dto.UserDto" parameterType="com.yiyuan.query.UserQueryCriteria">
+		SELECT * FROM `user`
+		<where>
+
+			<if test="criteria.id != null and criteria.id != ''">
+				id = #{criteria.id}
+			</if>
+
+			<if test="criteria.deptIds != null and criteria.deptIds.size > 0">
+				dept_id in
+				<foreach collection="criteria.deptIds" item="deptId" index="index" open="(" close=")" separator=",">
+					#{deptId}
+				</foreach>
+			</if>
+
+		</where>
+	</select>
+
 </mapper>
