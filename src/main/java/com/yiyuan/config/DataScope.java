@@ -37,7 +37,7 @@ public class DataScope {
 
         UserDto user = userService.findByName(SecurityUtils.getCurrentUsername());
 
-        // 用于存储部门id
+        // 用于存储部门id的集合
         Set<Long> deptIds = new HashSet<>();
 
         // 查询用户角色
@@ -56,11 +56,13 @@ public class DataScope {
 
             // 存储自定义的数据权限
             if (scopeType[2].equals(role.getDataScope())) {
-                //TODO 还未写实现类
+                //根据角色ID获取部门数据
                 Set<Dept> depts = deptService.findByRoleIds(role.getId());
+                //遍历部门数据
                 for (Dept dept : depts) {
+                    //将部门ID存入返回集合
                     deptIds.add(dept.getId());
-                    //TODO 还未写实现类
+                    //获取此部门下的所有子部门的部门数据
                     List<Dept> deptChildren = deptService.findByPid(dept.getId());
                     if (deptChildren != null && deptChildren.size() != 0) {
                         deptIds.addAll(getDeptChildren(deptChildren));

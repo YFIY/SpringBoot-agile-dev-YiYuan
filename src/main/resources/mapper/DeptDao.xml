@@ -5,4 +5,10 @@
     <select id="findDeptSmallById" resultType="com.yiyuan.entity.dto.DeptSmallDto">
 		SELECT id,`name` FROM dept WHERE id=#{id}
 	</select>
+    <select id="findByRoleIds" resultType="com.yiyuan.entity.Dept" parameterType="java.lang.Long">
+        SELECT de.* FROM dept de,roles_depts rd WHERE rd.dept_id = de.id AND rd.role_id=#{roleId}
+    </select>
+    <select id="findByPid" resultType="com.yiyuan.entity.Dept" parameterType="java.lang.Long">
+        SELECT * FROM dept WHERE pid = #{deptId}
+    </select>
 </mapper>

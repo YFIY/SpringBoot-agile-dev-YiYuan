@@ -8,9 +8,10 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Set;
 
+//部门表
 @Getter
 @Setter
-@TableName("dept")//@TableName中的值对应着表名
+@TableName("dept")//@表名
 public class Dept implements Serializable {
 
     private Long id;

@@ -9,8 +9,14 @@ import java.util.List;
 import java.util.Set;
 
 public interface DeptService {
-    
-    Set<Dept> findByRoleIds(Long id);
 
-    List<Dept> findByPid(Long id);
+    /**
+     * 根据角色ID获取部门数据
+     */
+    Set<Dept> findByRoleIds(Long roleId);
+
+    /**
+     * 根据上级部门ID获取部门数据
+     */
+    List<Dept> findByPid(Long deptId);
 }

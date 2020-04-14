@@ -66,10 +66,10 @@ public class UserController {
 
 
     @ApiOperation("查询用户")
-    @GetMapping
-    @AnonymousAccess//免登访问
-    //@PreAuthorize("@dokit.check('user:list')")
-    public ResponseEntity<Object> getUsers(UserQueryCriteria criteria, Pageable pageable) {
+    @GetMapping(value = "/getUsers")
+    @PreAuthorize("@dokit.check('user:list')")
+    public ResponseEntity<Object> getUsers(UserQueryCriteria criteria) {
+
         Set<Long> deptSet = new HashSet<>();
         Set<Long> result = new HashSet<>();
 
@@ -93,14 +93,16 @@ public class UserController {
             if (result.size() == 0) {
                 return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
             } else {
-                return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
+                //return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
+                return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
             }
             // 否则取并集
         } else {
             result.addAll(deptSet);
             result.addAll(deptIds);
             criteria.setDeptIds(result);
-            return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
+            //return new ResponseEntity<>(userService.queryAll(criteria, pageable), HttpStatus.OK);
+            return new ResponseEntity<>(PageUtil.toPage(null, 0), HttpStatus.OK);
         }
     }
 
