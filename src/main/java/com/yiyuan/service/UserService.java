@@ -38,4 +38,9 @@ public interface UserService extends IService<UserSqlEntity> {
      * 动态条件分页获取符合条件的用户数据集合
      */
     IPage<UserDto> queryAll(IPage<UserDto> page,UserQueryCriteria criteria);
+
+    /**
+     * 新增用户
+     */
+    UserDto create(User user);
 }

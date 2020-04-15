@@ -1,43 +1,30 @@
 package com.yiyuan.controller;
 
-import cn.hutool.crypto.asymmetric.KeyType;
-import cn.hutool.crypto.asymmetric.RSA;
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.config.DataScope;
-import com.yiyuan.dao.UserDao;
 import com.yiyuan.entity.Dept;
 import com.yiyuan.entity.User;
-import com.yiyuan.entity.UserInfoEntity;
-import com.yiyuan.entity.VerificationCode;
 import com.yiyuan.entity.dto.RoleSmallDto;
 import com.yiyuan.entity.dto.UserDto;
-import com.yiyuan.exception.BadRequestException;
 import com.yiyuan.exception.ServiceException;
 import com.yiyuan.query.UserQueryCriteria;
 import com.yiyuan.service.DeptService;
 import com.yiyuan.service.RoleService;
 import com.yiyuan.service.UserService;
 import com.yiyuan.service.VerificationCodeService;
-import com.yiyuan.utils.PageUtil;
 import com.yiyuan.utils.SecurityUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -135,16 +122,19 @@ public class UserController {
         }
     }
 
-    /*@ApiOperation("新增用户")
+    @ApiOperation("新增用户")
     @PostMapping
     @PreAuthorize("@dokit.check('user:add')")
-    public ResponseEntity<Object> create(@Validated @RequestBody User resources) {
-        checkLevel(resources);
+    public UserDto create(@RequestBody User user) {
+        //调用权限鉴定方法
+        checkLevel(user);
         // 默认密码 123456
-        resources.setPassword(passwordEncoder.encode("123456"));
-        return new ResponseEntity<>(userService.create(resources), HttpStatus.CREATED);
+        user.setPassword(passwordEncoder.encode("123456"));
+        //TODO 未写实现代码
+        UserDto userDto = userService.create(user);
+        return userDto;
     }
-
+/*
     @ApiOperation("修改用户")
     @PutMapping
     @PreAuthorize("@dokit.check('user:edit')")
@@ -220,14 +210,15 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+*/
     //如果当前用户的角色级别低于创建用户的角色级别，则抛出权限不足的错误
     private void checkLevel(User resources) {
         Integer currentLevel =  Collections.min(roleService.findByUsersId(SecurityUtils.getCurrentUserId()).stream().map(RoleSmallDto::getLevel).collect(Collectors.toList()));
+        //TODO 未写实现代码
         Integer optLevel = roleService.findByRoles(resources.getRoles());
         if (currentLevel > optLevel) {
-            throw new BadRequestException("角色权限不足");
+            throw new ServiceException("角色权限不足");
         }
-    }*/
+    }
 }
 

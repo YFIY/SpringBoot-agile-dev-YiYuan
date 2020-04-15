@@ -63,4 +63,14 @@ public class RoleServiceImpl implements RoleService {
 
         return result;
     }
+
+    @Override
+    public Integer findByRoles(Set<Role> roles) {
+        /*Set<RoleDto> roleDtos = new HashSet<>();
+        for (Role role : roles) {
+            roleDtos.add(findById(role.getId()));
+        }
+        return Collections.min(roleDtos.stream().map(RoleDto::getLevel).collect(Collectors.toList()));*/
+        return null;
+    }
 }

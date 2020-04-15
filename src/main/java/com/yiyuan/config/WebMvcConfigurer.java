@@ -6,6 +6,7 @@ import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultCode;
+import com.yiyuan.exception.NotIoggedInException;
 import com.yiyuan.exception.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,10 +118,14 @@ public class WebMvcConfigurer extends WebMvcConfigurationSupport {
             @Override
             public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) {
                 Result result = new Result();
-                if (e instanceof ServiceException) {//业务失败的异常，如“账号或密码错误”
+                if (e instanceof ServiceException) {
+                    //业务失败的异常，如“账号或密码错误”
                     result.setCode(ResultCode.FAIL).setMessage(e.getMessage()).setSuccess(false);
                     logger.info(e.getMessage());
-                } else if (e instanceof NoHandlerFoundException) {
+                }else if (e instanceof NotIoggedInException) {
+                    //登录失效异常
+                    result.setCode(ResultCode.UNauthorIZED).setMessage(e.getMessage()).setSuccess(false);
+                }else if (e instanceof NoHandlerFoundException) {
                     result.setCode(ResultCode.NOT_FOUND).setMessage("接口 [" + request.getRequestURI() + "] 不存在").setSuccess(false);
                 }else if (e instanceof AccessDeniedException) {
                     result.setCode(ResultCode.INSUFFICIENTAUTHORITY).setMessage("接口 [" + request.getRequestURI() + "] 您的权限不足,无法访问").setSuccess(false);

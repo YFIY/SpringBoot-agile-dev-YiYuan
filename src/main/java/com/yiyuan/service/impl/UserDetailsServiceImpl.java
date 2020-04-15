@@ -1,7 +1,6 @@
 package com.yiyuan.service.impl;
 
 import com.yiyuan.entity.dto.UserDto;
-import com.yiyuan.exception.BadRequestException;
 import com.yiyuan.exception.ServiceException;
 import com.yiyuan.service.RoleService;
 import com.yiyuan.service.UserService;

@@ -108,5 +108,10 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserSqlEntity> impleme
         return objectIPage;
     }
 
+    @Override
+    public UserDto create(User user) {
+        return null;
+    }
+
 
 }
