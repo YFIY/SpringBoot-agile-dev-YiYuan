@@ -140,35 +140,7 @@
 			<artifactId>commons-pool2</artifactId>
 			<version>${commons-pool2.version}</version>
 		</dependency>
-		<!--日志-->
-		<!--<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.0.11</version>
-		</dependency>
-		&lt;!&ndash;<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.11</version>
-			<scope>test</scope>
-		</dependency>&ndash;&gt;
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.11</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
-			<scope>provided</scope>
-		</dependency>-->
+
 		<!-- cache 本地缓存 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
