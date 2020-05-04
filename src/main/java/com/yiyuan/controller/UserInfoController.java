@@ -82,6 +82,7 @@ public class UserInfoController {
      * @param  jsonStr [current 当前页][size 每页条数]
      * @return IPage<UserInfoEntity> 分页数据
      */
+    @AnonymousAccess//免登访问
     @RequestMapping(value = "/getInfoListPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result getInfoListPage(@RequestBody String jsonStr){
         //需要在Config配置类中配置分页插件
