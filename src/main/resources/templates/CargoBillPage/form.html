@@ -272,7 +272,7 @@
             </div>
             <!-- end Topbar -->
 
-            <!-- ========== Left Sidebar Start ========== -->
+            <!-- ========== 左侧边栏 Start ========== -->
             <div class="left-side-menu">
 
                 <div class="slimscroll-menu">
@@ -572,7 +572,7 @@
                 <!-- Sidebar -left -->
 
             </div>
-            <!-- Left Sidebar End -->
+            <!-- 左侧边栏 End -->
 
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
@@ -615,6 +615,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label" for="example-email">时间</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="date" id="example-date" name="goodsTime">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-sm-2 col-form-label" for="example-email">出发地</label>
                                             <div class="col-sm-10">
                                                 <input type="text" id="form_departure_location" name="departure_location" class="form-control" placeholder="出发地">
@@ -637,7 +643,6 @@
                                             <div class="col-sm-10">
                                                 <select class="form-control" name="goods_unit" id="form_goods_unit">
                                                     <option value ="1">吨</option>
-
                                                 </select>
                                             </div>
                                         </div>
@@ -648,13 +653,13 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label" for="example-email">单价</label>
+                                            <label class="col-sm-2 col-form-label" for="example-email">料款/吨</label>
                                             <div class="col-sm-10">
                                                 <input type="number" id="form_goods_unit_price" name="goods_unit_price" class="form-control" placeholder="0">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label" for="example-email">运费</label>
+                                            <label class="col-sm-2 col-form-label" for="example-email">运费/吨</label>
                                             <div class="col-sm-10">
                                                 <input type="number" id="form_goods_freight" name="goods_freight" class="form-control" placeholder="0">
                                             </div>
@@ -768,11 +773,6 @@
                         });
                         console.log(JSON.stringify(formData));
                         return formData;
-                    },
-                    //标签过滤
-                    tagToFilter_FF(data){
-                        data = data.replace(/<[^>]+>|&[^>]+;/g,"").trim();//去掉所有的html标签和&nbsp;之类的特殊符合
-                        return data;
                     }
                 }
             });

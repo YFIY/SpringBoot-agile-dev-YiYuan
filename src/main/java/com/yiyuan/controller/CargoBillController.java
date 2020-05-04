@@ -10,6 +10,8 @@ import com.yiyuan.exception.ServiceException;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.service.CargoBillService;
 import com.yiyuan.utils.SnowflakeIdWorker;
+import com.yiyuan.utils.StringUtil;
+import com.yiyuan.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,17 +56,6 @@ public class CargoBillController {
     }
 
     /**
-     * 查询全部货运单数据
-     * @author MoLi
-     */
-    @AnonymousAccess//免登访问
-    @RequestMapping(value = "/getList",method = RequestMethod.GET)
-    public List<CargoBillSqlEntity> getList(){
-        List<CargoBillSqlEntity> cargoBillSqlEntityList = cargoBillService.list();
-        return cargoBillSqlEntityList;
-    }
-
-    /**
      * 分页查询全部货运单数据
      * @author MoLi
      * @param  jsonStr [current 当前页][size 每页条数]
@@ -91,21 +82,7 @@ public class CargoBillController {
     }
 
     /**
-     * 根据指定字段查询货运单数据集合
-     * @author MoLi
-     * @param  jsonStr  kay是字段名 value是字段值  例如{"id":"123","password":"123"}
-     * @return Collection<CargoBillSqlEntity>
-     */
-    @AnonymousAccess//免登访问
-    @RequestMapping(value = "/getListMap", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Collection<CargoBillSqlEntity> getListMap(@RequestBody String jsonStr){
-        Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
-        Collection<CargoBillSqlEntity> CargoBillSqlEntityList = cargoBillService.listByMap(jsonMap);
-        return CargoBillSqlEntityList;
-    }
-
-    /**
-     * 新增货运单数据
+     * 新增或者更新货运单数据
      * @author MoLi
      */
     @AnonymousAccess//免登访问
@@ -113,33 +90,22 @@ public class CargoBillController {
     public Result saveInfo(@RequestBody String jsonStr){
         //json字符串解析数据放入模型
         CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
-        //雪花ID注入
-        cargoBillSqlEntity.setId(snowflakeIdWorker.nextId());
-        //创建时间注入
-        cargoBillSqlEntity.setCreationTime(new Date());
+
+        //如果ID为空,执行新增参数注入
+        if(StringUtil.isEmpty(cargoBillSqlEntity.getId())){
+            //雪花ID注入
+            cargoBillSqlEntity.setId(snowflakeIdWorker.nextId());
+            //创建时间注入
+            cargoBillSqlEntity.setCreationTime(new Date());
+        }
+
         //TODO 暂时先固定用户ID
         cargoBillSqlEntity.setUserId(8068996691l);
         //执行保存
-        cargoBillService.save(cargoBillSqlEntity);
+        cargoBillService.saveOrUpdate(cargoBillSqlEntity);
         return ResultGenerator.genSuccessResult();
     }
 
-    /**
-     * 更新货运单数据
-     * @author MoLi
-     * @CreateTime 2019/6/8 16:47
-     */
-    @AnonymousAccess//免登访问
-    @RequestMapping(value = "/updateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result updateInfo(@RequestBody String jsonStr){
-
-        //json字符串解析数据放入模型
-        CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
-
-        //根据实体中的ID去更新,其他字段如果值为null则不会更新该字段,参考yml配置文件
-        cargoBillService.updateById(cargoBillSqlEntity);
-        return ResultGenerator.genSuccessResult();
-    }
 
 
 }

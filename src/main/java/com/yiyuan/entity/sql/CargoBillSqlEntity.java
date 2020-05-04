@@ -23,6 +23,10 @@ public class CargoBillSqlEntity {
      */
     private Long userId;
     /**
+     * 入货出货时间
+     */
+    private Date goodsTime;
+    /**
      * 出发地点
      */
     private String departureLocation;

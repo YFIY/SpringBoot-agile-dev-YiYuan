@@ -142,7 +142,7 @@
                         <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                             <img src="/yiyuan/static/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                             <span class="pro-user-name ml-1">
-                                Devid <i class="mdi mdi-chevron-down"></i> 
+                                Devid <i class="mdi mdi-chevron-down"></i>
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -205,9 +205,9 @@
                         </a>
                     </li>
                     <li class="app-search d-none d-md-block">
-                        <form class="form-inline"> 
-                            <input type="text" class="form-control" placeholder="Search…"> 
-                            <button class="btn btn-primary-color" type="submit"><i class="fa fa-search"></i></button> 
+                        <form class="form-inline">
+                            <input type="text" class="form-control" placeholder="Search…">
+                            <button class="btn btn-primary-color" type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </li>
                 </ul>
@@ -557,9 +557,9 @@
                                             <th>货物名称</th>
                                             <th>规格</th>
                                             <th>单位</th>
-                                            <th>单价</th>
                                             <th>数量</th>
-                                            <th>运费</th>
+                                            <th>料款/吨</th>
+                                            <th>运费/吨</th>
                                             <th>时间</th>
                                             <th>成本总价</th>
                                             <th>按钮</th>
@@ -573,10 +573,10 @@
                                             <td>{{item.goodsName}}</td>
                                             <td>{{item.goodsSpecification}}</td>
                                             <td>{{state_transform_FF(item.goodsUnit)}}</td>
-                                            <td>{{item.goodsUnitPrice}}</td>
                                             <td>{{item.goodsNumber}}</td>
+                                            <td>{{item.goodsUnitPrice}}</td>
                                             <td>{{item.goodsFreight}}</td>
-                                            <td>{{item.creationTime}}</td>
+                                            <td>{{item.goodsTime}}</td>
                                             <td>￥：{{(item.goodsUnitPrice+item.goodsFreight)*item.goodsNumber}}</td>
                                             <td>
                                                 <button type="button" class="btn btn-info waves-effect waves-light"> <i class="mdi mdi-border-color "></i> <span>修改</span> </button>
@@ -640,7 +640,7 @@
                     ajax_querySHTperfromance_FF(){
                         console.log("执行货运单查询接口")
                         axios.get('/yiyuan/CargoBill/getList',
-                            { //表单提交
+                            {
                                 "current":1,
                                 "size":"2"
                             }
