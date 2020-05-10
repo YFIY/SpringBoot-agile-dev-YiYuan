@@ -641,19 +641,15 @@
             elem: '#demo'//表格ID
             ,toolbar: '#toolbarDemo' //工具栏ID
             ,height: 'full-280' //高
+            //,cellMinWidth: 100 //全局定义常规单元格的最小宽度
             ,url: '/yiyuan/CargoBill/getInfoListPage' //数据接口
             ,defaultToolbar: ['filter']//数据表格 头部工具栏右侧图标
             ,method: 'post' //请求方式
             ,contentType: 'application/json' //发送到服务端的内容编码类型
             ,parseData: function(res){ //res 即为原始返回的数据
-
-                console.log("=========");
-                console.log(res);
-
                 if (!res.success){
                     return ;
                 }
-
                 return {
                     "code": res.code, //解析接口状态
                     "message": res.message, //解析提示文本
@@ -676,10 +672,10 @@
             ,limit: 20
             ,limits: [10,20,30]
             ,cols: [ [ //表头
-                { field: "state", checkbox: true,  width: '4%', align: 'center'}
-                ,{field: 'departureLocation', title: '出发'}
-                ,{field: 'arrivedLocation', title: '到达'}
-                ,{field: 'goodsName', title: '货物名称'}
+                /*{ field: "state", checkbox: true,  width: '4%', align: 'center'},*/
+                {field: 'departureLocation', title: '出发' , minWidth: 70}
+                ,{field: 'arrivedLocation', title: '到达' , minWidth: 70}
+                ,{field: 'goodsName', title: '货物名称' , minWidth: 100}
                 ,{field: 'goodsSpecification', title: '规格'}
                 ,{field: 'goodsUnit', title: '单位', templet: function (item) {
                     if (item.goodsUnit == '1') {
@@ -689,16 +685,16 @@
                     }
                  }}
                 ,{field: 'goodsNumber', title: '吨数'}
-                ,{field: 'goodsUnitPrice', title: '料款/吨'}
-                ,{field: 'goodsFreight', title: '运费/吨'}
-                ,{field: 'goodsTime', title: '购进时间' , templet: function (item) {
+                ,{field: 'goodsUnitPrice', title: '料款/吨' , minWidth: 80}
+                ,{field: 'goodsFreight', title: '运费/吨' , minWidth: 80}
+                ,{field: 'goodsTime', title: '购进时间' , minWidth: 110 , templet: function (item) {
                      //字符串截取,只要年月日
                      return item.goodsTime.slice(0,10);
                  }}
-                , { field: '', title: '成本总价',  templet: function (item) {
+                , { field: '', title: '进货价' , minWidth: 90 ,  templet: function (item) {
                       return  (item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight
                 }}
-                ,{field: 'whetherToShip', title: '是否出货',templet: function (item) {
+                ,{field: 'whetherToShip', title: '是否出货', minWidth: 90 ,templet: function (item) {
                     if (item.whetherToShip == '0') {
                         return "未出货";
                     }else if(item.whetherToShip == '1') {
@@ -707,7 +703,7 @@
                         return "未定义";
                     }
                  }}
-                ,{field: 'shippingTime', title: '出货时间', templet: function (item) {
+                ,{field: 'shippingTime', title: '出货时间', minWidth: 110 , templet: function (item) {
                         if(item.shippingTime != null){
                             //字符串截取,只要年月日
                             return item.shippingTime.slice(0,10);
@@ -715,7 +711,10 @@
                             return "无";
                         }
                  }}
-                ,{field: 'sellingPrice', title: '销售价/吨'}
+                ,{field: 'sellingPrice', title: '销售价/吨' , minWidth: 95}
+                ,{field: '', title: '纯利润' , minWidth: 95,  templet: function (item) {
+                        return   (item.sellingPrice * item.goodsFreight) - ((item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight)
+                    }}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}
 
             ]]
