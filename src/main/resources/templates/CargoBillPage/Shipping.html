@@ -2,26 +2,17 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>货运单列表页</title>
+    <title>新增货运单</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="/yiyuan/static/assets/images/favicon.ico">
 
-    <!-- third party css -->
-    <link href="/yiyuan/static/assets/libs/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="/yiyuan/static/assets/libs/datatables/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="/yiyuan/static/assets/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="/yiyuan/static/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
     <!-- App css -->
     <link href="/yiyuan/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/yiyuan/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/yiyuan/static/assets/css/app.min.css" rel="stylesheet" type="text/css" />
-
-    <!--Layui css-->
-    <link href="/yiyuan/static/layui/css/layui.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -89,6 +80,37 @@
                             <p class="notify-details">Sandra Smith<small class="text-muted">Hey ! I'm working on your project</small></p>
                         </a>
 
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon"><img src="/yiyuan/static/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" /></div>
+                            <p class="notify-details">Amily Lee<small class="text-muted">Hi, How are you? What about our next meeting?</small></p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon">
+                                <img src="/yiyuan/static/assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">David Boos</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>What about our next meeting</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon"><img src="/yiyuan/static/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">Christopher Palmer<small class="text-muted">Waiting for your Response...</small></p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon">
+                                <img src="/yiyuan/static/assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle" alt="" /> </div>
+                            <p class="notify-details">Malika Roy</p>
+                            <p class="text-muted mb-0 user-msg">
+                                <small>Wow that's great</small>
+                            </p>
+                        </a>
                     </div>
 
                     <!-- All-->
@@ -126,6 +148,43 @@
                             <p class="notify-details">Your upload has been approved<small class="text-muted">5 hours ago</small></p>
                         </a>
 
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
+                            <div class="notify-icon bg-success"><i class="mdi mdi-map-marker-check"></i> </div>
+                            <p class="notify-details">You added your Location<small class="text-muted">Just Now</small></p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-primary"><i class="mdi mdi-layers-remove"></i></div>
+                            <p class="notify-details">Your item is shipped<small class="text-muted">It is a long established fact that a reader will</small></p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-purple"><i class="mdi mdi-check-bold"></i></div>
+                            <p class="notify-details">Your order is placed<small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-warning">
+                                <i class="mdi mdi-alert-outline"></i>
+                            </div>
+                            <p class="notify-details">Your Subscription Expired
+                                <small class="text-muted">1 days ago</small>
+                            </p>
+                        </a>
+
+                        <!-- item-->
+                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <div class="notify-icon bg-danger">
+                                <i class="mdi mdi-settings"></i>
+                            </div>
+                            <p class="notify-details"><b>Devid</b>, You changed your Settings
+                                <small class="text-muted">5 days ago</small>
+                            </p>
+                        </a>
                     </div>
 
                     <!-- All-->
@@ -141,7 +200,7 @@
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="/yiyuan/static/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
-                                Devid <i class="mdi mdi-chevron-down"></i> 
+                                Devid <i class="mdi mdi-chevron-down"></i>
                             </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -213,7 +272,7 @@
     </div>
     <!-- end Topbar -->
 
-    <!-- ========== Left Sidebar Start ========== -->
+    <!-- ========== 左侧边栏 Start ========== -->
     <div class="left-side-menu">
 
         <div class="slimscroll-menu">
@@ -406,7 +465,7 @@
                                 <a href="tables-basic.html">Basic Tables</a>
                             </li>
                             <li>
-                                <a href="list.html">货物单列表</a>
+                                <a href="tables-datatable.html">Data Tables</a>
                         </ul>
                     </li>
 
@@ -513,7 +572,7 @@
         <!-- Sidebar -left -->
 
     </div>
-    <!-- Left Sidebar End -->
+    <!-- 左侧边栏 End -->
 
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
@@ -532,49 +591,107 @@
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
                                     <li class="breadcrumb-item"><a href="javascript: void(0);">Dashoon</a></li>
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                                    <li class="breadcrumb-item active">货物单列表</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
+                                    <li class="breadcrumb-item active">Form Elements</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">货物单列表</h4>
+                            <h4 class="page-title">新增货运单</h4>
                         </div>
                     </div>
                 </div>
                 <!-- end page title -->
 
-                <!--子模块 start-->
                 <div class="row">
                     <div class="col-12">
                         <div class="card-box">
-                            <!--<h4 class="header-title">子模块标题</h4>-->
-                            <!--<p class="sub-header">子模块描述</p>-->
 
-                            <!--====================条件搜索 start==========================-->
 
-                            <!--====================条件搜索 end==========================-->
+                            <form class="form-horizontal" id="basic-form">
 
-                            <!--====================layui 数据表格 start====================-->
-                            <!--lay 数据表格1-->
-                            <table id="demo" lay-filter="test"></table>
-                            <!--表格的工具栏-->
-                            <script type="text/html" id="toolbarDemo">
-                                <div class="layui-btn-container">
-                                    <button class="layui-btn layui-btn-sm" lay-event="xinzeng_button">购进</button>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">名称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="form_goods_name" name="goods_name" class="form-control" placeholder="货物名称">
+                                    </div>
                                 </div>
-                            </script>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">时间</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" type="date" id="example-date" name="goodsTime">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">出发地</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="form_departure_location" name="departure_location" class="form-control" placeholder="出发地">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">到达地</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="form_arrived_location" name="arrived_location" class="form-control" placeholder="到达地">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">规格</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="form_goods_specification" name="goods_specification" class="form-control" placeholder="货物规格">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">单位</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="goods_unit" id="form_goods_unit">
+                                            <option value ="1">吨</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">数量</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" id="form_goods_number" name="goods_number" class="form-control" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">料款/吨</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" id="form_goods_unit_price" name="goods_unit_price" class="form-control" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-email">运费/吨</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" id="form_goods_freight" name="goods_freight" class="form-control" placeholder="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="example-textarea">备注</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="goods_remarks" id="example-textarea" rows="5"></textarea>
+                                    </div>
+                                </div>
 
 
-                            <script type="text/html" id="barDemo">
-                                <a class="layui-btn layui-btn-xs" lay-event="Shipping" style="color: white">出货</a>
-                            </script>
-                            <!--====================layui 数据表格 end====================-->
-                        </div>
-                    </div>
+                            </form>
+                            <button class="btn btn-primary" v-on:click="ajax_insertCargoBill_FF">提交</button>
+
+                        </div> <!-- end card-box -->
+                    </div><!-- end col -->
                 </div>
-                <!--子模块 end-->
+                <!-- end row -->
+
+
+
+
+
+
+
 
             </div> <!-- container-fluid -->
+
         </div> <!-- content -->
+
         <!-- Footer Start -->
         <footer class="footer">
             <div class="container-fluid">
@@ -592,16 +709,13 @@
     <!-- ============================================================== -->
     <!-- End Page content -->
     <!-- ============================================================== -->
+
+
 </div>
 <!-- END wrapper -->
 
 
 
-
-<!-- Vendor js -->
-<script src="/yiyuan/static/assets/js/vendor.min.js"></script>
-<!--Layui js-->
-<script src="/yiyuan/static/layui/layui.all.js"></script>
 <!--VUE JS-->
 <script src="/yiyuan/static/assets/js/vue.js"></script>
 <!--Axios-->
@@ -610,116 +724,103 @@
 <!--<script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>-->
 
 
-
 <script>
 
-    //定义本页面数据表格的操作元素
-    var tableIns;
-    //定义Layui模块
-    var layer,table,upload,laydate;
-    //加载layui模块
-    !function(){
-        layer = layui.layer,
-            table  = layui.table,
-            laydate  = layui.laydate,
-            upload = layui.upload;
-    }();
+    //QS数据处理配置
+    //var qs = Qs;
 
+    //初始化VUE实例
+    const app = new Vue({
+        el: '#wrapper',     // 用于页面渲染VUE实例的元素
+        data: { // 定义数据
+            performDateList: []
+        },
+        methods:{
+            //新增货运单
+            ajax_insertCargoBill_FF(){
+                console.log("执行货运单新增接口");
 
-    //==============页面加载后执行 start========================
-    $(function() {
-        console.log("版本刷新号===》"+11);
+                //调用方法获取form中用户填的数据
+                const date = app.form_query_FF();
 
-        //日期输入框初始化
-        laydate.render({
-            elem: '#date_input_id', //指定元素
-            type:'datetime'
-        });
+                axios.post('/yiyuan/CargoBill/saveInfo',
+                    date
+                ).then(function (response) {
+                    //请求成功响应结果response
+                    console.log("↓货运单新增接口返回结果↓");
+                    console.log(response);
+                    console.log(response.data);
+                    app.performDateList = response.data;
 
-        //数据表格参数初始化
-        tableIns = table.render({
-            elem: '#demo'//表格ID
-            ,toolbar: '#toolbarDemo' //工具栏ID
-            ,height: 'full-280' //高
-            ,cellMinWidth: 120 //全局定义常规单元格的最小宽度
-            ,url: '/yiyuan/CargoBill/getInfoListPage' //数据接口
-            ,defaultToolbar: ['filter']//数据表格 头部工具栏右侧图标
-            ,method: 'post' //请求方式
-            ,contentType: 'application/json' //发送到服务端的内容编码类型
-            ,parseData: function(res){ //res 即为原始返回的数据
-
-                console.log("=========");
-                console.log(res);
-
-                if (!res.success){
-                    return ;
-                }
-
-                return {
-                    "code": res.code, //解析接口状态
-                    "message": res.message, //解析提示文本
-                    "total": res.data.total, //解析数据长度
-                    "records": res.data.records //解析数据列表
-                };
-            }
-            ,request: {//设定分页参数
-                pageName: 'current' //页码的参数名称，默认：page
-                ,limitName: 'size' //每页数据量的参数名，默认：limit
-            }
-            ,response: {//设定返回的数据格式
-                statusName: 'code' //规定数据状态的字段名称
-                ,statusCode: 200 //规定成功的状态码，默认：0
-                ,msgName: 'message' //规定状态信息的字段名称，默认：msg
-                ,countName: 'total' //规定数据总数的字段名称，默认：count
-                ,dataName: 'records' //规定数据列表的字段名称，默认：data
-            }
-            ,page: true //开启分页
-            ,limit: 20
-            ,limits: [10,20,30]
-            ,cols: [ [ //表头
-                { field: "state", checkbox: true,  width: '4%', align: 'center'}
-                ,{field: 'departureLocation', title: '出发'}
-                ,{field: 'arrivedLocation', title: '到达'}
-                ,{field: 'goodsName', title: '货物名称'}
-                ,{field: 'goodsSpecification', title: '规格'}
-                ,{field: 'goodsUnit', title: '单位', templet: function (item) {
-                        if (item.goodsUnit == '1') {
-                            return "吨";
-                        }else {
-                            return "未定义";
-                        }
-                 }}
-                ,{field: 'goodsNumber', title: '吨数'}
-                ,{field: 'goodsUnitPrice', title: '料款/吨'}
-                ,{field: 'goodsFreight', title: '运费/吨'}
-                ,{field: 'goodsTime', title: '时间'}
-                , { field: '', title: '成本总价',  templet: function (item) {
-                      return   (item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight
+                    if(response.data.success === true){
+                        alert("新增成功");
+                        //重定向到列表页
+                        window.location.replace("/yiyuan/CargoBillPage/list.html");
                     }
-                }
-                ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}
 
-            ]]
-        });//数据表格参数初始化-->结尾
+                }).catch(function (error) {
+                    //请求异常响应结果
+                    console.log(error);
+                });
+            },
+            //表单数据获取
+            form_query_FF(){
+                //获取表单内的所有数据并封装
+                var formData = {};
+                var t = $('#basic-form').serializeArray();
+                $.each(t, function() {
+                    formData[this.name] = this.value;
+                });
+                console.log(JSON.stringify(formData));
+                return formData;
+            }
+        }
+    });
 
-        //=======================事件监听方法区域 start===================================
-        //表格工具栏监听事件
-        table.on('toolbar(test)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch(obj.event){
-                case 'xinzeng_button':
-                    //跳转到新增页面
-                    window.location.replace("/yiyuan/CargoBillPage/form.html")
-                    break;
+    //============ ajax接口调用方法区 ====================
+
+
+
+
+
+
+
+    //===== 页面加载后执行 start=====
+
+    //===== 页面加载后执行 end=====
+
+    //获取一周前和一周后时间的方法
+    function getDate_FF () {
+        //========== Date拓展 ========== start
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "H+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
             };
-        });//表格工具栏监听事件 -->结尾
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+        //========== Date拓展 ========== end
 
+        //获取一周后的年月日
+        var date1 = new Date();
+        date1.setDate(date1.getDate()+7);
+        var endtime = date1.Format("yyyy/MM/dd");
+        //获取一周前的年月日
+        var date2 = new Date();
+        date2.setDate(date2.getDate()-7);
+        var begtime = date2.Format("yyyy/MM/dd");
 
-        //=======================事件监听方法区域 end===================================
-    });//页面加载后执行 -->end
+        return {"endtime":endtime,"begtime":begtime};
+    };
 
-
-    //======================== 普通方法 区域 start======================================
     //解析url参数
     function GetRequest() {
         var url = location.search; //获取url中"?"符后的字串
@@ -733,27 +834,16 @@
         }
         return theRequest;
     }
-    //======================== 普通方法 区域 end======================================
-
-
-
-    //==================================网络请求方法区域 所有的AJAX写这里 start=====================================
-
-    //==================================网络请求方法区域 end=====================================
-
-
 
 
 </script>
 
 
-
-
-
+<!-- Vendor js -->
+<script src="/yiyuan/static/assets/js/vendor.min.js"></script>
 
 <!-- App js -->
 <script src="/yiyuan/static/assets/js/app.min.js"></script>
-
 
 </body>
 </html>
