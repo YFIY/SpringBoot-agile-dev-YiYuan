@@ -15,6 +15,9 @@
     <link href="/yiyuan/static/assets/libs/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="/yiyuan/static/assets/libs/datatables/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- 弹窗 css-->
+    <link href="/yiyuan/static/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
     <!-- App css -->
     <link href="/yiyuan/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/yiyuan/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
@@ -552,11 +555,18 @@
 
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var shippingId=data.id;
+            var goodsName=data.goodsName;
 
             if(layEvent === 'Shipping'){ //出货
                 tiaozhuan(shippingId);
             }else if(layEvent === 'del_a_lay'){//删除
-                del_medth(shippingId);
+
+                let data = {
+                    shippingId : shippingId,
+                    goodsName : goodsName
+                }
+
+                del_medth(data);
             }
         });
         //=======================事件监听方法区域 end===================================
@@ -590,14 +600,31 @@
         return theRequest;
     }
     //伪删除数据
-    function del_medth(id) {
+    function del_medth(data) {
 
-        let data = {
-            id : id,
-            deleteOrNot : 1
-        }
-        //调用更新接口
-        saveOrupdate_http_medth(data)
+        Swal.fire({
+            title: "是否执行删除操作?",
+            text: "您即将删除货物名:["+data.goodsName+"]的数据",
+            type: "info",
+            showCancelButton: !0,
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            confirmButtonClass: "btn btn-success mt-2",
+            cancelButtonClass: "btn btn-danger ml-2 mt-2",
+            buttonsStyling: !1
+        }).then(function (t) {
+            if(t.value){
+
+                let data = {
+                    id : data.shippingId,
+                    deleteOrNot : 1
+                }
+                //调用更新接口,执行伪删除操作
+                saveOrupdate_http_medth(data)
+            }
+        });
+
+
     }
 
     //跳转到出货页
@@ -634,6 +661,10 @@
 
 <!-- App js -->
 <script src="/yiyuan/static/assets/js/app.min.js"></script>
+<!-- 弹窗 js-->
+<script src="/yiyuan/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- 弹窗初始化 js-->
+<script src="/yiyuan/static/assets/js/pages/sweet-alerts.init.js"></script>
 
 
 </body>
