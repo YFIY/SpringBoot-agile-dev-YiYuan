@@ -81,6 +81,7 @@ public class CargoBillController {
         //每页条数
         pageData.setSize(Long.parseLong(jsonMap.get("size").toString()));
         pageData = cargoBillService.getListMapPage(pageData,cargoBillSqlEntity);
+
         return pageData;
     }
 

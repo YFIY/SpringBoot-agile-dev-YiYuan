@@ -678,33 +678,35 @@
             ,limits: [10,20,30]
             ,cols: [ [ //表头
                 { field: "state", checkbox: true,  width: '4%', align: 'center'}
+                ,{field: 'id', title: 'id'}
                 ,{field: 'departureLocation', title: '出发'}
                 ,{field: 'arrivedLocation', title: '到达'}
                 ,{field: 'goodsName', title: '货物名称'}
                 ,{field: 'goodsSpecification', title: '规格'}
                 ,{field: 'goodsUnit', title: '单位', templet: function (item) {
-                        if (item.goodsUnit == '1') {
-                            return "吨";
-                        }else {
-                            return "未定义";
-                        }
+                    if (item.goodsUnit == '1') {
+                        return "吨";
+                    }else {
+                        return "未定义";
+                    }
                  }}
                 ,{field: 'goodsNumber', title: '吨数'}
                 ,{field: 'goodsUnitPrice', title: '料款/吨'}
                 ,{field: 'goodsFreight', title: '运费/吨'}
-                ,{field: 'goodsTime', title: '购进时间'}
+                ,{field: 'goodsTime', title: '购进时间' ,templet: function (item) {
+                     return   item.goodsTime
+                 }}
                 , { field: '', title: '成本总价',  templet: function (item) {
                       return   (item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight
-                    }
-                }
+                }}
                 ,{field: 'whetherToShip', title: '是否出货',templet: function (item) {
-                            if (item.whetherToShip == '0') {
-                                return "未出货";
-                            }else if(item.whetherToShip == '1') {
-                                return "已出货";
-                            }else{
-                                return "未定义";
-                            }
+                    if (item.whetherToShip == '0') {
+                        return "未出货";
+                    }else if(item.whetherToShip == '1') {
+                        return "已出货";
+                    }else{
+                        return "未定义";
+                    }
                  }}
                 ,{field: 'shippingTime', title: '出货时间'}
                 ,{field: 'sellingPrice', title: '销售价/吨'}
