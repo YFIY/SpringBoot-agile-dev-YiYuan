@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--系统参数表(t_sys_cfg)的Mapper-->
+<mapper namespace="com.yiyuan.dao.CargoBillDao">
+    <select id="getListMapPage" resultType="com.yiyuan.entity.sql.CargoBillSqlEntity">
+		SELECT * FROM
+		 t_cargo_bill
+		<where>
+
+			<!-- userID：id [精确查询] -->
+			<if test="queryModel.id != null and queryModel.id != '' ">
+				AND `id` = #{queryModel.id}
+			</if>
+
+		</where>
+	</select>
+</mapper>

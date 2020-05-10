@@ -23,7 +23,7 @@ public class CargoBillSqlEntity {
      */
     private Long userId;
     /**
-     * 入货出货时间
+     * 购进时间
      */
     private Date goodsTime;
     /**
@@ -43,7 +43,7 @@ public class CargoBillSqlEntity {
      */
     private String goodsSpecification;
     /**
-     * 货物数量
+     * 吨数
      */
     private Long goodsNumber;
     /**
@@ -51,11 +51,11 @@ public class CargoBillSqlEntity {
      */
     private Long goodsUnit;
     /**
-     * 货物单价
+     * 料款/吨
      */
     private BigDecimal goodsUnitPrice;
     /**
-     * 货物运费
+     * 运费/吨
      */
     private BigDecimal goodsFreight;
     /**
@@ -66,5 +66,17 @@ public class CargoBillSqlEntity {
      * 运单备注
      */
     private String goodsRemarks;
+    /**
+     * 是否出货 0:未出货 1:出货
+     */
+    private Integer whetherToShip;
+    /**
+     * 出货时间
+     */
+    private Date shippingTime;
+    /**
+     * 销售价/吨
+     */
+    private BigDecimal sellingPrice;
 
 }
