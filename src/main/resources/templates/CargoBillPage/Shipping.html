@@ -609,70 +609,17 @@
                             <form class="form-horizontal" id="basic-form">
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">名称</label>
+                                    <label class="col-sm-2 col-form-label" for="example-email">销售价/吨</label>
                                     <div class="col-sm-10">
-                                        <input type="text" id="form_goods_name" name="goods_name" class="form-control" placeholder="货物名称">
+                                        <input type="text" id="sellingPrice" name="sellingPrice" class="form-control" placeholder="销售价/吨">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">时间</label>
+                                    <label class="col-sm-2 col-form-label" for="example-email">出货时间</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="date" id="example-date" name="goodsTime">
+                                        <input class="form-control" type="date" id="shippingTime" name="shippingTime">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">出发地</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" id="form_departure_location" name="departure_location" class="form-control" placeholder="出发地">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">到达地</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" id="form_arrived_location" name="arrived_location" class="form-control" placeholder="到达地">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">规格</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" id="form_goods_specification" name="goods_specification" class="form-control" placeholder="货物规格">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">单位</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control" name="goods_unit" id="form_goods_unit">
-                                            <option value ="1">吨</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">数量</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" id="form_goods_number" name="goods_number" class="form-control" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">料款/吨</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" id="form_goods_unit_price" name="goods_unit_price" class="form-control" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">运费/吨</label>
-                                    <div class="col-sm-10">
-                                        <input type="number" id="form_goods_freight" name="goods_freight" class="form-control" placeholder="0">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-textarea">备注</label>
-                                    <div class="col-sm-10">
-                                        <textarea class="form-control" name="goods_remarks" id="example-textarea" rows="5"></textarea>
-                                    </div>
-                                </div>
-
-
                             </form>
                             <button class="btn btn-primary" v-on:click="ajax_insertCargoBill_FF">提交</button>
 
@@ -680,14 +627,6 @@
                     </div><!-- end col -->
                 </div>
                 <!-- end row -->
-
-
-
-
-
-
-
-
             </div> <!-- container-fluid -->
 
         </div> <!-- content -->
@@ -743,7 +682,7 @@
                 //调用方法获取form中用户填的数据
                 const date = app.form_query_FF();
 
-                axios.post('/yiyuan/CargoBill/saveInfo',
+                axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
                     date
                 ).then(function (response) {
                     //请求成功响应结果response
@@ -778,17 +717,14 @@
     });
 
     //============ ajax接口调用方法区 ====================
-
-
-
-
-
-
-
     //===== 页面加载后执行 start=====
+    $(function () {
+var shippingId=GetRequest();
+console.log("============================")
+    })
+
 
     //===== 页面加载后执行 end=====
-
     //获取一周前和一周后时间的方法
     function getDate_FF () {
         //========== Date拓展 ========== start
