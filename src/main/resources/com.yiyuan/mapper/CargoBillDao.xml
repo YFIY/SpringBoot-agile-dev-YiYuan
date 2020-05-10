@@ -14,5 +14,8 @@
 			</if>
 
 		</where>
+
+		ORDER BY goods_time DESC
+
 	</select>
 </mapper>
