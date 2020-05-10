@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultGenerator;
+import com.yiyuan.entity.vo.CargoBillVoEntity;
 import com.yiyuan.exception.ServiceException;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.service.CargoBillService;
@@ -63,12 +64,12 @@ public class CargoBillController {
      */
     @AnonymousAccess//免登访问
     @RequestMapping(value = "/getInfoListPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public IPage<CargoBillSqlEntity> getInfoListPage(@RequestBody String jsonStr){
+    public IPage<CargoBillVoEntity> getInfoListPage(@RequestBody String jsonStr){
 
         Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
         CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
 
-        IPage<CargoBillSqlEntity> pageData = new Page<>();
+        IPage<CargoBillVoEntity> pageData = new Page<>();
 
         //参数校验
         if( null == jsonMap.get("current") || null == jsonMap.get("size") ){

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yiyuan.dao.CargoBillDao;
 import com.yiyuan.entity.CfgEntity;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
+import com.yiyuan.entity.vo.CargoBillVoEntity;
 
 /**
  * 货运单功能业务接口
@@ -15,6 +16,6 @@ public interface CargoBillService extends IService<CargoBillSqlEntity> {
     /**
      * 动态条件分页查询
      */
-    public IPage<CargoBillSqlEntity> getListMapPage(IPage<CargoBillSqlEntity> page, CargoBillSqlEntity queryModel);
+    public IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
 
 }

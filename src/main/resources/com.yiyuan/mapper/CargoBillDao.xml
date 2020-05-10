@@ -3,7 +3,7 @@
 
 <!--系统参数表(t_sys_cfg)的Mapper-->
 <mapper namespace="com.yiyuan.dao.CargoBillDao">
-    <select id="getListMapPage" resultType="com.yiyuan.entity.sql.CargoBillSqlEntity">
+    <select id="getListMapPage" resultType="com.yiyuan.entity.vo.CargoBillVoEntity">
 		SELECT * FROM
 		 t_cargo_bill
 		<where>

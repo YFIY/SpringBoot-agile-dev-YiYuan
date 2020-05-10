@@ -6,6 +6,7 @@ import com.yiyuan.dao.CargoBillDao;
 import com.yiyuan.dao.CfgDao;
 import com.yiyuan.entity.CfgEntity;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
+import com.yiyuan.entity.vo.CargoBillVoEntity;
 import com.yiyuan.service.CargoBillService;
 import com.yiyuan.service.CfgService;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
     /**
      * 动态条件分页查询
      */
-    public IPage<CargoBillSqlEntity> getListMapPage(IPage<CargoBillSqlEntity> page, CargoBillSqlEntity queryModel){
+    public IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel){
         return this.baseMapper.getListMapPage(page,queryModel);
     }
 
