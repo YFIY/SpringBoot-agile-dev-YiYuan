@@ -683,6 +683,9 @@
                 //调用方法获取form中用户填的数据
                 const date = app.form_query_FF();
 
+                date. whetherToShip = 1;
+
+
                 axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
                     date
                 ).then(function (response) {

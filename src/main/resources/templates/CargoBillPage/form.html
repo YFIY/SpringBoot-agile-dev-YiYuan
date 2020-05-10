@@ -602,13 +602,15 @@
                         <!-- end page title -->
 
                         <div class="row">
+                            <button class="btn btn-primary" id="insertQuickly">快速添加</button>
                             <div class="col-12">
+
                                 <div class="card-box">
 
 
-                                    <form class="form-horizontal" id="basic-form">
-
                                         <div class="form-group row">
+
+                                            <form class="form-horizontal" id="basic-form">
                                             <label class="col-sm-2 col-form-label" for="example-email">名称</label>
                                             <div class="col-sm-10">
                                                 <input type="text" id="form_goods_name" name="goods_name" class="form-control" placeholder="货物名称">
@@ -728,7 +730,6 @@
 
             //QS数据处理配置
             //var qs = Qs;
-
             //初始化VUE实例
             const app = new Vue({
                 el: '#wrapper',     // 用于页面渲染VUE实例的元素
@@ -742,7 +743,7 @@
 
                         //调用方法获取form中用户填的数据
                         const date = app.form_query_FF();
-
+                        date.whetherToShip = 1;
                         axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
                             date
                         ).then(function (response) {
@@ -776,14 +777,38 @@
                     }
                 }
             });
+            //============ 事件监听 Strat====================
+            $('#insertQuickly').on('click', function(){
+                //账期
+                var customerName=$("#customerName").val();
+                var responsibleName=$("#responsibleName").val();
+                var data={
+                    'current':1,
+                    'size':1
+                }
+                //调用表格重载方法
+                insertQuickly(data);
+                //调用关闭弹窗并清空弹框input的方法
+                cancal_ff();
+            });
 
-            //============ ajax接口调用方法区 ====================
+            //============ 事件监听区End ====================
+            //============ ajax接口调用方法区 Start ==================
+            function insertQuickly(data) {
+                axios.post('/yiyuan/CargoBill/getInfoListPage',
+                    data
+                ).then(function (response) {
+                    //请求成功响应结果response
+                    console.log("↓货运单新增接口返回结果↓");
+                    console.log(response);
+                    console.log(response.data);
 
-
-
-
-
-
+                }).catch(function (error) {
+                    //请求异常响应结果
+                    console.log(error);
+                });
+            }
+            //============ ajax接口调用方法区 End ====================
 
             //===== 页面加载后执行 start=====
 
