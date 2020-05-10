@@ -79,5 +79,8 @@ public class CargoBillSqlEntity {
      * 销售价/吨
      */
     private BigDecimal sellingPrice;
-
+    /**
+     * 是否删除 0:正常 1:删除
+     */
+    private Integer deleteOrNot;
 }

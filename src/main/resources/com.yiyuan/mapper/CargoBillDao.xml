@@ -8,6 +8,9 @@
 		 t_cargo_bill
 		<where>
 
+			<!-- userID：delete_or_not 只查询没有被伪删除的数据 [特殊查询] -->
+			AND `delete_or_not` = 0
+
 			<!-- userID：id [精确查询] -->
 			<if test="queryModel.id != null and queryModel.id != '' ">
 				AND `id` = #{queryModel.id}
