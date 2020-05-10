@@ -2,7 +2,7 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>新增货运单</title>
+    <title>出货</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -595,7 +595,7 @@
                                     <li class="breadcrumb-item active">Form Elements</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">新增货运单</h4>
+                            <h4 class="page-title">出货</h4>
                         </div>
                     </div>
                 </div>
@@ -676,9 +676,9 @@
             performDateList: []
         },
         methods:{
-            //新增货运单
+            //出货
             ajax_insertCargoBill_FF(){
-                console.log("执行货运单新增接口");
+                console.log("执行货运单出货接口");
 
                 //调用方法获取form中用户填的数据
                 const date = app.form_query_FF();
@@ -690,7 +690,7 @@
                     date
                 ).then(function (response) {
                     //请求成功响应结果response
-                    console.log("↓货运单新增接口返回结果↓");
+                    console.log("↓单出货接口返回结果↓");
                     console.log(response);
                     console.log(response.data);
                     app.performDateList = response.data;
