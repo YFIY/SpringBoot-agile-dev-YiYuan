@@ -731,6 +731,8 @@
 
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             var shoppingId=data.id;
+            console.log("------------------------------------------")
+            console.log(data);
             if(layEvent === 'Shipping'){ //编辑
                 tiaozhuan(shoppingId);
             }
