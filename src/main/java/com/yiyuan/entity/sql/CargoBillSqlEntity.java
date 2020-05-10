@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 import java.util.Date;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.Data;
 
 /**
  * 货运单数据库模型(表名:t_cargo_bill)
  * @author MoLi
  */
+@Data
 @TableName("t_cargo_bill")//表名
 public class CargoBillSqlEntity {
 
@@ -44,7 +46,7 @@ public class CargoBillSqlEntity {
     /**
      * 吨数
      */
-    private Long goodsNumber;
+    private BigDecimal goodsNumber;
     /**
      * 货物单位
      */
@@ -78,132 +80,4 @@ public class CargoBillSqlEntity {
      */
     private BigDecimal sellingPrice;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Date getGoodsTime() {
-        return goodsTime;
-    }
-
-    public void setGoodsTime(Date goodsTime) {
-        this.goodsTime = goodsTime;
-    }
-
-    public String getDepartureLocation() {
-        return departureLocation;
-    }
-
-    public void setDepartureLocation(String departureLocation) {
-        this.departureLocation = departureLocation;
-    }
-
-    public String getArrivedLocation() {
-        return arrivedLocation;
-    }
-
-    public void setArrivedLocation(String arrivedLocation) {
-        this.arrivedLocation = arrivedLocation;
-    }
-
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
-    public String getGoodsSpecification() {
-        return goodsSpecification;
-    }
-
-    public void setGoodsSpecification(String goodsSpecification) {
-        this.goodsSpecification = goodsSpecification;
-    }
-
-    public Long getGoodsNumber() {
-        return goodsNumber;
-    }
-
-    public void setGoodsNumber(Long goodsNumber) {
-        this.goodsNumber = goodsNumber;
-    }
-
-    public Long getGoodsUnit() {
-        return goodsUnit;
-    }
-
-    public void setGoodsUnit(Long goodsUnit) {
-        this.goodsUnit = goodsUnit;
-    }
-
-    public BigDecimal getGoodsUnitPrice() {
-        return goodsUnitPrice;
-    }
-
-    public void setGoodsUnitPrice(BigDecimal goodsUnitPrice) {
-        this.goodsUnitPrice = goodsUnitPrice;
-    }
-
-    public BigDecimal getGoodsFreight() {
-        return goodsFreight;
-    }
-
-    public void setGoodsFreight(BigDecimal goodsFreight) {
-        this.goodsFreight = goodsFreight;
-    }
-
-    public Date getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(Date creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public String getGoodsRemarks() {
-        return goodsRemarks;
-    }
-
-    public void setGoodsRemarks(String goodsRemarks) {
-        this.goodsRemarks = goodsRemarks;
-    }
-
-    public Integer getWhetherToShip() {
-        return whetherToShip;
-    }
-
-    public void setWhetherToShip(Integer whetherToShip) {
-        this.whetherToShip = whetherToShip;
-    }
-
-    public Date getShippingTime() {
-        return shippingTime;
-    }
-
-    public void setShippingTime(Date shippingTime) {
-        this.shippingTime = shippingTime;
-    }
-
-    public BigDecimal getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(BigDecimal sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
 }

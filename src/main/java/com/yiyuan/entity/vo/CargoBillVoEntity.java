@@ -44,7 +44,7 @@ public class CargoBillVoEntity {
     /**
      * 吨数
      */
-    private Long goodsNumber;
+    private BigDecimal goodsNumber;
     /**
      * 货物单位
      */

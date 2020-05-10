@@ -688,8 +688,12 @@
                 ,{field: 'goodsUnitPrice', title: '料款/吨' , minWidth: 80}
                 ,{field: 'goodsFreight', title: '运费/吨' , minWidth: 80}
                 ,{field: 'goodsTime', title: '购进时间' , minWidth: 110 , templet: function (item) {
-                     //字符串截取,只要年月日
-                     return item.goodsTime.slice(0,10);
+                    if(item.goodsTime != null){
+                        //字符串截取,只要年月日
+                        return item.goodsTime.slice(0,10);
+                    }else{
+                        return "无";
+                    }
                  }}
                 , { field: '', title: '进货价' , minWidth: 90 ,  templet: function (item) {
                       return  (item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight
@@ -704,12 +708,12 @@
                     }
                  }}
                 ,{field: 'shippingTime', title: '出货时间', minWidth: 110 , templet: function (item) {
-                        if(item.shippingTime != null){
-                            //字符串截取,只要年月日
-                            return item.shippingTime.slice(0,10);
-                        }else{
-                            return "无";
-                        }
+                    if(item.shippingTime != null){
+                        //字符串截取,只要年月日
+                        return item.shippingTime.slice(0,10);
+                    }else{
+                        return "无";
+                    }
                  }}
                 ,{field: 'sellingPrice', title: '销售价/吨' , minWidth: 95}
                 ,{field: '', title: '纯利润' , minWidth: 95,  templet: function (item) {
