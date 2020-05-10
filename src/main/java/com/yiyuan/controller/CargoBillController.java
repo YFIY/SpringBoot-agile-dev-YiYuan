@@ -64,8 +64,10 @@ public class CargoBillController {
     @AnonymousAccess//免登访问
     @RequestMapping(value = "/getInfoListPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public IPage<CargoBillSqlEntity> getInfoListPage(@RequestBody String jsonStr){
-        //需要在Config配置类中配置分页插件
+
         Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
+        CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
+
         IPage<CargoBillSqlEntity> pageData = new Page<>();
 
         //参数校验
@@ -73,11 +75,12 @@ public class CargoBillController {
             throw new ServiceException("当前页current|每页条数size,不允许为空");
         }
 
+
         //当前页
         pageData.setCurrent(Long.parseLong(jsonMap.get("current").toString()));
         //每页条数
         pageData.setSize(Long.parseLong(jsonMap.get("size").toString()));
-        pageData = cargoBillService.page(pageData);
+        pageData = cargoBillService.getListMapPage(pageData,cargoBillSqlEntity);
         return pageData;
     }
 
@@ -86,8 +89,8 @@ public class CargoBillController {
      * @author MoLi
      */
     @AnonymousAccess//免登访问
-    @RequestMapping(value = "/saveInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result saveInfo(@RequestBody String jsonStr){
+    @RequestMapping(value = "/saveOrUpdateInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result saveOrUpdateInfo(@RequestBody String jsonStr){
         //json字符串解析数据放入模型
         CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
 
