@@ -697,6 +697,17 @@
                       return   (item.goodsUnitPrice +item.goodsFreight) * item.goodsFreight
                     }
                 }
+                ,{field: 'whetherToShip', title: '是否出货',templet: function (item) {
+                            if (item.whetherToShip == '0') {
+                                return "未出货";
+                            }else if(item.whetherToShip == '1') {
+                                return "已出货";
+                            }else{
+                                return "未定义";
+                            }
+                 }}
+                ,{field: 'shippingTime', title: '出货时间'}
+                ,{field: 'sellingPrice', title: '销售价/吨'}
                 ,{fixed: 'right', title:'操作', toolbar: '#barDemo',align:'center'}
 
             ]]
