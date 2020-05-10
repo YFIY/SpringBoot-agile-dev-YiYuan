@@ -557,16 +557,18 @@
             var shippingId=data.id;
             var goodsName=data.goodsName;
 
-            if(layEvent === 'Shipping'){ //出货
-                tiaozhuan(shippingId);
-            }else if(layEvent === 'del_a_lay'){//删除
+            //组装所需的数据
+            let data_zdy = {
+                shippingId : shippingId,
+                goodsName : goodsName
+            }
 
-                let data = {
-                    shippingId : shippingId,
-                    goodsName : goodsName
-                }
-
-                del_medth(data);
+            if(layEvent === 'Shipping'){
+                //出货
+                tiaozhuan(data_zdy);
+            }else if(layEvent === 'del_a_lay'){
+                //删除
+                del_medth(data_zdy);
             }
         });
         //=======================事件监听方法区域 end===================================
@@ -615,21 +617,38 @@
         }).then(function (t) {
             if(t.value){
 
-                let data = {
+                let data_http = {
                     id : data.shippingId,
                     deleteOrNot : 1
                 }
                 //调用更新接口,执行伪删除操作
-                saveOrupdate_http_medth(data)
+                saveOrupdate_http_medth(data_http);
             }
         });
 
 
     }
-
     //跳转到出货页
-    function tiaozhuan(shoppingId) {
-        window.location.href = "Shipping.html?id="+shoppingId;
+    function tiaozhuan(data) {
+
+        Swal.fire({
+            title: "是否执行出货操作?",
+            text: "您即将出货,货物名:["+data.goodsName+"]的数据",
+            type: "info",
+            showCancelButton: !0,
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            confirmButtonClass: "btn btn-success mt-2",
+            cancelButtonClass: "btn btn-danger ml-2 mt-2",
+            buttonsStyling: !1
+        }).then(function (t) {
+            if(t.value){
+                //跳转到出货页面并携带要出货的数据ID
+                window.location.href = "Shipping.html?id="+data.shippingId;
+            }
+        });
+
+
     }
     //======================== 普通方法 区域 end======================================
 
