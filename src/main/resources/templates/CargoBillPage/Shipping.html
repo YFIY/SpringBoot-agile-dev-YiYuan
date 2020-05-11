@@ -14,6 +14,9 @@
     <link href="/yiyuan/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/yiyuan/static/assets/css/app.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- 弹窗 css-->
+    <link href="/yiyuan/static/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
@@ -25,213 +28,7 @@
     <div class="navbar-custom">
         <ul class="list-unstyled topnav-menu float-right mb-0">
 
-            <li class="dropdown d-none d-lg-block">
-                <div class="dropdown-menu dropdown-menu-right">
 
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="/yiyuan/static/assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Spanish</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="/yiyuan/static/assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">German</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="/yiyuan/static/assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Italian</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <img src="/yiyuan/static/assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span class="align-middle">Russian</span>
-                    </a>
-
-                </div>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="dripicons-inbox mail-icon"></i>
-                    <span class="badge badge-info noti-icon-badge">20</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                                    <span class="float-right">
-                                        <a href="" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>20 New Messages
-                        </h5>
-                    </div>
-
-                    <div class="slimscroll noti-scroll">
-
-
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon"><img src="/yiyuan/static/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" /></div>
-                            <p class="notify-details">Amily Lee<small class="text-muted">Hi, How are you? What about our next meeting?</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon">
-                                <img src="/yiyuan/static/assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                            <p class="notify-details">David Boos</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>What about our next meeting</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon"><img src="/yiyuan/static/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                            <p class="notify-details">Christopher Palmer<small class="text-muted">Waiting for your Response...</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon">
-                                <img src="/yiyuan/static/assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle" alt="" /> </div>
-                            <p class="notify-details">Malika Roy</p>
-                            <p class="text-muted mb-0 user-msg">
-                                <small>Wow that's great</small>
-                            </p>
-                        </a>
-                    </div>
-
-                    <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                        View all
-                        <i class="fi-arrow-right"></i>
-                    </a>
-
-                </div>
-            </li>
-
-            <li class="dropdown notification-list">
-                <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i class="dripicons-bell noti-icon"></i>
-                    <span class="badge badge-danger noti-icon-badge">35</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-lg">
-
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h5 class="m-0">
-                                    <span class="float-right">
-                                        <a href="" class="text-dark">
-                                            <small>Clear All</small>
-                                        </a>
-                                    </span>Notification
-                        </h5>
-                    </div>
-
-                    <div class="slimscroll noti-scroll">
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-info"><i class="mdi mdi-cloud-upload-outline"></i></div>
-                            <p class="notify-details">Your upload has been approved<small class="text-muted">5 hours ago</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                            <div class="notify-icon bg-success"><i class="mdi mdi-map-marker-check"></i> </div>
-                            <p class="notify-details">You added your Location<small class="text-muted">Just Now</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-primary"><i class="mdi mdi-layers-remove"></i></div>
-                            <p class="notify-details">Your item is shipped<small class="text-muted">It is a long established fact that a reader will</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-purple"><i class="mdi mdi-check-bold"></i></div>
-                            <p class="notify-details">Your order is placed<small class="text-muted">Dummy text of the printing and typesetting industry.</small></p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-warning">
-                                <i class="mdi mdi-alert-outline"></i>
-                            </div>
-                            <p class="notify-details">Your Subscription Expired
-                                <small class="text-muted">1 days ago</small>
-                            </p>
-                        </a>
-
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                            <div class="notify-icon bg-danger">
-                                <i class="mdi mdi-settings"></i>
-                            </div>
-                            <p class="notify-details"><b>Devid</b>, You changed your Settings
-                                <small class="text-muted">5 days ago</small>
-                            </p>
-                        </a>
-                    </div>
-
-                    <!-- All-->
-                    <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                        View all
-                        <i class="fi-arrow-right"></i>
-                    </a>
-
-                </div>
-            </li>
-
-            <li class="dropdown notification-list">
-              <!--  <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="/yiyuan/static/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ml-1">
-                                Devid <i class="mdi mdi-chevron-down"></i>
-                            </span>
-                </a>-->
-                <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
-                    <!-- item-->
-                    <div class="dropdown-item noti-title">
-                        <h6 class="m-0">
-                            Hello, Devid !
-                        </h6>
-                    </div>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="dripicons-user"></i>
-                        <span>My Profile</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="dripicons-card"></i>
-                        <span>My Wallet</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="dripicons-gear"></i>
-                        <span>Settings</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="dripicons-power"></i>
-                        <span>Logout</span>
-                    </a>
-
-                </div>
-            </li>
 
         </ul>
 
@@ -333,7 +130,7 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item active">Form Elements</li>
+                                    <li class="breadcrumb-item active">出货</li>
                                 </ol>
                             </div>
                             <h4 class="page-title">出货</h4>
@@ -351,19 +148,30 @@
                                 <!--隐藏的ID 输入框，有值后台会自动判断进行更新-->
                                 <input type="hidden" name="id" id="hiddenid"  class="form-control">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">销售价/吨</label>
+                                    <label class="col-sm-2 col-form-label">销售价/吨</label>
                                     <div class="col-sm-10">
-                                        <input type="text" id="sellingPrice" name="sellingPrice" class="form-control" placeholder="销售价/吨">
+                                        <input type="number" min="0.0" step="0.01" name="sellingPrice" class="form-control" placeholder="销售价/吨" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="example-email">出货时间</label>
+                                    <label class="col-sm-2 col-form-label">出货时间</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="date" id="shippingTime" name="shippingTime">
+                                        <input class="form-control" type="date" name="shippingTime" required>
                                     </div>
                                 </div>
+
+
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
+                                        提交
+                                    </button>
+                                    <button type="reset" class="btn btn-light waves-effect">
+                                        重置
+                                    </button>
+                                </div>
+
+
                             </form>
-                            <button class="btn btn-primary" v-on:click="ajax_insertCargoBill_FF">提交</button>
 
                         </div> <!-- end card-box -->
                     </div><!-- end col -->
@@ -410,99 +218,75 @@
     //QS数据处理配置
     //var qs = Qs;
 
-    //初始化VUE实例
-    const app = new Vue({
-        el: '#wrapper',     // 用于页面渲染VUE实例的元素
-        data: { // 定义数据
-            performDateList: []
-        },
-        methods:{
-            //出货
-            ajax_insertCargoBill_FF(){
-                console.log("执行货运单出货接口");
-
-                //调用方法获取form中用户填的数据
-                const date = app.form_query_FF();
-
-                date. whetherToShip = 1;
 
 
-                axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
-                    date
-                ).then(function (response) {
-                    //请求成功响应结果response
-                    console.log("↓单出货接口返回结果↓");
-                    console.log(response);
-                    console.log(response.data);
-                    app.performDateList = response.data;
 
-                    if(response.data.success === true){
-                        alert("操作成功");
+    //============ 事件监听 Strat====================
+
+    //出货 表单提交监听
+    $("#basic-form").on("submit",function(event){
+
+        //阻止默认表单提交
+        event.preventDefault();
+
+        //获取表单内的所有数据并封装
+        var formData = {};
+        var t = $('#basic-form').serializeArray();
+        $.each(t, function() {
+            formData[this.name] = this.value;
+        });
+
+        //将是否出货 字段改为 1：出货
+        formData.whetherToShip = 1;
+
+        //调用http发送请求
+        insertOrUpdate_http_ff(formData);
+    })
+    //============ 事件监听区End ====================
+
+
+    //============ ajax接口调用方法区 Start ==================
+    //新增或更新数据
+    function insertOrUpdate_http_ff(data) {
+        axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
+            data
+        ).then(function (response) {
+            if(response.data.success === true){
+                Swal.fire({
+                    title: "操作成功",
+                    text: "点击确定后返回列表页面",
+                    type: "success",
+                    confirmButtonText: "确定",
+                    confirmButtonClass: "btn btn-success mt-2",
+                    cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                    buttonsStyling: !1
+                }).then(function (t) {
+                    if(t.value){
                         //重定向到列表页
                         window.location.replace("/yiyuan/CargoBillPage/list.html");
                     }
-
-                }).catch(function (error) {
-                    //请求异常响应结果
-                    console.log(error);
                 });
-            },
-            //表单数据获取
-            form_query_FF(){
-                //获取表单内的所有数据并封装
-                var formData = {};
-                var t = $('#basic-form').serializeArray();
-                $.each(t, function() {
-                    formData[this.name] = this.value;
-                });
-                console.log(JSON.stringify(formData));
-                return formData;
             }
-        }
-    });
+        }).catch(function (error) {
+            //请求异常响应结果
+            console.log(error);
+        });
+    }
+    //============ ajax接口调用方法区 End ====================
 
-    //============ ajax接口调用方法区 ====================
+
     //===== 页面加载后执行 start=====
+
     $(function () {
+        //获取url中的数据
         var dataObj = GetRequest();
-        console.log("============================")
-        console.log(dataObj)
+        //将id注入input
         $("#hiddenid").val(dataObj.id);
     });
 
-
     //===== 页面加载后执行 end=====
-    //获取一周前和一周后时间的方法
-    function getDate_FF () {
-        //========== Date拓展 ========== start
-        Date.prototype.Format = function (fmt) { //author: meizz
-            var o = {
-                "M+": this.getMonth() + 1, //月份
-                "d+": this.getDate(), //日
-                "H+": this.getHours(), //小时
-                "m+": this.getMinutes(), //分
-                "s+": this.getSeconds(), //秒
-                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-                "S": this.getMilliseconds() //毫秒
-            };
-            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-            for (var k in o)
-                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            return fmt;
-        }
-        //========== Date拓展 ========== end
 
-        //获取一周后的年月日
-        var date1 = new Date();
-        date1.setDate(date1.getDate()+7);
-        var endtime = date1.Format("yyyy/MM/dd");
-        //获取一周前的年月日
-        var date2 = new Date();
-        date2.setDate(date2.getDate()-7);
-        var begtime = date2.Format("yyyy/MM/dd");
 
-        return {"endtime":endtime,"begtime":begtime};
-    };
 
     //解析url参数
     function GetRequest() {
@@ -526,6 +310,19 @@
 
 <!-- App js -->
 <script src="/yiyuan/static/assets/js/app.min.js"></script>
+
+<!--表单验证功能 --》 Start-->
+<!-- Validation js (Parsleyjs) -->
+<script src="/yiyuan/static/assets/libs/parsleyjs/parsley.min.js"></script>
+<!-- validation init -->
+<script src="/yiyuan/static/assets/js/pages/form-validation.init.js"></script>
+<!--表单验证功能 --》 End-->
+
+<!-- 弹窗 js-->
+<script src="/yiyuan/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
+<!-- 弹窗初始化 js-->
+<script src="/yiyuan/static/assets/js/pages/sweet-alerts.init.js"></script>
+
 
 </body>
 </html>
