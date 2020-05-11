@@ -320,12 +320,20 @@
         axios.post('/yiyuan/CargoBill/getInfoListPage',
             data
         ).then(function (response) {
-            var objdata=response.data.data.records
-            //数据注入到input
-            injection(objdata);
+
+            if(response.data.success){
+                var objdata=response.data.data.records
+                //数据注入到input
+                injection(objdata);
+            }else{
+                alert("操作失败，请联系管理员，错误原因："+response.data.message);
+            }
+
+
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            alert("网络连接超时");
         });
     }
 
@@ -353,12 +361,14 @@
                     }
                 });
 
-
+            }else{
+                alert("操作失败，请联系管理员，错误原因："+response.data.message);
             }
 
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            alert("网络连接超时");
         });
     }
     //============ ajax接口调用方法区 End ====================

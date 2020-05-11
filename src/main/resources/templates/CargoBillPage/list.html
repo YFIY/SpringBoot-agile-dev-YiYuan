@@ -242,7 +242,7 @@
 
         //数据表格参数初始化
         tableIns = table.render({
-            elem: '#demo'//表格ID
+             elem: '#demo'//表格ID
             ,toolbar: '#toolbarDemo' //工具栏ID
             ,height: '650' //高
             //,cellMinWidth: 100 //全局定义常规单元格的最小宽度
@@ -277,7 +277,15 @@
             ,limits: [10,20,30]
             ,cols: [ [ //表头
                 /*{ field: "state", checkbox: true,  width: '4%', align: 'center'},*/
-                {field: 'departureLocation', title: '出发' , minWidth: 70}
+                {field: 'goodsTime', title: '购进时间' , minWidth: 110 , templet: function (item) {
+                        if(item.goodsTime != null){
+                            //字符串截取,只要年月日
+                            return item.goodsTime.slice(0,10);
+                        }else{
+                            return "无";
+                        }
+                 }}
+                ,{field: 'departureLocation', title: '出发' , minWidth: 70}
                 ,{field: 'arrivedLocation', title: '到达' , minWidth: 70}
                 ,{field: 'goodsName', title: '货物名称' , minWidth: 100}
                 ,{field: 'goodsSpecification', title: '规格'}
@@ -288,18 +296,16 @@
                         return "未定义";
                     }
                  }}
-                ,{field: 'goodsNumber', title: '吨数'}
-                ,{field: 'goodsUnitPrice', title: '料款/吨' , minWidth: 80}
-                ,{field: 'goodsFreight', title: '运费/吨' , minWidth: 80}
-                ,{field: 'goodsTime', title: '购进时间' , minWidth: 110 , templet: function (item) {
-                    if(item.goodsTime != null){
-                        //字符串截取,只要年月日
-                        return item.goodsTime.slice(0,10);
-                    }else{
-                        return "无";
-                    }
-                 }}
-                , { field: '', title: '进货价' , minWidth: 90 ,  templet: function (item) {
+                ,{field: 'goodsNumber', title: '吨数', templet: function (item) {
+                        return  item.goodsUnitPrice + " 吨"
+                }}
+                ,{field: 'goodsUnitPrice', title: '料款/吨' , minWidth: 80, templet: function (item) {
+                        return  item.goodsUnitPrice + " 元"
+                }}
+                ,{field: 'goodsFreight', title: '运费/吨' , minWidth: 80, templet: function (item) {
+                        return  item.goodsFreight + " 元"
+                }}
+                , { field: '', title: '进货价' , minWidth: 90 , templet: function (item) {
                       return  (item.goodsUnitPrice + item.goodsFreight) * item.goodsNumber
                 }}
                 ,{field: 'whetherToShip', title: '是否出货', minWidth: 90 ,templet: function (item) {
@@ -319,11 +325,24 @@
                         return "无";
                     }
                  }}
-                ,{field: 'sellingPrice', title: '销售价/吨' , minWidth: 95}
+                ,{field: 'sellingPrice', title: '销售价/吨' , minWidth: 95,  templet: function (item) {
+                        //如果出货状态是1 已出货
+                        if(item.whetherToShip == '1') {
+                            return item.sellingPrice + " 元";
+                        }else{
+                            return "无";
+                        }
+                 }}
                 ,{field: '', title: '纯利润' , minWidth: 95,  templet: function (item) {
-                        return   (item.sellingPrice * item.goodsFreight) - ((item.goodsUnitPrice +item.goodsFreight) * item.goodsNumber)
-                    }}
-                ,{fixed: 'right', title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}
+                    //如果出货状态是1 已出货
+                    if(item.whetherToShip == '1') {
+                        return (item.sellingPrice * item.goodsFreight) - ((item.goodsUnitPrice +item.goodsFreight) * item.goodsNumber);
+                    }else{
+                        return "无";
+                    }
+                 }}
+                /*,{fixed: 'right', title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}*/
+                ,{title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}
 
             ]]
         });//数据表格参数初始化-->结尾
@@ -474,10 +493,13 @@
             if(response.data.success){
                 layer.msg('操作成功');
                 table_overload_ff();
+            }else{
+                alert("操作失败，请联系管理员，错误原因："+response.data.message);
             }
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            alert("网络连接超时");
         });
     }
     //==================================网络请求方法区域 end=====================================

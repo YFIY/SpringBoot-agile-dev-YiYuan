@@ -268,10 +268,13 @@
                         window.location.replace("/yiyuan/CargoBillPage/list.html");
                     }
                 });
+            }else{
+                alert("操作失败，请联系管理员，错误原因："+response.data.message);
             }
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            alert("网络连接超时");
         });
     }
     //============ ajax接口调用方法区 End ====================
