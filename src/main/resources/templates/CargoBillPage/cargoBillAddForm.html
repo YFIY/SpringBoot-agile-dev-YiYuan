@@ -266,20 +266,25 @@
 
 
 <!--VUE JS-->
-<script src="/yiyuan/static/assets/js/vue.js"></script>
+<!--<script src="/yiyuan/static/assets/js/vue.js"></script>-->
 <!--Axios-->
 <script src="/yiyuan/static/assets/js/axios.min.js"></script>
-<!--QS-->
-<!--<script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>-->
 <!-- Vendor js -->
 <script src="/yiyuan/static/assets/js/vendor.min.js"></script>
+<!--Layui js-->
+<script src="/yiyuan/static/layui/layui.all.js"></script>
 
 <script>
 
-    //QS数据处理配置
-    //var qs = Qs;
+    //定义Layui模块
+    var layer;
+    //加载layui模块
+    !function(){
+        layer = layui.layer;
+    }();
 
-    console.log(12);
+    //全局加载层控制变量
+    let loding_layLoad;
 
     //============ 事件监听 Strat====================
 
@@ -296,17 +301,23 @@
             formData[this.name] = this.value;
         });
 
+        //拉起加载层
+        loding_layLoad = layer.msg('加载中', {icon: 16,shade: 0.02});
+
         //调用http发送请求
         insertOrUpdate_http_ff(formData);
-    })
+    });
 
 
     //快速添加 按钮的事件
     $('#insertQuickly').on('click', function(){
+        //组装数据
         var data = {
             'current':1,
             'size':1
         }
+        //拉起加载层
+        loding_layLoad = layer.msg('加载中', {icon: 16,shade: 0.02});
         //执行http请求
         insertQuickly(data);
     });
@@ -321,6 +332,9 @@
             data
         ).then(function (response) {
 
+            //关闭加载层
+            layer.close(loding_layLoad);
+
             if(response.data.success){
                 var objdata=response.data.data.records
                 //数据注入到input
@@ -329,10 +343,11 @@
                 alert("操作失败，请联系管理员，错误原因："+response.data.message);
             }
 
-
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            //关闭加载层
+            layer.close(loding_layLoad);
             alert("网络连接超时");
         });
     }
@@ -342,7 +357,9 @@
         axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
             data
         ).then(function (response) {
-            //请求成功响应结果response
+
+            //关闭加载层
+            layer.close(loding_layLoad);
 
             if(response.data.success === true){
 
@@ -368,6 +385,8 @@
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            //关闭加载层
+            layer.close(loding_layLoad);
             alert("网络连接超时");
         });
     }

@@ -207,7 +207,7 @@
 <!--Layui js-->
 <script src="/yiyuan/static/layui/layui.all.js"></script>
 <!--VUE JS-->
-<script src="/yiyuan/static/assets/js/vue.js"></script>
+<!--<script src="/yiyuan/static/assets/js/vue.js"></script>-->
 <!--Axios-->
 <script src="/yiyuan/static/assets/js/axios.min.js"></script>
 <!--QS-->
@@ -219,6 +219,7 @@
 
     //定义本页面数据表格的操作元素
     var tableIns;
+
     //定义Layui模块
     var layer,table,upload,laydate;
     //加载layui模块
@@ -228,6 +229,9 @@
             laydate  = layui.laydate,
             upload = layui.upload;
     }();
+
+    //全局加载层控制变量
+    let loding_layLoad;
 
 
     //==============页面加载后执行 start========================
@@ -428,10 +432,13 @@
         }).then(function (t) {
             if(t.value){
 
+                //组装数据
                 let data_http = {
                     id : data.shippingId,
                     deleteOrNot : 1
                 }
+                //拉起加载层
+                loding_layLoad = layer.msg('加载中', {icon: 16,shade: 0.02});
                 //调用更新接口,执行伪删除操作
                 saveOrupdate_http_medth(data_http);
             }
@@ -489,7 +496,10 @@
         axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
             data
         ).then(function (response) {
-            //请求成功响应结果response
+
+            //关闭加载层
+            layer.close(loding_layLoad);
+
             if(response.data.success){
                 layer.msg('操作成功');
                 table_overload_ff();
@@ -499,6 +509,8 @@
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
+            //关闭加载层
+            layer.close(loding_layLoad);
             alert("网络连接超时");
         });
     }
