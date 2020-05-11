@@ -2,7 +2,7 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>出货</title>
+    <title>更新货运单</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -83,7 +83,8 @@
                             <h5><a href="javascript: void(0);">Devid Stanberry</a> </h5>
                             <p class="text-muted mb-0"><small>Main Admin</small></p>
                         </div>
-                    </div>-->
+                    </div>
+-->
 
                     <li>
                         <a href="javascript: void(0);">
@@ -93,7 +94,7 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a href="cargoBillAddForm.html">新增货运单</a>
+                                <a href="cargoBillAddForm.html">更新货运单</a>
                             </li>
                             <li>
                                 <a href="list.html">货物单列表</a>
@@ -112,7 +113,7 @@
         <!-- Sidebar -left -->
 
     </div>
-    <!-- 左侧边栏 End -->
+    <!-- ========== 左侧边栏 End ========== -->
 
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
@@ -130,10 +131,10 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item active">出货</li>
+                                    <li class="breadcrumb-item active">更新货运单</li>
                                 </ol>
                             </div>
-                            <h4 class="page-title">出货</h4>
+                            <h4 class="page-title">更新货运单</h4>
                         </div>
                     </div>
                 </div>
@@ -143,22 +144,73 @@
                     <div class="col-12">
                         <div class="card-box">
 
-
                             <form class="form-horizontal" id="basic-form">
+
 
                                 <!--隐藏的ID 输入框，有值后台会自动判断进行更新-->
                                 <input type="hidden" name="id" id="hiddenid"  class="form-control">
 
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">销售价/吨</label>
+                                    <label class="col-sm-2 col-form-label">名称</label>
                                     <div class="col-sm-10">
-                                        <input type="number" min="0.0" step="0.01" name="sellingPrice" class="form-control" placeholder="销售价/吨" required>
+                                        <input type="text" name="goods_name" class="form-control" placeholder="石料名称" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">出货时间</label>
+                                    <label class="col-sm-2 col-form-label">时间</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" type="date" name="shippingTime" required>
+                                        <input class="form-control" type="date" name="goodsTime" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">出发地</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="departure_location" class="form-control" placeholder="出发地" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">到达地</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="arrived_location" class="form-control" placeholder="到达地" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">规格</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="goods_specification" class="form-control" placeholder="石料规格" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">单位</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="goods_unit">
+                                            <option value ="1">吨</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">吨数</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" min="0.0" step="0.01" name="goods_number" class="form-control" placeholder="请填本车料的吨数" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">料款/吨</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" min="0.0" step="0.01" name="goods_unit_price" class="form-control" placeholder="请填本车每吨料的成本价" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">运费/吨</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" min="0.0" step="0.01" name="goods_freight" class="form-control" placeholder="请填本车每吨料的运费" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">备注</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="goods_remarks" id="example-textarea" rows="5"></textarea>
                                     </div>
                                 </div>
 
@@ -175,10 +227,19 @@
 
                             </form>
 
+
                         </div> <!-- end card-box -->
                     </div><!-- end col -->
                 </div>
                 <!-- end row -->
+
+
+
+
+
+
+
+
             </div> <!-- container-fluid -->
 
         </div> <!-- content -->
@@ -215,17 +276,30 @@
 <!--<script src="https://cdn.bootcss.com/qs/6.7.0/qs.min.js"></script>-->
 <!-- Vendor js -->
 <script src="/yiyuan/static/assets/js/vendor.min.js"></script>
+
 <script>
 
-    //QS数据处理配置
-    //var qs = Qs;
+    //===== 页面加载后执行 start=====
 
+    $(function () {
+        //获取url中的数据
+        var dataObj = GetRequest();
 
+        var data = {
+            'current':1,
+            'size':1,
+            'id':dataObj.id
+        }
+        //执行http请求
+        insertQuickly(data);
+    });
+
+    //===== 页面加载后执行 end=====
 
 
     //============ 事件监听 Strat====================
 
-    //出货 表单提交监听
+    //更新 表单提交监听
     $("#basic-form").on("submit",function(event){
 
         //阻止默认表单提交
@@ -238,22 +312,38 @@
             formData[this.name] = this.value;
         });
 
-        //将是否出货 字段改为 1：出货
-        formData.whetherToShip = 1;
-
         //调用http发送请求
         insertOrUpdate_http_ff(formData);
-    })
+    });
+
+
     //============ 事件监听区End ====================
 
-
     //============ ajax接口调用方法区 Start ==================
-    //新增或更新数据
+
+    //查询所需的数据并注入到input
+    function insertQuickly(data) {
+        axios.post('/yiyuan/CargoBill/getInfoListPage',
+            data
+        ).then(function (response) {
+            var objdata=response.data.data.records
+            //数据注入到input
+            injection(objdata);
+        }).catch(function (error) {
+            //请求异常响应结果
+            console.log(error);
+        });
+    }
+
+    //更新数据
     function insertOrUpdate_http_ff(data) {
         axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
             data
         ).then(function (response) {
+            //请求成功响应结果response
+
             if(response.data.success === true){
+
                 Swal.fire({
                     title: "操作成功",
                     text: "点击确定后返回列表页面",
@@ -268,7 +358,10 @@
                         window.location.replace("/yiyuan/CargoBillPage/list.html");
                     }
                 });
+
+
             }
+
         }).catch(function (error) {
             //请求异常响应结果
             console.log(error);
@@ -276,18 +369,31 @@
     }
     //============ ajax接口调用方法区 End ====================
 
+    //===== 普通方法 start=====
 
+    //数据注入到input
+    function injection(objdata) {
+        $("#basic-form input[name='id']").val(objdata[0].id);
+        $("#basic-form input[name='goods_name']").val(objdata[0].goodsName);
+        //时间转换，为了能将时间注入到date input中
+        s = objdata[0].goodsTime.replace(/-/g,"/");
+        var date = new Date(s );
+        $("#basic-form input[name='goodsTime']").val(DateUtil.formatDateTime(date,"yyyy-MM-dd"));
+        $("#basic-form input[name='departure_location']").val(objdata[0].departureLocation);
+        $("#basic-form input[name='arrived_location']").val(objdata[0].arrivedLocation);
+        $("#basic-form input[name='goods_specification']").val(objdata[0].goodsSpecification);
+        $("#basic-form input[name='goods_unit']").val(objdata[0].goodsUnit);
+        $("#basic-form input[name='goods_freight']").val(objdata[0].goodsFreight);
+        $("#basic-form input[name='goods_remarks']").val(objdata[0].goodsRemarks);
+        $("#basic-form input[name='goods_number']").val(objdata[0].goodsNumber);
+        $("#basic-form input[name='goods_unit_price']").val(objdata[0].goodsUnitPrice);
+    }
+    //===== 普通方法 end=====
+    
+    
     //===== 页面加载后执行 start=====
 
-    $(function () {
-        //获取url中的数据
-        var dataObj = GetRequest();
-        //将id注入input
-        $("#hiddenid").val(dataObj.id);
-    });
-
     //===== 页面加载后执行 end=====
-
 
 
     //解析url参数
@@ -303,6 +409,94 @@
         }
         return theRequest;
     }
+
+
+
+    /**
+     *  时间工具类
+     *  @author fei
+     */
+    var DateUtil={
+        /**
+         * 当前时间，格式 yyyy-MM-dd HH:mm:ss
+         *
+         * @return 当前时间的标准形式字符串
+         */
+        now: function() {
+            return new Date().format("yyyy-MM-dd HH:mm:ss");
+        },
+        /**
+         * 格式化日期时间
+         * 格式 yyyy-MM-dd HH:mm:ss
+         *
+         * @param date 被格式化的日期
+         * @param format 格式化 参考 {@link date_formate}
+         * @return 格式化后的日期
+         */
+        formatDateTime: function(date,format) {
+            if(format == undefined || format ==null ){
+                format = "yyyy-MM-dd HH:mm:ss";
+            }
+
+            return date.format(format);
+        },
+        /**
+         * 只支持毫秒级别时间戳，如果需要秒级别时间戳，请自行×1000
+         *
+         * @param timestamp 时间戳
+         * @return 时间对象
+         */
+        date:function (timestamp) {
+            return new Date(timestamp);
+        }
+    };
+
+    /** 日期格式 命名参考hutool工具类 */
+    date_formate = {
+        /** 标准日期格式：yyyy-MM-dd */
+        normDatePattern: "yyyy-MM-dd",
+        /** 标准时间格式：hh:mm:ss */
+        normTimePattern : "HH:mm:ss",
+        /** 标准日期时间格式，精确到分：yyyy-MM-dd HH:mm */
+        normDatetimeMinutePattern:"yyyy-MM-dd HH:mm",
+        /** 标准日期时间格式，精确到秒：yyyy-MM-dd HH:mm:ss */
+        normDatetimePattern:"yyyy-MM-dd HH:mm:ss",
+        /** 标准日期时间格式，精确到毫秒：yyyy-MM-dd HH:mm:ss.SSS */
+        normDatetimeMsPattern:"yyyy-MM-dd HH:mm:ss.SSS",
+        /** 标准日期格式：yyyy年MM月dd日 */
+        chineseDatePattern : "yyyy年MM月dd日",
+        /** 标准日期格式：yyyyMMdd */
+        pureDatePattern : "yyyyMMdd",
+        /** 标准日期格式：HHmmss */
+        pureTimePattern : "HHmmss",
+        /** 标准日期格式：yyyyMMddHHmmss */
+        pureDatetimePattern : "yyyyMMddHHmmss",
+        /** 标准日期格式：yyyyMMddHHmmssSSS */
+        pureDatetimeMsPattern : "yyyyMMddHHmmssSSS",
+    };
+
+    Date.prototype.format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "H+" : this.getHours(),                   //小时
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    };
+
 
 
 </script>
@@ -324,7 +518,6 @@
 <script src="/yiyuan/static/assets/libs/sweetalert2/sweetalert2.min.js"></script>
 <!-- 弹窗初始化 js-->
 <script src="/yiyuan/static/assets/js/pages/sweet-alerts.init.js"></script>
-
 
 </body>
 </html>

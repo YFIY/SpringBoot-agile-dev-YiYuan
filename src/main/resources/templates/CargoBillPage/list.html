@@ -97,7 +97,7 @@
                         </a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li>
-                                <a href="form.html">新增货运单</a>
+                                <a href="cargoBillAddForm.html">新增货运单</a>
                             </li>
                             <li>
                                 <a href="list.html">货物单列表</a>
@@ -168,6 +168,7 @@
 
                             <script type="text/html" id="barDemo">
                                 <a class="layui-btn layui-btn-xs" lay-event="Shipping" style="color: white">出货</a>
+                                <a class="layui-btn layui-btn-xs" lay-event="update_a_lay" style="color: white">编辑</a>
                                 <a class="layui-btn layui-btn-xs" lay-event="del_a_lay" style="color: white">删除</a>
                             </script>
                             <!--====================layui 数据表格 end====================-->
@@ -322,7 +323,7 @@
                 ,{field: '', title: '纯利润' , minWidth: 95,  templet: function (item) {
                         return   (item.sellingPrice * item.goodsFreight) - ((item.goodsUnitPrice +item.goodsFreight) * item.goodsNumber)
                     }}
-                ,{fixed: 'right', title:'操作', minWidth: 120 , toolbar: '#barDemo',align:'center'}
+                ,{fixed: 'right', title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}
 
             ]]
         });//数据表格参数初始化-->结尾
@@ -334,7 +335,7 @@
             switch(obj.event){
                 case 'xinzeng_button':
                     //跳转到新增页面
-                    window.location.replace("/yiyuan/CargoBillPage/form.html")
+                    window.location.replace("/yiyuan/CargoBillPage/cargoBillAddForm.html")
                     break;
             };
         });//表格工具栏监听事件 -->结尾
@@ -357,6 +358,9 @@
             }else if(layEvent === 'del_a_lay'){
                 //删除
                 del_medth(data_zdy);
+            }else if(layEvent === 'update_a_lay'){
+                //编辑
+                update_medth(data_zdy);
             }
         });
         //=======================事件监听方法区域 end===================================
@@ -395,7 +399,7 @@
         Swal.fire({
             title: "是否执行删除操作?",
             text: "您即将删除货物名:["+data.goodsName+"]的数据",
-            type: "info",
+            type: "warning",
             showCancelButton: !0,
             confirmButtonText: "确定",
             cancelButtonText: "取消",
@@ -413,8 +417,27 @@
                 saveOrupdate_http_medth(data_http);
             }
         });
+    }
+    //编辑数据
+    function update_medth(data) {
 
+        Swal.fire({
+            title: "是否执行更新操作?",
+            text: "您即将更新货物名:["+data.goodsName+"]的数据",
+            type: "info",
+            showCancelButton: !0,
+            confirmButtonText: "确定",
+            cancelButtonText: "取消",
+            confirmButtonClass: "btn btn-success mt-2",
+            cancelButtonClass: "btn btn-danger ml-2 mt-2",
+            buttonsStyling: !1
+        }).then(function (t) {
+            if(t.value){
 
+                //跳转到编辑页面并携带要出货的数据ID
+                window.location.href = "cargoBillUpdateForm.html?id="+data.shippingId;
+            }
+        });
     }
     //跳转到出货页
     function tiaozhuan(data) {
