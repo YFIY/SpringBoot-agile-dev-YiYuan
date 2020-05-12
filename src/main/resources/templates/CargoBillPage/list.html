@@ -300,8 +300,8 @@
                         return "未定义";
                     }
                  }}
-                ,{field: 'goodsNumber', title: '吨数', templet: function (item) {
-                        return  item.goodsUnitPrice + " 吨"
+                ,{field: 'goodsNumber', title: '吨数', minWidth: 100 , templet: function (item) {
+                        return  item.goodsNumber + " 吨"
                 }}
                 ,{field: 'goodsUnitPrice', title: '料款/吨' , minWidth: 80, templet: function (item) {
                         return  item.goodsUnitPrice + " 元"
@@ -309,8 +309,10 @@
                 ,{field: 'goodsFreight', title: '运费/吨' , minWidth: 80, templet: function (item) {
                         return  item.goodsFreight + " 元"
                 }}
-                , { field: '', title: '进货价' , minWidth: 90 , templet: function (item) {
-                      return  (item.goodsUnitPrice + item.goodsFreight) * item.goodsNumber
+                ,{ field: '', title: '进货价' , minWidth: 90 , templet: function (item) {
+                    let num = (item.goodsUnitPrice + item.goodsFreight) * item.goodsNumber;
+                    //四舍五入保两位小数
+                    return num.toFixed(2);
                 }}
                 ,{field: 'whetherToShip', title: '是否出货', minWidth: 90 ,templet: function (item) {
                     if (item.whetherToShip == '0') {
@@ -337,14 +339,26 @@
                             return "无";
                         }
                  }}
-                ,{field: '', title: '纯利润' , minWidth: 95,  templet: function (item) {
+                ,{field: '', title: '销售金额' , minWidth: 95,  templet: function (item) {
                     //如果出货状态是1 已出货
                     if(item.whetherToShip == '1') {
-                        return (item.sellingPrice * item.goodsFreight) - ((item.goodsUnitPrice +item.goodsFreight) * item.goodsNumber);
+                        let num = (item.sellingPrice * item.goodsNumber);
+                        //四舍五入保两位小数
+                        return num.toFixed(2);
                     }else{
                         return "无";
                     }
                  }}
+                ,{field: '', title: '净利润' , minWidth: 95,  templet: function (item) {
+                        //如果出货状态是1 已出货
+                        if(item.whetherToShip == '1') {
+                            let num = (item.sellingPrice * item.goodsNumber - ((item.goodsUnitPrice + item.goodsFreight) * item.goodsNumber));
+                            //四舍五入保两位小数
+                            return num.toFixed(2);
+                        }else{
+                            return "无";
+                        }
+                    }}
                 /*,{fixed: 'right', title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}*/
                 ,{title:'操作', minWidth: 160 , toolbar: '#barDemo',align:'center'}
 
