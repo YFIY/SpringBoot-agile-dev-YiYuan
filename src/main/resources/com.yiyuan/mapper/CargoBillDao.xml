@@ -21,4 +21,18 @@
 		ORDER BY goods_time DESC
 
 	</select>
+
+	<select id="getUnloadingTonnage" resultType="com.yiyuan.entity.vo.CargoBillVoEntity">
+		SELECT * FROM
+		 t_cargo_bill
+		<where>
+
+			<!-- userID：delete_or_not 只查询没有被伪删除的数据 [特殊查询] -->
+			`delete_or_not` = 0
+
+		</where>
+
+		ORDER BY creation_time DESC
+
+	</select>
 </mapper>

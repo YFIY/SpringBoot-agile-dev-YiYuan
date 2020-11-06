@@ -42,9 +42,13 @@ public class CargoBillVoEntity {
      */
     private String goodsSpecification;
     /**
-     * 吨数
+     * 装车吨数
      */
     private BigDecimal goodsNumber;
+    /**
+     * 卸车吨数
+     */
+    private BigDecimal unloadingTonnage;
     /**
      * 货物单位
      */

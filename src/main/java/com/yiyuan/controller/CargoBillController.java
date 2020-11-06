@@ -87,6 +87,33 @@ public class CargoBillController {
     }
 
     /**
+     * 查询最新一条的数据，用于快速添加功能
+     */
+    @AnonymousAccess//免登访问
+    @RequestMapping(value = "/getUnloadingTonnage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public IPage<CargoBillVoEntity> getUnloadingTonnage(@RequestBody String jsonStr){
+
+        Map<String,Object> jsonMap = JSON.parseObject(jsonStr);
+        CargoBillSqlEntity cargoBillSqlEntity = JSON.parseObject(jsonStr, CargoBillSqlEntity.class);
+
+        IPage<CargoBillVoEntity> pageData = new Page<>();
+
+        //参数校验
+        if( null == jsonMap.get("current") || null == jsonMap.get("size") ){
+            throw new ServiceException("当前页current|每页条数size,不允许为空");
+        }
+
+
+        //当前页
+        pageData.setCurrent(Long.parseLong(jsonMap.get("current").toString()));
+        //每页条数
+        pageData.setSize(Long.parseLong(jsonMap.get("size").toString()));
+        pageData = cargoBillService.getUnloadingTonnage(pageData,cargoBillSqlEntity);
+
+        return pageData;
+    }
+
+    /**
      * 新增或者更新货运单数据
      * @author MoLi
      */
@@ -105,7 +132,7 @@ public class CargoBillController {
         }
 
         //TODO 暂时先固定用户ID
-        cargoBillSqlEntity.setUserId(8068996691l);
+        cargoBillSqlEntity.setUserId(8068996691L);
         //执行保存
         cargoBillService.saveOrUpdate(cargoBillSqlEntity);
         return ResultGenerator.genSuccessResult();

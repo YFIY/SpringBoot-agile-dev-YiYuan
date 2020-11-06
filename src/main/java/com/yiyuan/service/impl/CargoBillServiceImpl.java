@@ -19,8 +19,17 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
     /**
      * 动态条件分页查询
      */
+    @Override
     public IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel){
         return this.baseMapper.getListMapPage(page,queryModel);
+    }
+
+    /**
+     * 查询最新一条的数据，用于快速添加功能
+     */
+    @Override
+    public IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel){
+        return this.baseMapper.getUnloadingTonnage(page,queryModel);
     }
 
 }

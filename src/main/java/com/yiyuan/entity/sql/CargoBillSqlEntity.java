@@ -24,15 +24,15 @@ public class CargoBillSqlEntity {
      */
     private Long userId;
     /**
-     * 购进时间
+     * 装车时间
      */
     private Date goodsTime;
     /**
-     * 出发地点
+     * 装车地
      */
     private String departureLocation;
     /**
-     * 到达地点
+     * 卸车地
      */
     private String arrivedLocation;
     /**
@@ -44,15 +44,19 @@ public class CargoBillSqlEntity {
      */
     private String goodsSpecification;
     /**
-     * 吨数
+     * 装车吨数
      */
     private BigDecimal goodsNumber;
+    /**
+     * 卸车吨数
+     */
+    private BigDecimal unloadingTonnage;
     /**
      * 货物单位
      */
     private Long goodsUnit;
     /**
-     * 料款/吨
+     * 单价/吨
      */
     private BigDecimal goodsUnitPrice;
     /**

@@ -18,4 +18,9 @@ public interface CargoBillService extends IService<CargoBillSqlEntity> {
      */
     public IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
 
+    /**
+     * 查询最新一条的数据，用于快速添加功能
+     */
+    public IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
+
 }

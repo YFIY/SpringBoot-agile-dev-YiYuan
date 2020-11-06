@@ -13,4 +13,9 @@ public interface CargoBillDao extends BaseMapper<CargoBillSqlEntity> {
      */
     IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
 
+    /**
+     * 查询最新一条的数据，用于快速添加功能
+     */
+    IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
+
 }
