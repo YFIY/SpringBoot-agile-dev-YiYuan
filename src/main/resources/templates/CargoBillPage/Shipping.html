@@ -130,7 +130,7 @@
                         <div class="page-title-box">
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item active">出货</li>
+                                    <li class="breadcrumb-item active">卸货</li>
                                 </ol>
                             </div>
                             <h4 class="page-title">卸货</h4>
@@ -148,6 +148,10 @@
 
                                 <!--隐藏的ID 输入框，有值后台会自动判断进行更新-->
                                 <input type="hidden" name="id" id="hiddenid"  class="form-control">
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" id="zhuangchedunshu"></label>
+                                </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">销售价/吨</label>
@@ -263,6 +267,30 @@
 
 
     //============ ajax接口调用方法区 Start ==================
+
+    //查询上次录入的销售价并注入到input
+    function insertQuickly() {
+
+        axios.post('/yiyuan/CargoBill/queryTheLastSalesPriceEntered'
+        ).then(function (response) {
+
+            if(response.data.success){
+                var objdata=response.data.data
+                //数据注入到input
+                $("#basic-form input[name='sellingPrice']").val(objdata);
+            }else{
+                alert("操作失败，请联系管理员，错误原因："+response.data.message);
+            }
+
+        }).catch(function (error) {
+            //请求异常响应结果
+            console.log(error);
+            //关闭加载层
+            layer.close(loding_layLoad);
+            alert("网络连接超时");
+        });
+    }
+
     //新增或更新数据
     function insertOrUpdate_http_ff(data) {
         axios.post('/yiyuan/CargoBill/saveOrUpdateInfo',
@@ -308,6 +336,13 @@
         var dataObj = GetRequest();
         //将id注入input
         $("#hiddenid").val(dataObj.id);
+        //将装车吨数注入DIV中
+        $("#zhuangchedunshu").text("本车装车吨数："+dataObj.goodsNumber);
+        //将时间注入input
+        var date = new Date(dataObj.goodsTime );
+        $("#basic-form input[name='shippingTime']").val(DateUtil.formatDateTime(date,"yyyy-MM-dd"));
+        //上次的销售价注入
+        insertQuickly();
     });
 
     //===== 页面加载后执行 end=====
@@ -327,6 +362,91 @@
         }
         return theRequest;
     }
+
+
+    /**
+     *  时间工具类
+     *  @author fei
+     */
+    var DateUtil={
+        /**
+         * 当前时间，格式 yyyy-MM-dd HH:mm:ss
+         *
+         * @return 当前时间的标准形式字符串
+         */
+        now: function() {
+            return new Date().format("yyyy-MM-dd HH:mm:ss");
+        },
+        /**
+         * 格式化日期时间
+         * 格式 yyyy-MM-dd HH:mm:ss
+         *
+         * @param date 被格式化的日期
+         * @param format 格式化 参考 {@link date_formate}
+         * @return 格式化后的日期
+         */
+        formatDateTime: function(date,format) {
+            if(format == undefined || format ==null ){
+                format = "yyyy-MM-dd HH:mm:ss";
+            }
+
+            return date.format(format);
+        },
+        /**
+         * 只支持毫秒级别时间戳，如果需要秒级别时间戳，请自行×1000
+         *
+         * @param timestamp 时间戳
+         * @return 时间对象
+         */
+        date:function (timestamp) {
+            return new Date(timestamp);
+        }
+    };
+    /** 日期格式 命名参考hutool工具类 */
+    date_formate = {
+        /** 标准日期格式：yyyy-MM-dd */
+        normDatePattern: "yyyy-MM-dd",
+        /** 标准时间格式：hh:mm:ss */
+        normTimePattern : "HH:mm:ss",
+        /** 标准日期时间格式，精确到分：yyyy-MM-dd HH:mm */
+        normDatetimeMinutePattern:"yyyy-MM-dd HH:mm",
+        /** 标准日期时间格式，精确到秒：yyyy-MM-dd HH:mm:ss */
+        normDatetimePattern:"yyyy-MM-dd HH:mm:ss",
+        /** 标准日期时间格式，精确到毫秒：yyyy-MM-dd HH:mm:ss.SSS */
+        normDatetimeMsPattern:"yyyy-MM-dd HH:mm:ss.SSS",
+        /** 标准日期格式：yyyy年MM月dd日 */
+        chineseDatePattern : "yyyy年MM月dd日",
+        /** 标准日期格式：yyyyMMdd */
+        pureDatePattern : "yyyyMMdd",
+        /** 标准日期格式：HHmmss */
+        pureTimePattern : "HHmmss",
+        /** 标准日期格式：yyyyMMddHHmmss */
+        pureDatetimePattern : "yyyyMMddHHmmss",
+        /** 标准日期格式：yyyyMMddHHmmssSSS */
+        pureDatetimeMsPattern : "yyyyMMddHHmmssSSS",
+    };
+
+    Date.prototype.format = function(fmt) {
+        var o = {
+            "M+" : this.getMonth()+1,                 //月份
+            "d+" : this.getDate(),                    //日
+            "H+" : this.getHours(),                   //小时
+            "h+" : this.getHours(),                   //小时
+            "m+" : this.getMinutes(),                 //分
+            "s+" : this.getSeconds(),                 //秒
+            "q+" : Math.floor((this.getMonth()+3)/3), //季度
+            "S"  : this.getMilliseconds()             //毫秒
+        };
+        if(/(y+)/.test(fmt)) {
+            fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+        }
+        for(var k in o) {
+            if(new RegExp("("+ k +")").test(fmt)){
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+            }
+        }
+        return fmt;
+    };
 
 
 </script>

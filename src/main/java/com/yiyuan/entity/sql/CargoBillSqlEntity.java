@@ -1,11 +1,10 @@
 package com.yiyuan.entity.sql;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Date;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import lombok.Data;
 
 /**
  * 货运单数据库模型(表名:t_cargo_bill)

@@ -22,7 +22,7 @@ public class CargoBillVoEntity {
      */
     private Long userId;
     /**
-     * 购进时间
+     * 装车时间
      */
     private Date goodsTime;
     /**

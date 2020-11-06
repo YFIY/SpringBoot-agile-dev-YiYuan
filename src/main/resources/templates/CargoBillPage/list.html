@@ -393,7 +393,9 @@
             //组装所需的数据
             let data_zdy = {
                 shippingId : shippingId,
-                goodsName : goodsName
+                goodsName : goodsName,
+                goodsTime : data.goodsTime,
+                goodsNumber : data.goodsNumber
             }
 
             if(layEvent === 'Shipping'){
@@ -502,7 +504,7 @@
         }).then(function (t) {
             if(t.value){
                 //跳转到出货页面并携带要出货的数据ID
-                window.location.href = "Shipping.html?id="+data.shippingId;
+                window.location.href = "Shipping.html?id="+data.shippingId+"&goodsTime="+data.goodsTime+"&goodsNumber="+data.goodsNumber;
             }
         });
 

@@ -160,15 +160,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">出发地</label>
+                                    <label class="col-sm-2 col-form-label">装车地</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="departure_location" class="form-control" placeholder="出发地" required>
+                                        <input type="text" name="departure_location" class="form-control" placeholder="装车地" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">到达地</label>
+                                    <label class="col-sm-2 col-form-label">卸车地</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="arrived_location" class="form-control" placeholder="到达地" required>
+                                        <input type="text" name="arrived_location" class="form-control" placeholder="卸车地" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -186,13 +186,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">吨数</label>
+                                    <label class="col-sm-2 col-form-label">装车吨数</label>
                                     <div class="col-sm-10">
                                         <input type="number" min="0.0" step="0.01" name="goods_number" class="form-control" placeholder="请填本车料的吨数" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label">料款/吨</label>
+                                    <label class="col-sm-2 col-form-label">单价/吨</label>
                                     <div class="col-sm-10">
                                         <input type="number" min="0.0" step="0.01" name="goods_unit_price" class="form-control" placeholder="请填本车每吨料的成本价" required>
                                     </div>
@@ -204,12 +204,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
+                                <!--<div class="form-group row">
                                     <label class="col-sm-2 col-form-label">备注</label>
                                     <div class="col-sm-10">
                                         <textarea class="form-control" name="goods_remarks" id="example-textarea" rows="5"></textarea>
                                     </div>
-                                </div>
+                                </div>-->
 
 
                                 <div class="form-group mb-0">
@@ -398,7 +398,7 @@
     function injection(objdata) {
         $("#basic-form input[name='goods_name']").val(objdata[0].goodsName);
         //时间转换，为了能将时间注入到date input中
-        s = objdata[0].goodsTime.replace(/-/g,"/");
+        var s = objdata[0].goodsTime.replace(/-/g,"/");
         var date = new Date(s );
         $("#basic-form input[name='goodsTime']").val(DateUtil.formatDateTime(date,"yyyy-MM-dd"));
         $("#basic-form input[name='departure_location']").val(objdata[0].departureLocation);
