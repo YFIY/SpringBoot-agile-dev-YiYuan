@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yiyuan.dao.CargoBillDao;
 import com.yiyuan.dao.CfgDao;
 import com.yiyuan.entity.CfgEntity;
+import com.yiyuan.entity.dto.SummaryStatisticsDTO;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.entity.vo.CargoBillVoEntity;
+import com.yiyuan.entity.vo.SummaryStatisticsVO;
 import com.yiyuan.service.CargoBillService;
 import com.yiyuan.service.CfgService;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,18 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
     @Override
     public IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel){
         return this.baseMapper.getUnloadingTonnage(page,queryModel);
+    }
+
+    /**
+     * 统计汇总
+     *
+     * @author MoLi
+     */
+    @Override
+    public SummaryStatisticsVO summaryStatistics(SummaryStatisticsDTO model) {
+        System.out.println(model);
+        System.out.println(model);
+        return null;
     }
 
 }

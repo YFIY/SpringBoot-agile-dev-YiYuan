@@ -6,7 +6,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yiyuan.annotation.AnonymousAccess;
 import com.yiyuan.core.Result;
 import com.yiyuan.core.ResultGenerator;
+import com.yiyuan.entity.dto.SummaryStatisticsDTO;
 import com.yiyuan.entity.vo.CargoBillVoEntity;
+import com.yiyuan.entity.vo.SummaryStatisticsVO;
 import com.yiyuan.exception.ServiceException;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.service.CargoBillService;
@@ -152,6 +154,21 @@ public class CargoBillController {
         //执行保存
         cargoBillService.saveOrUpdate(cargoBillSqlEntity);
         return ResultGenerator.genSuccessResult();
+    }
+
+    /**
+     * 统计汇总
+     *
+     * @author MoLi
+     */
+    @AnonymousAccess//免登访问
+    @RequestMapping(value = "/summaryStatistics", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result summaryStatistics(@RequestBody String jsonStr) {
+        //json字符串解析数据放入模型
+        SummaryStatisticsDTO model = JSON.parseObject(jsonStr, SummaryStatisticsDTO.class);
+
+        SummaryStatisticsVO summaryStatisticsVO = cargoBillService.summaryStatistics(model);
+        return ResultGenerator.genSuccessResult(summaryStatisticsVO);
     }
 
     /**
