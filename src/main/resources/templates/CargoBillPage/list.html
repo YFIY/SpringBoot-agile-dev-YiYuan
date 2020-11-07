@@ -362,9 +362,9 @@
                 ,{field: '', title: '净利润' , minWidth: 95,  templet: function (item) {
                         //如果出货状态是1 已出货
                         if(item.whetherToShip == '1') {
-                            let num = (item.sellingPrice * item.unloadingTonnage - ((item.goodsUnitPrice + item.goodsFreight) * item.unloadingTonnage));
+                            let num = (item.sellingPrice * item.unloadingTonnage) - ((item.goodsUnitPrice + item.goodsFreight) * item.goodsNumber);
                             //四舍五入保两位小数
-                            return num.toFixed(2);
+                            return num.toFixed(3);
                         }else{
                             return "无";
                         }
