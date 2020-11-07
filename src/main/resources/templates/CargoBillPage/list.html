@@ -165,6 +165,7 @@
                             <script type="text/html" id="toolbarDemo">
                                 <div class="layui-btn-container">
                                     <button class="layui-btn layui-btn-sm" lay-event="xinzeng_button">购进</button>
+                                    <button class="layui-btn layui-btn-sm" lay-event="tongji_button">统计</button>
                                 </div>
                             </script>
 
@@ -383,6 +384,10 @@
                 case 'xinzeng_button':
                     //跳转到新增页面
                     window.location.replace("/yiyuan/CargoBillPage/cargoBillAddForm.html")
+                    break;
+                case 'tongji_button':
+                    //跳转到新增页面
+                    window.location.replace("/yiyuan/CargoBillPage/summaryStatistics.html")
                     break;
             };
         });//表格工具栏监听事件 -->结尾
