@@ -30,5 +30,5 @@ public interface CargoBillService extends IService<CargoBillSqlEntity> {
      *
      * @author MoLi
      */
-    SummaryStatisticsVO summaryStatistics(SummaryStatisticsDTO model);
+    public SummaryStatisticsVO summaryStatistics(SummaryStatisticsDTO model);
 }

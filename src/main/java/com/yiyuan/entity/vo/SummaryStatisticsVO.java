@@ -2,22 +2,24 @@ package com.yiyuan.entity.vo;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class SummaryStatisticsVO {
     /**
      * 总装车吨数
      */
-    private String totalTonnage;
+    private BigDecimal totalTonnage;
     /**
      * 总卸车吨数
      */
-    private String totalUnloadingTonnage;
+    private BigDecimal totalUnloadingTonnage;
     /**
      * 总销售金额
      */
-    private String totalSalesAmount;
+    private BigDecimal totalSalesAmount;
     /**
      * 总净利润
      */
-    private String totalNetProfit;
+    private BigDecimal totalNetProfit;
 }

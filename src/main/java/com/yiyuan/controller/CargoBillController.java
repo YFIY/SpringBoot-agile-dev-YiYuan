@@ -50,7 +50,6 @@ public class CargoBillController {
     @Autowired
     RedisUtils redisUtils;
 
-
     /**
      * 根据ID获取一个货运单数据
      *
