@@ -336,8 +336,8 @@
         var dataObj = GetRequest();
         //将id注入input
         $("#hiddenid").val(dataObj.id);
-        //将装车吨数注入DIV中
-        $("#zhuangchedunshu").text("本车装车吨数："+dataObj.goodsNumber);
+        //将规格和装车吨数注入DIV中
+        $("#zhuangchedunshu").text(dataObj.goodsSpecification + "装车吨数：" + dataObj.goodsNumber);
         //将时间注入input
         var date = new Date(dataObj.goodsTime );
         $("#basic-form input[name='shippingTime']").val(DateUtil.formatDateTime(date,"yyyy-MM-dd"));
