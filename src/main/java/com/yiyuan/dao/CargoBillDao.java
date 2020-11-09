@@ -7,6 +7,7 @@ import com.yiyuan.entity.dto.SummaryStatisticsDTO;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.entity.vo.CargoBillVoEntity;
 import com.yiyuan.entity.vo.SummaryStatisticsVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -15,14 +16,15 @@ public interface CargoBillDao extends BaseMapper<CargoBillSqlEntity> {
     /**
      * 动态条件分页查询欠费单数据
      */
-    IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
+    IPage<CargoBillVoEntity> getListMapPage(IPage<CargoBillVoEntity> page, @Param("queryModel") CargoBillSqlEntity queryModel);
 
     /**
      * 查询最新一条的数据，用于快速添加功能
      */
-    IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, CargoBillSqlEntity queryModel);
+    IPage<CargoBillVoEntity> getUnloadingTonnage(IPage<CargoBillVoEntity> page, @Param("queryModel") CargoBillSqlEntity queryModel);
+
     /**
-     * 统计汇总-
+     * 统计汇总
      */
-   List<CargoBillVoEntity>  summaryStatistics(SummaryStatisticsDTO summaryStatisticsDTO);
+    List<CargoBillVoEntity> summaryStatistics(SummaryStatisticsDTO summaryStatisticsDTO);
 }

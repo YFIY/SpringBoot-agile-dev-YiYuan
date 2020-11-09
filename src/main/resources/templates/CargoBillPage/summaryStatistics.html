@@ -172,13 +172,19 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">装车地</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="departureLocation" class="form-control" placeholder="装车地" required>
+                                        <input type="text" name="departureLocation" class="form-control" placeholder="装车地">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">卸车地</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="arrivedLocation" class="form-control" placeholder="卸车地" required>
+                                        <input type="text" name="arrivedLocation" class="form-control" placeholder="卸车地">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">规格</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="specification" class="form-control" placeholder="规格">
                                     </div>
                                 </div>
 
@@ -186,6 +192,9 @@
                                 <div class="form-group mb-0">
                                     <button class="btn btn-primary waves-effect waves-light mr-1" type="submit">
                                         提交
+                                    </button>
+                                    <button class="btn btn-primary waves-effect waves-light mr-1" type="button" id="daYin_button_id">
+                                        打印
                                     </button>
                                     <button type="reset" class="btn btn-light waves-effect">
                                         重置
@@ -264,21 +273,37 @@
             formData[this.name] = this.value;
         });
 
-        //将是否出货 字段改为 1：出货
-        formData.whetherToShip = 1;
-
         //拉起加载层
         loding_layLoad = layer.msg('加载中', {icon: 16,shade: 0.02});
 
         //调用http发送请求
         insertOrUpdate_http_ff(formData);
-    })
+    });
+
+    //导出按钮点击监听
+    $('#daYin_button_id').on('click', function () {
+
+        //获取表单内的所有数据并封装
+        var formData = {};
+        var t = $('#basic-form').serializeArray();
+        $.each(t, function() {
+            formData[this.name] = this.value;
+        });
+
+        download_file("/yiyuan/CargoBill/daoChu?startingTime="+formData.startingTime
+            +"&endTime="+formData.endTime
+            +"&specification="+formData.specification
+            +"&arrivedLocation="+formData.arrivedLocation
+            +"&departureLocation="+formData.departureLocation+""
+        );
+
+    });
     //============ 事件监听区End ====================
 
 
     //============ ajax接口调用方法区 Start ==================
 
-    //新增或更新数据
+    //统计
     function insertOrUpdate_http_ff(data) {
         axios.post('/yiyuan/CargoBill/summaryStatistics',
             data
@@ -329,7 +354,17 @@
 
     //===== 页面加载后执行 end=====
 
-
+    //下载
+    function download_file(src){
+        var download_file= {}
+        if (typeof(download_file.iframe) == "undefined") {
+            var iframe = document.createElement("iframe");
+            download_file.iframe = iframe;
+            document.body.appendChild(download_file.iframe);
+        }
+        download_file.iframe.src = src
+        download_file.iframe.style.display = "none";
+    }
 
     //解析url参数
     function GetRequest() {
@@ -344,7 +379,6 @@
         }
         return theRequest;
     }
-
 
     /**
      *  时间工具类
@@ -407,7 +441,6 @@
         /** 标准日期格式：yyyyMMddHHmmssSSS */
         pureDatetimeMsPattern : "yyyyMMddHHmmssSSS",
     };
-
     Date.prototype.format = function(fmt) {
         var o = {
             "M+" : this.getMonth()+1,                 //月份

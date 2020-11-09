@@ -2,12 +2,13 @@ package com.yiyuan.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yiyuan.dao.CargoBillDao;
-import com.yiyuan.entity.CfgEntity;
 import com.yiyuan.entity.dto.SummaryStatisticsDTO;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.entity.vo.CargoBillVoEntity;
 import com.yiyuan.entity.vo.SummaryStatisticsVO;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 货运单功能业务接口
@@ -31,4 +32,9 @@ public interface CargoBillService extends IService<CargoBillSqlEntity> {
      * @author MoLi
      */
     public SummaryStatisticsVO summaryStatistics(SummaryStatisticsDTO model);
+
+    /**
+     * 导出
+     */
+    void daoChu(SummaryStatisticsDTO model, HttpServletResponse response) throws IOException;
 }

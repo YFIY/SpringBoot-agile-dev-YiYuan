@@ -18,7 +18,7 @@
 
 		</where>
 
-		ORDER BY goods_time DESC
+		ORDER BY goods_time DESC,goods_specification DESC
 
 	</select>
 
@@ -35,6 +35,7 @@
 		ORDER BY creation_time DESC
 
 	</select>
+
     <!--统计汇总-->
 	<select id="summaryStatistics" parameterType="com.yiyuan.entity.dto.SummaryStatisticsDTO" resultType="com.yiyuan.entity.vo.CargoBillVoEntity">
 	SELECT * FROM t_cargo_bill tb
@@ -46,12 +47,14 @@
         <if test="endTime != null ">
             AND tb.goods_time &lt;= #{endTime}
         </if>
-        <if test="arrivedLocation != null ">
+		<if test="specification != null and specification != ''">
+			AND tb.goods_specification = #{specification}
+		</if>
+        <if test="arrivedLocation != null and arrivedLocation != '' ">
             AND tb.arrived_location = #{arrivedLocation}
         </if>
-            <if test="departureLocation != null ">
+            <if test="departureLocation != null and departureLocation != '' ">
             AND tb.departure_location = #{departureLocation}
         </if>
-
     </select>
 </mapper>

@@ -26,17 +26,21 @@ public class CargoBillVoEntity {
      */
     private Date goodsTime;
     /**
-     * 出发地点
+     * 装车地
      */
     private String departureLocation;
     /**
-     * 到达地点
+     * 卸车地
      */
     private String arrivedLocation;
     /**
      * 货物名称
      */
     private String goodsName;
+    /**
+     * 车牌号
+     */
+    private String numberPlate;
     /**
      * 货物规格
      */
@@ -54,7 +58,7 @@ public class CargoBillVoEntity {
      */
     private Long goodsUnit;
     /**
-     * 料款/吨
+     * 单价/吨
      */
     private BigDecimal goodsUnitPrice;
     /**

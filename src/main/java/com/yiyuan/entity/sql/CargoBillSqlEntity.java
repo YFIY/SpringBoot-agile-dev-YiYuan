@@ -35,6 +35,10 @@ public class CargoBillSqlEntity {
      */
     private String arrivedLocation;
     /**
+     * 车牌号
+     */
+    private String numberPlate;
+    /**
      * 货物名称
      */
     private String goodsName;

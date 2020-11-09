@@ -15,6 +15,10 @@ public class SummaryStatisticsDTO {
      */
     private String arrivedLocation;
     /**
+     * 规格
+     */
+    private String specification;
+    /**
      * 开始时间
      */
     private Date startingTime;

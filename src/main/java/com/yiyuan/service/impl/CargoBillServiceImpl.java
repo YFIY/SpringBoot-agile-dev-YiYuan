@@ -1,22 +1,22 @@
 package com.yiyuan.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yiyuan.dao.CargoBillDao;
-import com.yiyuan.dao.CfgDao;
-import com.yiyuan.entity.CfgEntity;
 import com.yiyuan.entity.dto.SummaryStatisticsDTO;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.entity.vo.CargoBillVoEntity;
 import com.yiyuan.entity.vo.SummaryStatisticsVO;
 import com.yiyuan.service.CargoBillService;
-import com.yiyuan.service.CfgService;
+import com.yiyuan.utils.FileUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -90,6 +90,55 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
         summaryStatisticsVO.setTotalNetProfit(totalNetProfit);
 
         return summaryStatisticsVO;
+    }
+
+    /**
+     * 导出
+     */
+    @Override
+    public void daoChu(SummaryStatisticsDTO model, HttpServletResponse response) throws IOException {
+
+        //截至时间加一天
+        model.setEndTime(new Date(model.getEndTime().getTime() + (long) ((24 * 60 * 60 * 1000) - 1)));
+
+        List<CargoBillVoEntity> cargoBillVoEntities = this.baseMapper.summaryStatistics(model);
+
+
+        //成本价
+        BigDecimal costPrice = new BigDecimal(0.0);
+        //销售金额
+        BigDecimal salesAmount = new BigDecimal(0.0);
+        //净利润
+        BigDecimal netProfit = new BigDecimal(0.0);
+
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (CargoBillVoEntity mo : cargoBillVoEntities) {
+
+            // 成本价 = 装车吨数 *（单价/吨 + 运费/吨）
+            costPrice = mo.getGoodsNumber().multiply(mo.getGoodsUnitPrice().add(mo.getGoodsFreight()));
+            //销售金额 = 卸车吨数 * 销售价/吨
+            salesAmount = mo.getUnloadingTonnage().multiply(mo.getSellingPrice());
+            // 净利润 = 销售金额 - 成本价
+            netProfit = mo.getUnloadingTonnage().multiply(mo.getSellingPrice()).subtract(costPrice);
+
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("装车时间", DateUtil.format(mo.getGoodsTime(), "yyyy-MM-dd"));
+            map.put("装车地", mo.getDepartureLocation());
+            map.put("卸车地", mo.getArrivedLocation());
+            map.put("名称", mo.getGoodsName());
+            map.put("车牌号", mo.getNumberPlate());
+            map.put("规格", mo.getGoodsSpecification());
+            map.put("装车吨数", mo.getGoodsNumber());
+            map.put("单价/吨", mo.getGoodsUnitPrice());
+            map.put("运费/吨", mo.getGoodsFreight());
+            map.put("成本价", costPrice);
+            map.put("卸车吨数", mo.getUnloadingTonnage());
+            map.put("销售价/吨", mo.getSellingPrice());
+            map.put("销售金额", salesAmount);
+            map.put("净利润", netProfit);
+            list.add(map);
+        }
+        FileUtil.downloadExcel(list, response);
     }
 
 }

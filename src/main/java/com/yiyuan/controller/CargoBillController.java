@@ -1,5 +1,6 @@
 package com.yiyuan.controller;
 
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,18 +13,15 @@ import com.yiyuan.entity.vo.SummaryStatisticsVO;
 import com.yiyuan.exception.ServiceException;
 import com.yiyuan.entity.sql.CargoBillSqlEntity;
 import com.yiyuan.service.CargoBillService;
-import com.yiyuan.utils.RedisUtils;
-import com.yiyuan.utils.SnowflakeIdWorker;
-import com.yiyuan.utils.StringUtil;
-import com.yiyuan.utils.StringUtils;
+import com.yiyuan.utils.*;
+import com.yiyuan.vo.OnlineUserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * 货运单功能接口
@@ -168,6 +166,32 @@ public class CargoBillController {
 
         SummaryStatisticsVO summaryStatisticsVO = cargoBillService.summaryStatistics(model);
         return ResultGenerator.genSuccessResult(summaryStatisticsVO);
+    }
+
+    /**
+     * 导出
+     */
+    @AnonymousAccess//免登访问
+    @RequestMapping(value = "/daoChu", method = RequestMethod.GET)
+    public void daoChu(@RequestParam String departureLocation
+            ,@RequestParam String arrivedLocation
+            ,@RequestParam String startingTime
+            ,@RequestParam String endTime
+            ,@RequestParam String specification, HttpServletResponse response) throws IOException {
+
+        //json字符串解析数据放入模型
+        //SummaryStatisticsDTO model = JSON.parseObject(jsonStr, SummaryStatisticsDTO.class);
+
+        SummaryStatisticsDTO model = new SummaryStatisticsDTO();
+        model.setStartingTime(DateUtil.parse(startingTime));
+        model.setEndTime(DateUtil.parse(endTime));
+        model.setArrivedLocation(arrivedLocation);
+        model.setDepartureLocation(departureLocation);
+        model.setSpecification(specification);
+
+        cargoBillService.daoChu(model,response);
+
+
     }
 
     /**
