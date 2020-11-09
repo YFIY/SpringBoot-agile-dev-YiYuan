@@ -1,5 +1,6 @@
 package com.yiyuan.service.impl;
 
+import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -46,10 +47,10 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
     @Override
     public SummaryStatisticsVO summaryStatistics(SummaryStatisticsDTO model) {
 
-        //截至时间加一天
+        //开始时间减一毫秒
+        model.setStartingTime(DateUtil.offset(model.getStartingTime(), DateField.MILLISECOND, -1));
+        //结束时间加24小时减一毫秒
         model.setEndTime(new Date(model.getEndTime().getTime() + (long) ((24 * 60 * 60 * 1000) - 1)));
-        //model.setStartingTime(new Date(model.getStartingTime().getTime() -  (long) ((60 * 60 * 1000) - 1)));
-        //model.setStartingTime(new Date(model.getStartingTime().getTime() - (long) (1000)));
 
         List<CargoBillVoEntity> cargoBillVoEntities = this.baseMapper.summaryStatistics(model);
         //总装车吨数
@@ -100,9 +101,10 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
     @Override
     public void daoChu(SummaryStatisticsDTO model, HttpServletResponse response) throws IOException {
 
-        //截至时间加一天
+        //开始时间减一毫秒
+        model.setStartingTime(DateUtil.offset(model.getStartingTime(), DateField.MILLISECOND, -1));
+        //结束时间加24小时减一毫秒
         model.setEndTime(new Date(model.getEndTime().getTime() + (long) ((24 * 60 * 60 * 1000) - 1)));
-        model.setStartingTime(new Date(model.getStartingTime().getTime() + (long) ((1000) - 1)));
 
         List<CargoBillVoEntity> cargoBillVoEntities = this.baseMapper.summaryStatistics(model);
 
