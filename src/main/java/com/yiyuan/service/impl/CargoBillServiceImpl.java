@@ -48,6 +48,8 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
 
         //截至时间加一天
         model.setEndTime(new Date(model.getEndTime().getTime() + (long) ((24 * 60 * 60 * 1000) - 1)));
+        //model.setStartingTime(new Date(model.getStartingTime().getTime() -  (long) ((60 * 60 * 1000) - 1)));
+        //model.setStartingTime(new Date(model.getStartingTime().getTime() - (long) (1000)));
 
         List<CargoBillVoEntity> cargoBillVoEntities = this.baseMapper.summaryStatistics(model);
         //总装车吨数
@@ -100,6 +102,7 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
 
         //截至时间加一天
         model.setEndTime(new Date(model.getEndTime().getTime() + (long) ((24 * 60 * 60 * 1000) - 1)));
+        model.setStartingTime(new Date(model.getStartingTime().getTime() + (long) ((1000) - 1)));
 
         List<CargoBillVoEntity> cargoBillVoEntities = this.baseMapper.summaryStatistics(model);
 
@@ -113,14 +116,14 @@ public class CargoBillServiceImpl extends ServiceImpl<CargoBillDao, CargoBillSql
 
         List<Map<String, Object>> list = new ArrayList<>();
         for (CargoBillVoEntity mo : cargoBillVoEntities) {
-
-            // 成本价 = 装车吨数 *（单价/吨 + 运费/吨）
-            costPrice = mo.getGoodsNumber().multiply(mo.getGoodsUnitPrice().add(mo.getGoodsFreight()));
-            //销售金额 = 卸车吨数 * 销售价/吨
-            salesAmount = mo.getUnloadingTonnage().multiply(mo.getSellingPrice());
-            // 净利润 = 销售金额 - 成本价
-            netProfit = mo.getUnloadingTonnage().multiply(mo.getSellingPrice()).subtract(costPrice);
-
+            if (mo.getUnloadingTonnage() != null) {
+                // 成本价 = 装车吨数 *（单价/吨 + 运费/吨）
+                costPrice = mo.getGoodsNumber().multiply(mo.getGoodsUnitPrice().add(mo.getGoodsFreight()));
+                //销售金额 = 卸车吨数 * 销售价/吨
+                salesAmount = mo.getUnloadingTonnage().multiply(mo.getSellingPrice());
+                // 净利润 = 销售金额 - 成本价
+                netProfit = mo.getUnloadingTonnage().multiply(mo.getSellingPrice()).subtract(costPrice);
+            }
             Map<String, Object> map = new LinkedHashMap<>();
             map.put("装车时间", DateUtil.format(mo.getGoodsTime(), "yyyy-MM-dd"));
             map.put("装车地", mo.getDepartureLocation());

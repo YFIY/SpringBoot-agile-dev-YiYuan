@@ -289,14 +289,48 @@
         $.each(t, function() {
             formData[this.name] = this.value;
         });
-
+        if(formData.startingTime==null || formData.startingTime ==""){
+            Swal.fire({
+                title: "请填写开始时间",
+                type: "warning",
+                confirmButtonText: "确定",
+                confirmButtonClass: "btn btn-success mt-2",
+                cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                buttonsStyling: !1
+            }).then(function (t) {
+                if(t.value){
+                    //重定向到列表页
+                    //window.location.replace("/yiyuan/CargoBillPage/list.html");
+                }
+            });
+            return null;
+        }
+        if(formData.endTime==null || formData.endTime ==""){
+            Swal.fire({
+                title: "请填写结束时间",
+                type: "warning",
+                confirmButtonText: "确定",
+                confirmButtonClass: "btn btn-success mt-2",
+                cancelButtonClass: "btn btn-danger ml-2 mt-2",
+                buttonsStyling: !1
+            }).then(function (t) {
+                if(t.value){
+                    //重定向到列表页
+                    //window.location.replace("/yiyuan/CargoBillPage/list.html");
+                }
+            });
+            return null;
+        }
+        //拉起加载层
+        loding_layLoad = layer.msg('加载中', {icon: 16,shade: 0.02});
         download_file("/yiyuan/CargoBill/daoChu?startingTime="+formData.startingTime
             +"&endTime="+formData.endTime
             +"&specification="+formData.specification
             +"&arrivedLocation="+formData.arrivedLocation
             +"&departureLocation="+formData.departureLocation+""
         );
-
+        //关闭加载层
+        layer.close(loding_layLoad);
     });
     //============ 事件监听区End ====================
 

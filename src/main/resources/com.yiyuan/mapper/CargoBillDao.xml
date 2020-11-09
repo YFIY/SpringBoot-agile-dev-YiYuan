@@ -39,12 +39,10 @@
     <!--统计汇总-->
 	<select id="summaryStatistics" parameterType="com.yiyuan.entity.dto.SummaryStatisticsDTO" resultType="com.yiyuan.entity.vo.CargoBillVoEntity">
 	SELECT * FROM t_cargo_bill tb
-	WHERE
+	<where>
 	tb.delete_or_not = 0
-        <if test="startingTime != null ">
+        <if test="startingTime != null and endTime != null ">
             AND tb.goods_time &gt;= #{startingTime}
-        </if>
-        <if test="endTime != null ">
             AND tb.goods_time &lt;= #{endTime}
         </if>
 		<if test="specification != null and specification != ''">
@@ -56,5 +54,7 @@
             <if test="departureLocation != null and departureLocation != '' ">
             AND tb.departure_location = #{departureLocation}
         </if>
+      </where>
+
     </select>
 </mapper>
